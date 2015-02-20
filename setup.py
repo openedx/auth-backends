@@ -1,19 +1,30 @@
-from setuptools import setup
+import os
+
+from setuptools import setup, find_packages
 
 
-def readme():
-    with open('README.rst') as f:
+exec(open('auth_backends/_version.py').read())
+
+
+def read(*paths):
+    """Build a file path from `paths` and return the contents."""
+    with open(os.path.join(*paths), 'r') as f:
         return f.read()
 
 
 setup(
     name='edx-auth-backends',
-    version='0.1',
+    version=__version__,
     description='Custom edX authentication backends and pipeline steps',
-    long_description=readme(),
+    long_description=(
+        read('README.rst') + '\n\n' +
+        read('HISTORY.rst') + '\n\n' +
+        read('AUTHORS')
+    ),
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU Affero General Public License v3',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Topic :: Internet',
         'Intended Audience :: Developers',
@@ -24,14 +35,8 @@ setup(
     author='edX',
     author_email='oscm@edx.org',
     license='AGPL',
-    packages=['auth_backends'],
+    packages=find_packages(exclude=['tests*']),
     install_requires=[
         'Django>=1.7',
-        # PSA package on PyPI hasn't been updated to include a fix for a breaking change in PyJWT.
-        # For reference on how dependency_links is used here, see http://goo.gl/D5g4Qq.
-        'python-social-auth<=0.2.2'
     ],
-    dependency_links=[
-        'git+https://github.com/omab/python-social-auth.git@bdf69d67d109acfda1016d4a2a63a1cc0a3aba84#egg=python-social-auth-0.2.2',
-    ]
 )
