@@ -1,5 +1,5 @@
 auth-backends  |Travis|_ |Coveralls|_
-=============
+=====================================
 .. |Travis| image:: https://travis-ci.org/edx/auth-backends.svg?branch=master
 .. _Travis: https://travis-ci.org/edx/auth-backends
 
@@ -12,6 +12,18 @@ and `edx-ecommerce <https://github.com/edx/edx-ecommerce>`_.
 
 This project is new and under active development.
 
+Installation
+------------
+
+The `auth_backends` package can be installed from PyPI using pip::
+
+    pip install edx-auth-backends
+
+Use of `auth_backends` requires a specific version of `Python Social Auth <https://github.com/omab/python-social-auth>`_ which,
+as of Friday, February 20, has not been released on PyPI. Please install it from GitHub by running::
+    
+    pip install git+https://github.com/edx/python-social-auth.git@pyjwt-fix#egg=python-social-auth
+
 Overview
 --------
 
@@ -23,7 +35,7 @@ Backend          Purpose
 Open ID Connect  Authenticate with the LMS, an OIDC provider.
 ===============  ============================================
 
-This package requires Django 1.7. Required Django settings:
+`auth_backends` requires Django 1.7. Required Django settings:
 
 ============================================  ============================================
 Setting                                       Default
@@ -71,7 +83,5 @@ Please do not report security issues in public. Please email security@edx.org.
 Mailing List and IRC Channel
 ----------------------------
 
-You can discuss this code on the `edx-code Google Group`__ or in the
+You can discuss this code on the `edx-code Google Group <https://groups.google.com/forum/#!forum/edx-code>`_ or in the
 ``#edx-code`` IRC channel on Freenode.
-
-__ https://groups.google.com/forum/#!forum/edx-code

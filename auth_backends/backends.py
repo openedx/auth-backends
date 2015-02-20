@@ -61,7 +61,6 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
 
     def get_user_claims(self, access_token, claims=None):
         """Returns a dictionary with the values for each claim requested."""
-
         data = self.get_json(
             self.USER_INFO_URL,
             headers={'Authorization': 'Bearer {0}'.format(access_token)}
