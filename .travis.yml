@@ -5,5 +5,8 @@ install:
     - pip install -qr requirements.txt
     - pip install coveralls
 script: ./test.sh
+branches:
+    only:
+        - master
 after_success:
     coveralls
