@@ -19,11 +19,6 @@ The `auth_backends` package can be installed from PyPI using pip::
 
     pip install edx-auth-backends
 
-Use of `auth_backends` requires a specific version of `Python Social Auth <https://github.com/omab/python-social-auth>`_ which,
-as of Friday, February 20, has not been released on PyPI. Please install it from GitHub by running::
-    
-    pip install git+https://github.com/edx/python-social-auth.git@pyjwt-fix#egg=python-social-auth
-
 Overview
 --------
 
