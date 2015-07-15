@@ -27,7 +27,7 @@ setup(
     author='edX',
     author_email='oscm@edx.org',
     license='AGPL',
-    packages=find_packages(exclude=['tests*']),
+    packages=find_packages(exclude=['tests', '*.tests']),
     install_requires=[
         'Django>=1.7',
         'python-social-auth>=0.2.3',
