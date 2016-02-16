@@ -10,3 +10,11 @@ branches:
         - master
 after_success:
     coveralls
+deploy:
+  provider: pypi
+  user: edx
+  password:
+    secure: gzZOrwuJoH2AxHETtI7ddItBZ7zHykpMETJhCRCfJrPyCQLvEJ4Gs1Rg9cDDrNTbrds95N4lTconu2mMK5XAL7WUy9SRg6PVzOrAOn3dMELuxzWoIBW70FDVfzM7JfAnOPvt0aF5iMPrwK1WPM1Jj/hJ2Cuk4L7AvEGloB1RJqA=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
