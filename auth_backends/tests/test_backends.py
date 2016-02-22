@@ -3,12 +3,11 @@ from django.conf import settings
 from social.tests.backends.oauth import OAuth2Test
 from social.tests.backends.open_id import OpenIdConnectTestMixin
 
-from auth_backends.backends import EdXOpenIdConnect
-
 
 class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
     backend_path = 'auth_backends.backends.EdXOpenIdConnect'
-    issuer = getattr(settings, 'SOCIAL_AUTH_EDX_OIDC_URL_ROOT', None)
+    url_root = 'http://www.example.com'
+    issuer = url_root
     expected_username = 'test_user'
     fake_locale = 'en_US'
     fake_data = {
@@ -16,6 +15,14 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         'another-claim': 'some-other-data'
     }
     fake_access_token = 'an-access-token'
+
+    def extra_settings(self):
+        settings = super(EdXOpenIdConnectTests, self).extra_settings()
+        settings.update({
+            'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
+            'SOCIAL_AUTH_{0}_ISSUER'.format(self.name): self.issuer,
+        })
+        return settings
 
     def get_id_token(self, *args, **kwargs):
         data = super(EdXOpenIdConnectTests, self).get_id_token(*args, **kwargs)
@@ -34,7 +41,6 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
 
     @mock.patch('auth_backends.backends.EdXOpenIdConnect.get_json', mock.Mock(return_value=fake_data))
     def test_get_user_claims(self):
-        backend = EdXOpenIdConnect()
-        data = backend.get_user_claims(self.fake_access_token, claims=['a-claim'])
+        data = self.backend.get_user_claims(self.fake_access_token, claims=['a-claim'])
 
         self.assertDictEqual(data, {'a-claim': 'some-data'})

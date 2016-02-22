@@ -18,10 +18,6 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     ID_KEY = 'preferred_username'
 
     DEFAULT_SCOPE = ['openid', 'profile', 'email'] + getattr(settings, 'EXTRA_SCOPE', [])
-    ID_TOKEN_ISSUER = getattr(settings, 'SOCIAL_AUTH_EDX_OIDC_URL_ROOT', None)
-    AUTHORIZATION_URL = '{0}/authorize/'.format(ID_TOKEN_ISSUER)
-    ACCESS_TOKEN_URL = '{0}/access_token/'.format(ID_TOKEN_ISSUER)
-    USER_INFO_URL = '{0}/user_info/'.format(ID_TOKEN_ISSUER)
 
     PROFILE_TO_DETAILS_KEY_MAP = {
         'preferred_username': u'username',
@@ -33,6 +29,22 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     }
 
     auth_complete_signal = django.dispatch.Signal(providing_args=["user", "id_token"])
+
+    @property
+    def ID_TOKEN_ISSUER(self):
+        return self.setting('ISSUER')
+
+    @property
+    def AUTHORIZATION_URL(self):
+        return '{0}/authorize/'.format(self.setting('URL_ROOT'))
+
+    @property
+    def ACCESS_TOKEN_URL(self):
+        return '{0}/access_token/'.format(self.setting('URL_ROOT'))
+
+    @property
+    def USER_INFO_URL(self):
+        return '{0}/user_info/'.format(self.setting('URL_ROOT'))
 
     def user_data(self, _access_token, *_args, **_kwargs):
         # Include decoded id_token fields in user data.
