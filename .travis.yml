@@ -11,7 +11,7 @@ deploy:
   provider: pypi
   user: edx
   password:
-    secure: gzZOrwuJoH2AxHETtI7ddItBZ7zHykpMETJhCRCfJrPyCQLvEJ4Gs1Rg9cDDrNTbrds95N4lTconu2mMK5XAL7WUy9SRg6PVzOrAOn3dMELuxzWoIBW70FDVfzM7JfAnOPvt0aF5iMPrwK1WPM1Jj/hJ2Cuk4L7AvEGloB1RJqA=
+    secure: G8N7hXGl4a9J6pwLVbniGBgz0I2qA4sHTamSw++8HrJO5QCYnYBZQr25BpdrbE83UJX+pDdLxVj85+fML5XlrSf/hlc4XQTYMHcLhVQNNIjEim5q9hlKkBi+wwCErm5U9UZwzfvFbNx/w9SSO4qAM2NUbTP0fEZ/wF8Od2bJNVc=
   distributions: sdist bdist_wheel
   on:
     tags: true
