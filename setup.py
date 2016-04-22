@@ -14,13 +14,18 @@ setup(
     description='Custom edX authentication backends and pipeline steps',
     long_description=long_description,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Affero General Public License v3',
+        'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
+        'Framework :: Django',
+        'Framework :: Django :: 1.8',
+        'Framework :: Django :: 1.9',
         'Topic :: Internet',
-        'Intended Audience :: Developers',
-        'Environment :: Web Environment',
     ],
     keywords='authentication edx',
     url='https://github.com/edx/auth-backends',
@@ -29,7 +34,8 @@ setup(
     license='AGPL',
     packages=find_packages(exclude=['tests', '*.tests']),
     install_requires=[
-        'Django>=1.7',
-        'python-social-auth>=0.2.3',
+        'Django>=1.8,<1.10',
+        'python-social-auth>=0.2.18,<1.0.0',
+        'six>=1.10.0,<2.0.0'
     ],
 )

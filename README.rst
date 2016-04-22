@@ -30,7 +30,9 @@ Backend          Purpose
 Open ID Connect  Authenticate with the LMS, an OIDC provider.
 ===============  ============================================
 
-`auth_backends` requires Django 1.7. Required Django settings:
+`auth_backends` has been tested with Django 1.8 and 1.9.
+
+Required Django settings:
 
 ============================================  ============================================
 Setting                                       Default
@@ -51,7 +53,7 @@ to get a full list of courses).
 Testing
 -------
 
-Execute ``test.sh`` to run the test suite.
+Call ``make test``.
 
 License
 -------

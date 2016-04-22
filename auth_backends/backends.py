@@ -86,7 +86,7 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
 
         if claims:
             claims_names = set(claims)
-            data = {k: v for (k, v) in data.iteritems() if k in claims_names}
+            data = {k: v for (k, v) in six.iteritems(data) if k in claims_names}
 
         return data
 
