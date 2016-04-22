@@ -1,5 +1,5 @@
-auth-backends  |Travis|_ |Coveralls|_
-=====================================
+auth-backends  |Travis|_ |Codecov|_
+===================================
 .. |Travis| image:: https://travis-ci.org/edx/auth-backends.svg?branch=master
 .. _Travis: https://travis-ci.org/edx/auth-backends
 
