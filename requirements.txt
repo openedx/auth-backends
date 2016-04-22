@@ -2,7 +2,6 @@ Django==1.7.4                  # BSD License
 python-social-auth==0.2.3      # BSD
 
 # For running tests
-django-dynamic-fixture==1.8.1  # MIT
 django-nose==1.4.1
 httpretty==0.8.3
 unittest2==0.8.0

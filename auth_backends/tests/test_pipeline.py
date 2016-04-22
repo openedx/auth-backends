@@ -1,27 +1,34 @@
+""" Tests for pipelines. """
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django_dynamic_fixture import G
 
 from auth_backends.pipeline import get_user_if_exists
 
+User = get_user_model()
 
-class PipelineTests(TestCase):
+
+class GetUserIfExistsPipelineTests(TestCase):
+    """ Tests for the get_user_if_exists pipeline function. """
+
     def setUp(self):
-        self.user = get_user_model()
+        super(GetUserIfExistsPipelineTests, self).setUp()
+        self.username = 'edx'
+        self.details = {'username': self.username}
 
-    def test_get_user_if_exists(self):
-        username = 'edx'
-        details = {'username': username}
-
-        # If no user exists, return an empty dict
-        actual = get_user_if_exists(None, details)
+    def test_no_user_exists(self):
+        """ Verify an empty dict is returned if no user exists. """
+        actual = get_user_if_exists(None, self.details)
         self.assertDictEqual(actual, {})
 
-        # If user exists, return dict with user and any additional information
-        user = G(self.user, username=username)
-        actual = get_user_if_exists(None, details)
+    def test_existing_user(self):
+        """ Verify a dict with the user and extra details is returned if the user exists. """
+        user = User.objects.create(username=self.username)
+        actual = get_user_if_exists(None, self.details)
         self.assertDictEqual(actual, {'is_new': False, 'user': user})
 
-        # If user passed to function, just return the additional information
-        actual = get_user_if_exists(None, details, user=user)
+    def test_get_user_if_exists(self):
+        """ Verify only the details are returned if a user is passed to the function. """
+        user = User.objects.create(username=self.username)
+        actual = get_user_if_exists(None, self.details, user=user)
         self.assertDictEqual(actual, {'is_new': False})

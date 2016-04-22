@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-from auth_backends._version import __version__
+from auth_backends import __version__
 
 
 with open('README.rst') as a, open('HISTORY.rst') as b, open('AUTHORS') as c:
