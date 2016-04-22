@@ -19,14 +19,14 @@ cache:
   - pip
 
 install:
-  - pip install -U pip wheel coveralls
+  - pip install -U pip wheel codecov
   - make requirements
 
 script:
   - make test
 
 after_success:
-    coveralls
+  codecov
 
 deploy:
   provider: pypi
