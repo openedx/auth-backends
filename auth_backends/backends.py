@@ -6,11 +6,13 @@ import json
 
 from django.conf import settings
 import django.dispatch
+import six
 from social.backends.open_id import OpenIdConnectAuth
 
 
 # pylint: disable=abstract-method
 class EdXOpenIdConnect(OpenIdConnectAuth):
+    """ OpenID Connect backend designed for use with the Open edX auth provider. """
     name = 'edx-oidc'
 
     ACCESS_TOKEN_METHOD = 'POST'
@@ -31,19 +33,23 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     auth_complete_signal = django.dispatch.Signal(providing_args=["user", "id_token"])
 
     @property
-    def ID_TOKEN_ISSUER(self):
+    def ID_TOKEN_ISSUER(self):  # pylint: disable=invalid-name
+        """ Expected value of the `iss` claim in the ID token. """
         return self.setting('ISSUER')
 
     @property
-    def AUTHORIZATION_URL(self):
+    def AUTHORIZATION_URL(self):  # pylint: disable=invalid-name
+        """ URL of the auth provider's authorization endpoint. """
         return '{0}/authorize/'.format(self.setting('URL_ROOT'))
 
     @property
-    def ACCESS_TOKEN_URL(self):
+    def ACCESS_TOKEN_URL(self):  # pylint: disable=invalid-name
+        """ URL of the auth provider's access token endpoint. """
         return '{0}/access_token/'.format(self.setting('URL_ROOT'))
 
     @property
-    def USER_INFO_URL(self):
+    def USER_INFO_URL(self):  # pylint: disable=invalid-name
+        """ URL of the auth provider's user info endpoint. """
         return '{0}/user_info/'.format(self.setting('URL_ROOT'))
 
     def user_data(self, _access_token, *_args, **_kwargs):
@@ -80,7 +86,7 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
 
         if claims:
             claims_names = set(claims)
-            data = {k: v for (k, v) in data.iteritems() if k in claims_names}
+            data = {k: v for (k, v) in six.iteritems(data) if k in claims_names}
 
         return data
 

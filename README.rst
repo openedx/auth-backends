@@ -3,8 +3,8 @@ auth-backends  |Travis|_ |Coveralls|_
 .. |Travis| image:: https://travis-ci.org/edx/auth-backends.svg?branch=master
 .. _Travis: https://travis-ci.org/edx/auth-backends
 
-.. |Coveralls| image:: https://img.shields.io/coveralls/edx/auth-backends.svg
-.. _Coveralls: https://coveralls.io/r/edx/auth-backends?branch=master
+.. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
+.. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
 
 This repo houses custom authentication backends and pipeline steps used by edX
 projects such as the `edx-analytics-dashboard <https://github.com/edx/edx-analytics-dashboard>`_
@@ -30,7 +30,9 @@ Backend          Purpose
 Open ID Connect  Authenticate with the LMS, an OIDC provider.
 ===============  ============================================
 
-`auth_backends` requires Django 1.7. Required Django settings:
+`auth_backends` has been tested with Django 1.8 and 1.9.
+
+Required Django settings:
 
 ============================================  ============================================
 Setting                                       Default
@@ -51,7 +53,7 @@ to get a full list of courses).
 Testing
 -------
 
-Execute ``test.sh`` to run the test suite.
+Call ``make test``.
 
 License
 -------

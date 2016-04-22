@@ -1,10 +1,13 @@
+""" Tests for the backends. """
+
 import mock
-from django.conf import settings
 from social.tests.backends.oauth import OAuth2Test
 from social.tests.backends.open_id import OpenIdConnectTestMixin
 
 
 class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
+    """ Tests for the EdXOpenIdConnect backend. """
+
     backend_path = 'auth_backends.backends.EdXOpenIdConnect'
     url_root = 'http://www.example.com'
     issuer = url_root
@@ -17,6 +20,7 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
     fake_access_token = 'an-access-token'
 
     def extra_settings(self):
+        """ Define additional Django settings. """
         settings = super(EdXOpenIdConnectTests, self).extra_settings()
         settings.update({
             'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
