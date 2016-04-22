@@ -19,6 +19,9 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     REDIRECT_STATE = False
     ID_KEY = 'preferred_username'
 
+    # Store the token type to ensure that we use the correct authentication mechanism for future calls.
+    EXTRA_DATA = OpenIdConnectAuth.EXTRA_DATA + ['token_type']
+
     DEFAULT_SCOPE = ['openid', 'profile', 'email'] + getattr(settings, 'EXTRA_SCOPE', [])
 
     PROFILE_TO_DETAILS_KEY_MAP = {
@@ -30,7 +33,7 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
         'locale': u'language',
     }
 
-    auth_complete_signal = django.dispatch.Signal(providing_args=["user", "id_token"])
+    auth_complete_signal = django.dispatch.Signal(providing_args=['user', 'id_token'])
 
     @property
     def ID_TOKEN_ISSUER(self):  # pylint: disable=invalid-name
@@ -77,11 +80,11 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
         self.auth_complete_signal.send(sender=self.__class__, user=user, id_token=self.id_token)
         return user
 
-    def get_user_claims(self, access_token, claims=None):
+    def get_user_claims(self, access_token, claims=None, token_type='Bearer'):
         """Returns a dictionary with the values for each claim requested."""
         data = self.get_json(
             self.USER_INFO_URL,
-            headers={'Authorization': 'Bearer {0}'.format(access_token)}
+            headers={'Authorization': '{token_type} {token}'.format(token_type=token_type, token=access_token)}
         )
 
         if claims:
@@ -106,7 +109,7 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     def _map_user_details(self, response):
         """Maps key/values from the response to key/values in the user model.
 
-        Does not transfer any key/value that is empty or not present in the reponse.
+        Does not transfer any key/value that is empty or not present in the response.
         """
         dest = {}
         for source_key, dest_key in self.PROFILE_TO_DETAILS_KEY_MAP.items():

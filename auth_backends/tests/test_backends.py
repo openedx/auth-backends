@@ -1,10 +1,13 @@
 """ Tests for the backends. """
 
+import ddt
 import mock
+import six
 from social.tests.backends.oauth import OAuth2Test
 from social.tests.backends.open_id import OpenIdConnectTestMixin
 
 
+@ddt.ddt
 class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
     """ Tests for the EdXOpenIdConnect backend. """
 
@@ -43,8 +46,26 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         user = self.do_login()
         self.assertIsNotNone(user)
 
-    @mock.patch('auth_backends.backends.EdXOpenIdConnect.get_json', mock.Mock(return_value=fake_data))
-    def test_get_user_claims(self):
-        data = self.backend.get_user_claims(self.fake_access_token, claims=['a-claim'])
+    @ddt.data(None, 'Bearer', 'JWT')
+    def test_get_user_claims(self, token_type):
+        expected_token_type = token_type or 'Bearer'
+        with mock.patch('auth_backends.backends.EdXOpenIdConnect.get_json') as mock_get_json:
+            mock_get_json.return_value = self.fake_data
 
-        self.assertDictEqual(data, {'a-claim': 'some-data'})
+            claim = six.next(six.iteritems(self.fake_data))
+            kwargs = {
+                'claims': [claim[0]],
+            }
+
+            if token_type:
+                kwargs['token_type'] = token_type
+
+            actual = self.backend.get_user_claims(self.fake_access_token, **kwargs)
+
+            # Verify the correct claim data is returned
+            self.assertDictEqual(actual, {claim[0]: claim[1]})
+
+            # Verify the call to the user info endpoint was made with the correct authorization headers
+            headers = {'Authorization': '{token_type} {token}'.format(token_type=expected_token_type,
+                                                                      token=self.fake_access_token)}
+            mock_get_json.assert_called_once_with(self.backend.USER_INFO_URL, headers=headers)
