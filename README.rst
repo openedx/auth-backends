@@ -6,20 +6,21 @@ auth-backends  |Travis|_ |Codecov|_
 .. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
 
-This repo houses custom authentication backends and pipeline steps used by edX
+This repo houses custom authentication backends, views, and pipeline steps used by edX
 projects such as the `edx-analytics-dashboard <https://github.com/edx/edx-analytics-dashboard>`_
-and `edx-ecommerce <https://github.com/edx/edx-ecommerce>`_.
+and `ecommerce <https://github.com/edx/ecommerce>`_. These components are primarily intended to aid the usage
+of edX's single sign-on functionality (built atop OpenID Connect).
 
-This project is new and under active development.
+This package is compatible with Python 2.7 and 3.5, and Django 1.8 and 1.9.
 
 Installation
 ------------
 
 The `auth_backends` package can be installed from PyPI using pip::
 
-    pip install edx-auth-backends
+    $ pip install edx-auth-backends
 
-Overview
+Backends
 --------
 
 Included backends:
@@ -29,8 +30,6 @@ Backend          Purpose
 ---------------  --------------------------------------------
 Open ID Connect  Authenticate with the LMS, an OIDC provider.
 ===============  ============================================
-
-`auth_backends` has been tested with Django 1.8 and 1.9.
 
 Required Django settings:
 
@@ -49,6 +48,21 @@ Set these to the correct values for your OAuth2/OpenID Connect provider. ``SOCIA
 should be the same as ``SOCIAL_AUTH_EDX_OIDC_SECRET``. Set ``EXTRA_SCOPE`` equal to a list of scope strings to request
 additional information from the edX OAuth2 provider at the moment of authentication (e.g., provide course permissions bits
 to get a full list of courses).
+
+Views
+-----
+
+This package includes a login view, ``EdxOpenIdConnectLoginView``, that utilizes edX's implementation of OpenID Connect.
+This should be used for all microservices/IDAs.
+
+``LogoutRedirectBaseView`` is also included. It should be overridden, and customized. See the docstring for details.
+
+urls.py
+-------
+
+``auth_urlpatterns`` in `urls.py` includes the patterns necessary to facilitate OpenID Connect login. This should
+be used by microservices to avoid code duplication. Note that microservices will still need to provide their own
+implementations of ``LogoutRedirectBaseView``, and define the linking in the service's `urls.py` file.
 
 Testing
 -------

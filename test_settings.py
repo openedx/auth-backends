@@ -12,6 +12,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django_nose',
+    'social.apps.django_app.default',
     'auth_backends',
 )
 

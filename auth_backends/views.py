@@ -1,6 +1,7 @@
 """ Authentication views. """
 
 from django.contrib.auth import logout
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -32,3 +33,13 @@ class LogoutRedirectBaseView(RedirectView):
             return HttpResponse()
 
         return super(LogoutRedirectBaseView, self).dispatch(request, *args, **kwargs)
+
+
+class EdxOpenIdConnectLoginView(RedirectView):
+    """ Login view for projects utilizing edX OpenID Connect for single sign-on.
+
+    Usage of this view requires `python-social-auth` to be installed and configured in `urls.py`.
+    """
+    permanent = False
+    query_string = True
+    url = reverse_lazy('social:begin', args=['edx-oidc'])
