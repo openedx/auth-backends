@@ -2,12 +2,20 @@
 
 from django.contrib.auth import get_user, get_user_model
 from django.core.urlresolvers import reverse
+from social.apps.django_app.default.models import UserSocialAuth
 
+PASSWORD = 'test'
 User = get_user_model()
 
 
 class LogoutViewTestMixin(object):
     """ Mixin for tests of the LogoutRedirectBaseView children. """
+
+    def create_user(self):
+        """ Create a new user. """
+        user = User.objects.create_user('test', password=PASSWORD)
+        UserSocialAuth.objects.create(user=user, provider='edx-oidc', uid=user.username)
+        return user
 
     def get_logout_url(self):
         """ Returns the URL of the logout view. """
@@ -22,28 +30,23 @@ class LogoutViewTestMixin(object):
         user = get_user(self.client)
         self.assertEqual(user.is_authenticated(), is_authenticated)
 
-    def test_redirect_url(self):
-        """ Verify the view redirects to the correct URL. """
-        response = self.client.get(self.get_logout_url())
-        self.assertRedirects(response, self.get_redirect_url(), fetch_redirect_response=False)
-
     def test_x_frame_options_header(self):
         """ Verify no X-Frame-Options header is set in the resposne. """
         response = self.client.get(self.get_logout_url())
         self.assertNotIn('X-Frame-Options', response)
 
     def test_logout(self):
-        """ Verify the user is logged out of the current session. """
+        """ Verify the user is logged out of the current session and redirected to the appropriate URL. """
         self.client.logout()
         self.assert_authentication_status(False)
 
-        password = 'test'
-        user = User.objects.create_user('test', password=password)
-        self.client.login(username=user.username, password=password)
+        user = self.create_user()
+        self.client.login(username=user.username, password=PASSWORD)
         self.assert_authentication_status(True)
 
-        self.client.get(self.get_logout_url())
+        response = self.client.get(self.get_logout_url())
         self.assert_authentication_status(False)
+        self.assertRedirects(response, self.get_redirect_url(), fetch_redirect_response=False)
 
     def test_no_redirect(self):
         """ Verify the view does not redirect if the no_redirect querystring parameter is set. """

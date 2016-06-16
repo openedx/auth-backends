@@ -44,6 +44,12 @@ SOCIAL_AUTH_EDX_OIDC_URL_ROOT = 'http://example.com'
 SOCIAL_AUTH_EDX_OIDC_KEY = 'dummy-key'
 SOCIAL_AUTH_EDX_OIDC_SECRET = 'dummy-secret'
 SOCIAL_AUTH_EDX_OIDC_ID_TOKEN_DECRYPTION_KEY = 'dummy-secret'
+SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL = 'http://example.com/logout/'
 
 EXTRA_SCOPE = []
 COURSE_PERMISSIONS_CLAIMS = []
+
+AUTHENTICATION_BACKENDS = (
+    'auth_backends.backends.EdXOpenIdConnect',
+    'django.contrib.auth.backends.ModelBackend',
+)

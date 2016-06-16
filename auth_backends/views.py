@@ -1,4 +1,5 @@
 """ Authentication views. """
+import logging
 
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse_lazy
@@ -6,6 +7,9 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic import RedirectView
+from social.apps.django_app.utils import load_strategy, load_backend
+
+logger = logging.getLogger(__name__)
 
 
 class LogoutRedirectBaseView(RedirectView):
@@ -24,9 +28,12 @@ class LogoutRedirectBaseView(RedirectView):
     authorization server's logout page. This allows signout to be triggered by the authorization server.
     """
     permanent = False
+    user = None
 
     @method_decorator(xframe_options_exempt)
     def dispatch(self, request, *args, **kwargs):
+        # Keep track of the user so that child classes have access to it after logging out.
+        self.user = request.user
         logout(request)
 
         if request.GET.get('no_redirect'):
@@ -43,3 +50,12 @@ class EdxOpenIdConnectLoginView(RedirectView):
     permanent = False
     query_string = True
     url = reverse_lazy('social:begin', args=['edx-oidc'])
+
+
+class EdxOpenIdConnectLogoutView(LogoutRedirectBaseView):
+    """ Logout view for projects utilizing edX OpenID Connect for single sign-on. """
+
+    def get_redirect_url(self, *args, **kwargs):
+        strategy = load_strategy(self.request)
+        backend = load_backend(strategy, 'edx-oidc', None)
+        return backend.logout_url

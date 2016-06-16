@@ -13,6 +13,7 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
 
     backend_path = 'auth_backends.backends.EdXOpenIdConnect'
     url_root = 'http://www.example.com'
+    logout_url = 'http://www.example.com/logout/'
     issuer = url_root
     expected_username = 'test_user'
     fake_locale = 'en_US'
@@ -28,6 +29,7 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         settings.update({
             'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
             'SOCIAL_AUTH_{0}_ISSUER'.format(self.name): self.issuer,
+            'SOCIAL_AUTH_{0}_LOGOUT_URL'.format(self.name): self.logout_url,
         })
         return settings
 
@@ -69,3 +71,7 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
             headers = {'Authorization': '{token_type} {token}'.format(token_type=expected_token_type,
                                                                       token=self.fake_access_token)}
             mock_get_json.assert_called_once_with(self.backend.USER_INFO_URL, headers=headers)
+
+    def test_logout_url(self):
+        """ Verify the property returns the configured logout URL. """
+        self.assertEqual(self.backend.logout_url, self.logout_url)
