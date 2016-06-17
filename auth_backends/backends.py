@@ -55,6 +55,11 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
         """ URL of the auth provider's user info endpoint. """
         return '{0}/user_info/'.format(self.setting('URL_ROOT'))
 
+    @property
+    def logout_url(self):
+        """ URL of the auth provider's logout page. """
+        return self.setting('LOGOUT_URL')
+
     def user_data(self, _access_token, *_args, **_kwargs):
         # Include decoded id_token fields in user data.
         return self.id_token
