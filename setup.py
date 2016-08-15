@@ -35,7 +35,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Django>=1.8,<1.10',
-        'python-social-auth>=0.2.20,<1.0.0',
+        'python-social-auth>=0.2.21,<1.0.0',
         'six>=1.10.0,<2.0.0'
     ],
 )
