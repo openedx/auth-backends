@@ -35,7 +35,10 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Django>=1.8,<1.10',
-        'python-social-auth>=0.2.21,<1.0.0',
+        # 0.3.0 introduced a major breaking change, effectively gutting PSA and
+        # moving its Django components to a new social-auth-app-django package.
+        # We may require the new package at some point in the future, once it's stable.
+        'python-social-auth>=0.2.21,<0.3.0',
         'six>=1.10.0,<2.0.0'
     ],
 )
