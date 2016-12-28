@@ -2,7 +2,7 @@
 
 from django.contrib.auth import get_user, get_user_model
 from django.core.urlresolvers import reverse
-from social.apps.django_app.default.models import UserSocialAuth
+from social_django.models import UserSocialAuth
 
 PASSWORD = 'test'
 User = get_user_model()

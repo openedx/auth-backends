@@ -4,7 +4,7 @@ Python Social Auth strategies.
 See http://python-social-auth.readthedocs.io/en/latest/strategies.html for more information.
 """
 
-from social.strategies.django_strategy import DjangoStrategy
+from social_django.strategy import DjangoStrategy
 
 
 class EdxDjangoStrategy(DjangoStrategy):

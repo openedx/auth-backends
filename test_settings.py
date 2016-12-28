@@ -11,7 +11,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'social.apps.django_app.default',
+    'social_django',
     'auth_backends',
 )
 
@@ -38,12 +38,6 @@ MIDDLEWARE_CLASSES = [
 ]
 
 SOCIAL_AUTH_STRATEGY = 'auth_backends.strategies.EdxDjangoStrategy'
-
-SOCIAL_AUTH_EDX_OIDC_URL_ROOT = 'http://example.com'
-SOCIAL_AUTH_EDX_OIDC_KEY = 'dummy-key'
-SOCIAL_AUTH_EDX_OIDC_SECRET = 'dummy-secret'
-SOCIAL_AUTH_EDX_OIDC_ID_TOKEN_DECRYPTION_KEY = 'dummy-secret'
-SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL = 'http://example.com/logout/'
 
 EXTRA_SCOPE = []
 COURSE_PERMISSIONS_CLAIMS = []

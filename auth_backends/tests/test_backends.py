@@ -1,10 +1,16 @@
 """ Tests for the backends. """
+import datetime
+import json
+from calendar import timegm
 
 import ddt
 import mock
 import six
-from social.tests.backends.oauth import OAuth2Test
-from social.tests.backends.open_id import OpenIdConnectTestMixin
+from jwkest.jwk import SYMKey
+from jwkest.jws import JWS
+from jwkest.jwt import b64encode_item
+from social_core.tests.backends.oauth import OAuth2Test
+from social_core.tests.backends.open_id_connect import OpenIdConnectTestMixin
 
 
 @ddt.ddt
@@ -22,6 +28,13 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         'another-claim': 'some-other-data'
     }
     fake_access_token = 'an-access-token'
+
+    # NOTE (CCB): We don't use this, but it's required by OpenIdConnectTestMixin.setUp().
+    openid_config_body = '{ "jwks_uri": "http://www.example.com" }'
+
+    def setUp(self):
+        super(EdXOpenIdConnectTests, self).setUp()
+        self.key = SYMKey(key=self.client_secret)
 
     def extra_settings(self):
         """ Define additional Django settings. """
@@ -43,6 +56,35 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         data['locale'] = self.fake_locale
 
         return data
+
+    def prepare_access_token_body(self, client_key=None, tamper_message=False, expiration_datetime=None,
+                                  issue_datetime=None, nonce=None, issuer=None):
+        """
+        Prepares a provider access token response.
+
+        Note:
+            We only override this method to force the JWS class to use the HS256 algorithm.
+        """
+
+        body = {'access_token': 'foobar', 'token_type': 'bearer'}
+        client_key = client_key or self.client_key
+        now = datetime.datetime.utcnow()
+        expiration_datetime = expiration_datetime or (now + datetime.timedelta(seconds=30))
+        issue_datetime = issue_datetime or now
+        nonce = nonce or 'a-nonce'
+        issuer = issuer or self.issuer
+        id_token = self.get_id_token(
+            client_key, timegm(expiration_datetime.utctimetuple()),
+            timegm(issue_datetime.utctimetuple()), nonce, issuer)
+
+        body['id_token'] = JWS(id_token, jwk=self.key, alg='HS256').sign_compact()
+        if tamper_message:
+            header, msg, sig = body['id_token'].split('.')
+            id_token['sub'] = '1235'
+            msg = b64encode_item(id_token).decode('utf-8')
+            body['id_token'] = '.'.join([header, msg, sig])
+
+        return json.dumps(body)
 
     def test_login(self):
         user = self.do_login()
