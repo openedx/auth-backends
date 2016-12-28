@@ -7,7 +7,8 @@ import json
 from django.conf import settings
 import django.dispatch
 import six
-from social.backends.open_id import OpenIdConnectAuth
+from jwkest.jwk import KEYS
+from social_core.backends.open_id_connect import OpenIdConnectAuth
 
 
 # pylint: disable=abstract-method
@@ -36,10 +37,31 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
 
     auth_complete_signal = django.dispatch.Signal(providing_args=['user', 'id_token'])
 
+    def get_jwks_keys(self):
+        """ Returns the keys used to decode the ID token.
+
+        Note:
+            edX uses symmetric keys, so bypass the parent class's calls to an external
+            server and return the key from settings.
+        """
+        keys = KEYS()
+        keys.add({'key': self.setting('ID_TOKEN_DECRYPTION_KEY'), 'kty': 'oct'})
+        return keys
+
     @property
     def ID_TOKEN_ISSUER(self):  # pylint: disable=invalid-name
         """ Expected value of the `iss` claim in the ID token. """
         return self.setting('ISSUER')
+
+    @property
+    def OIDC_ENDPOINT(self):  # pylint: disable=invalid-name
+        """ OpenID Connect discovery endpoint. """
+        url_root = self.setting('PUBLIC_URL_ROOT')
+
+        if not url_root:
+            url_root = self.setting('URL_ROOT')
+
+        return url_root
 
     @property
     def AUTHORIZATION_URL(self):  # pylint: disable=invalid-name

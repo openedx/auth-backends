@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.test import TestCase
 from django.test import override_settings
-from social.apps.django_app.utils import load_strategy
+from social_django.utils import load_strategy
 
 from auth_backends.strategies import EdxDjangoStrategy
 

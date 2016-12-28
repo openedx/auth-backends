@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic import RedirectView
-from social.apps.django_app.utils import load_strategy, load_backend
+from social_django.utils import load_strategy, load_backend
 
 logger = logging.getLogger(__name__)
 
