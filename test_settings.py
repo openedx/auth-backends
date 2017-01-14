@@ -37,6 +37,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SOCIAL_AUTH_STRATEGY = 'auth_backends.strategies.EdxDjangoStrategy'
+
 SOCIAL_AUTH_EDX_OIDC_URL_ROOT = 'http://example.com'
 SOCIAL_AUTH_EDX_OIDC_KEY = 'dummy-key'
 SOCIAL_AUTH_EDX_OIDC_SECRET = 'dummy-secret'
