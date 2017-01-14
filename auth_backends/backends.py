@@ -25,12 +25,12 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     DEFAULT_SCOPE = ['openid', 'profile', 'email'] + getattr(settings, 'EXTRA_SCOPE', [])
 
     PROFILE_TO_DETAILS_KEY_MAP = {
-        'preferred_username': u'username',
-        'email': u'email',
-        'name': u'full_name',
-        'given_name': u'first_name',
-        'family_name': u'last_name',
-        'locale': u'language',
+        'preferred_username': 'username',
+        'email': 'email',
+        'name': 'full_name',
+        'given_name': 'first_name',
+        'family_name': 'last_name',
+        'locale': 'language',
     }
 
     auth_complete_signal = django.dispatch.Signal(providing_args=['user', 'id_token'])
@@ -43,17 +43,22 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
     @property
     def AUTHORIZATION_URL(self):  # pylint: disable=invalid-name
         """ URL of the auth provider's authorization endpoint. """
-        return '{0}/authorize/'.format(self.setting('URL_ROOT'))
+        url_root = self.setting('PUBLIC_URL_ROOT')
+
+        if not url_root:
+            url_root = self.setting('URL_ROOT')
+
+        return '{}/authorize/'.format(url_root)
 
     @property
     def ACCESS_TOKEN_URL(self):  # pylint: disable=invalid-name
         """ URL of the auth provider's access token endpoint. """
-        return '{0}/access_token/'.format(self.setting('URL_ROOT'))
+        return '{}/access_token/'.format(self.setting('URL_ROOT'))
 
     @property
     def USER_INFO_URL(self):  # pylint: disable=invalid-name
         """ URL of the auth provider's user info endpoint. """
-        return '{0}/user_info/'.format(self.setting('URL_ROOT'))
+        return '{}/user_info/'.format(self.setting('URL_ROOT'))
 
     @property
     def logout_url(self):
@@ -104,10 +109,10 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
         # Limits the scope of languages we can use
         locale = response.get('locale')
         if locale:
-            details[u'language'] = _to_language(response['locale'])
+            details['language'] = _to_language(response['locale'])
 
         # Set superuser bit if the provider determines the user is an administrator
-        details[u'is_superuser'] = details[u'is_staff'] = response.get('administrator', False)
+        details['is_superuser'] = details['is_staff'] = response.get('administrator', False)
 
         return details
 

@@ -68,10 +68,23 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
             self.assertDictEqual(actual, {claim[0]: claim[1]})
 
             # Verify the call to the user info endpoint was made with the correct authorization headers
-            headers = {'Authorization': '{token_type} {token}'.format(token_type=expected_token_type,
-                                                                      token=self.fake_access_token)}
+            headers = {
+                'Authorization': '{token_type} {token}'.format(token_type=expected_token_type,
+                                                               token=self.fake_access_token)
+            }
             mock_get_json.assert_called_once_with(self.backend.USER_INFO_URL, headers=headers)
 
     def test_logout_url(self):
         """ Verify the property returns the configured logout URL. """
         self.assertEqual(self.backend.logout_url, self.logout_url)
+
+    def test_authorization_url(self):
+        """ Verify the method utilizes the public URL, if one is set. """
+        authorize_path = '/authorize/'
+        self.assertEqual(self.backend.AUTHORIZATION_URL, self.url_root + authorize_path)
+
+        expected = 'http://public.example.com'
+        # NOTE (CCB): We use the strategy's method, rather than override_settings, because the TestStrategy
+        # class being used does not rely on Django settings.
+        self.strategy.set_settings({'SOCIAL_AUTH_EDX_OIDC_PUBLIC_URL_ROOT': expected})
+        self.assertEqual(self.backend.AUTHORIZATION_URL, expected + authorize_path)
