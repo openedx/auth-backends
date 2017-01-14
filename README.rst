@@ -7,7 +7,7 @@ auth-backends  |Travis|_ |Codecov|_
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
 
 This repo houses a custom authentication backend, views, and pipeline steps used by edX services for single sign-on.
-This functionality is built atop the `OpenID Connect protocol <http://openid.net/connect/>`_.
+This functionality is built atop the `OpenID Connect (OIDC) protocol <http://openid.net/connect/>`_.
 
 This package is compatible with Python 2.7 and 3.5, and Django 1.8 and 1.9.
 
@@ -46,7 +46,6 @@ The following settings MUST be set:
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
 | SOCIAL_AUTH_STRATEGY                         | Python Social Auth strategy. Set this to `'auth_backends.strategies.EdxDjangoStrategy'`     |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
-
 
 If your application requires additional user data in the identity token, you can specify additional claims by defining
 the ``EXTRA_SCOPE`` setting. For example, if you wish to have a claim named `preferred_language`, you would include
@@ -110,6 +109,23 @@ This package includes views and urlpatterns configured for edX OpenID Connect. T
 It is recommended that you not modify the login view. If, however, you need to modify the logout view (to redirect to
 a different URL, for example), you can subclass ``EdxOpenIdConnectLogoutView`` for the view and ``LogoutViewTestMixin``
 for your tests.
+
+Devstack
+--------
+When using the Docker-based devstack, it is necessary to have both internal and public URLs for the OAuth/OIDC
+provider. To accommodate this need, set the ``SOCIAL_AUTH_EDX_OIDC_PUBLIC_URL_ROOT`` setting to the value of the
+provider's browser-accessible URL.
+
+.. code-block:: python
+
+    SOCIAL_AUTH_EDX_OIDC_URL_ROOT = 'http://edx.devstack.edxapp:18000/oauth2'
+    SOCIAL_AUTH_EDX_OIDC_PUBLIC_URL_ROOT = 'http://localhost:18000/oauth2'
+
+Additionally, the logout URL should also be browser-accessible:
+
+.. code-block:: python
+
+    SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL = 'http://localhost:18000/logout'
 
 Testing
 -------
