@@ -44,6 +44,8 @@ The following settings MUST be set:
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
 | SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL              | OAuth/OpenID Connect provider's logout page URL (e.g. https://courses.stage.edx.org/logout) |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_STRATEGY                         | Python Social Auth strategy. Set this to `'auth_backends.strategies.EdxDjangoStrategy'`     |
++----------------------------------------------+---------------------------------------------------------------------------------------------+
 
 
 If your application requires additional user data in the identity token, you can specify additional claims by defining
@@ -62,6 +64,18 @@ The optional setting ``COURSE_PERMISSIONS_CLAIMS``, used primarily by
 `edx-analytics-dashboard <https://github.com/edx/edx-analytics-dashboard>`_, can be used to designate scopes/claims that
 should be requested in order to retrieve a list of courses the user is permitted to access/administer. The value of this
 array depends on the authentication provider's available scopes.
+
+Strategy
+~~~~~~~~
+We use a custom `strategy <http://python-social-auth.readthedocs.io/en/latest/strategies.html>`_ that includes many of
+the default settings necessary to utilize single sign-on for edX services. This strategy should be used for all
+services to simplify configuration. If you need to override the defaults, you may still do so as you would with any
+social auth setting——prepend `SOCIAL_AUTH_` to the setting name. Add the following to your Django settings to use the
+strategy:
+
+.. code-block:: python
+
+    SOCIAL_AUTH_STRATEGY = 'auth_backends.strategies.EdxDjangoStrategy'
 
 Authentication Backend
 ~~~~~~~~~~~~~~~~~~~~~~
