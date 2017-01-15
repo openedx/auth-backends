@@ -11,7 +11,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django_nose',
     'social.apps.django_app.default',
     'auth_backends',
 )
@@ -37,8 +36,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 SOCIAL_AUTH_EDX_OIDC_URL_ROOT = 'http://example.com'
 SOCIAL_AUTH_EDX_OIDC_KEY = 'dummy-key'

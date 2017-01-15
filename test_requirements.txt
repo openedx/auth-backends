@@ -1,9 +1,11 @@
 coverage>=4.3.1,<5.0.0
 ddt>=1.1.1,<2.0.0
-django-nose>=1.4.3,<2.0.0
 edx-lint>=0.5.2,<1.0.0
 httpretty>=0.8.14,<1.0.0
 mock>=2.0.0,<3.0.0
 pep8>=1.7.0,<2.0.0
+pytest-catchlog>=1.2.2,<2.0.0
+pytest-cov>=2.4.0,<3.0.0
+pytest-django>=3.1.2,<4.0.0
 tox>=2.3.2,<3.0.0
 unittest2>=1.1.0,<2.0.0
