@@ -31,6 +31,7 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
         'given_name': 'first_name',
         'family_name': 'last_name',
         'locale': 'language',
+        'user_tracking_id': 'user_tracking_id',
     }
 
     auth_complete_signal = django.dispatch.Signal(providing_args=['user', 'id_token'])
