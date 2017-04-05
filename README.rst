@@ -9,7 +9,7 @@ auth-backends  |Travis|_ |Codecov|_
 This repo houses a custom authentication backend, views, and pipeline steps used by edX services for single sign-on.
 This functionality is built atop the `OpenID Connect (OIDC) protocol <http://openid.net/connect/>`_.
 
-This package is compatible with Python 2.7 and 3.5, and Django 1.8 and 1.9.
+This package is compatible with Python 2.7 and 3.5, and Django 1.8 through 1.11.
 
 Installation
 ------------
