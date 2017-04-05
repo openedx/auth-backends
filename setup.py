@@ -24,6 +24,8 @@ setup(
         'Framework :: Django',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
+        'Framework :: Django :: 1.10',
+        'Framework :: Django :: 1.11',
         'Topic :: Internet',
     ],
     keywords='authentication edx',
@@ -33,7 +35,7 @@ setup(
     license='AGPL',
     packages=find_packages(),
     install_requires=[
-        'Django>=1.8,<1.10',
+        'Django>=1.8,<2.0',
         'six',
         'social-auth-core[openidconnect]>1.0.0,<2.0.0',
         'social-auth-app-django>1.0.0,<2.0.0',
