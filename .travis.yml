@@ -16,6 +16,8 @@ matrix:
  include:
   - python: 3.5
     env: TOXENV=quality
+  - python: 3.6
+    env: TOXENV=django111
 
 cache:
   - pip
@@ -38,5 +40,5 @@ deploy:
   distributions: sdist bdist_wheel
   on:
     tags: true
-    python: 3.5
-    condition: '$TOXENV = django19'
+    python: 3.6
+    condition: '$TOXENV = django111'
