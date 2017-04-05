@@ -26,7 +26,8 @@ setup(
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
         'Framework :: Django :: 1.10',
-        'Framework :: Django :: 1.11',
+        # This classifier is not yet valid. See https://github.com/pypa/warehouse/issues/1673.
+        # 'Framework :: Django :: 1.11',
         'Topic :: Internet',
     ],
     keywords='authentication edx',
