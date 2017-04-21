@@ -46,8 +46,9 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         })
         return settings
 
-    def get_id_token(self, *args, **kwargs):
-        data = super(EdXOpenIdConnectTests, self).get_id_token(*args, **kwargs)
+    def get_id_token(self, client_key=None, expiration_datetime=None, issue_datetime=None, nonce=None, issuer=None):
+        data = super(EdXOpenIdConnectTests, self).get_id_token(
+            client_key, expiration_datetime, issue_datetime, nonce, issuer)
 
         # Set the field used to derive the username of the logged user.
         data['preferred_username'] = self.expected_username
