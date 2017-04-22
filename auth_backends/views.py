@@ -2,7 +2,7 @@
 import logging
 
 from django.contrib.auth import logout
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -27,6 +27,7 @@ class LogoutRedirectBaseView(RedirectView):
     provider. Additionally, no X-Frame-Options header is set, allowing this page to be loaded in an iframe on the
     authorization server's logout page. This allows signout to be triggered by the authorization server.
     """
+    auth_backend_name = None
     permanent = False
     user = None
 
@@ -41,21 +42,43 @@ class LogoutRedirectBaseView(RedirectView):
 
         return super(LogoutRedirectBaseView, self).dispatch(request, *args, **kwargs)
 
+    def get_redirect_url(self, *args, **kwargs):
+        strategy = load_strategy(self.request)
+        backend = load_backend(strategy, self.auth_backend_name, None)
+        return backend.logout_url
 
-class EdxOpenIdConnectLoginView(RedirectView):
+
+class LoginRedirectBaseView(RedirectView):
+    """ Base view for backend logins. """
+    auth_backend_name = None
+    permanent = False
+    query_string = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('social:begin', args=[self.auth_backend_name])
+
+
+class EdxOpenIdConnectLoginView(LoginRedirectBaseView):
     """ Login view for projects utilizing edX OpenID Connect for single sign-on.
 
     Usage of this view requires `python-social-auth` to be installed and configured in `urls.py`.
     """
-    permanent = False
-    query_string = True
-    url = reverse_lazy('social:begin', args=['edx-oidc'])
+    auth_backend_name = 'edx-oidc'
 
 
 class EdxOpenIdConnectLogoutView(LogoutRedirectBaseView):
     """ Logout view for projects utilizing edX OpenID Connect for single sign-on. """
+    auth_backend_name = 'edx-oidc'
 
-    def get_redirect_url(self, *args, **kwargs):
-        strategy = load_strategy(self.request)
-        backend = load_backend(strategy, 'edx-oidc', None)
-        return backend.logout_url
+
+class EdxOAuth2LoginView(LoginRedirectBaseView):
+    """ Login view for projects utilizing edX OAuth 2.0 for single sign-on.
+
+    Usage of this view requires `python-social-auth` to be installed and configured in `urls.py`.
+    """
+    auth_backend_name = 'edx-oauth2'
+
+
+class EdxOAuth2LogoutView(LogoutRedirectBaseView):
+    """ Logout view for projects utilizing edX OAuth 2.0 for single sign-on. """
+    auth_backend_name = 'edx-oauth2'

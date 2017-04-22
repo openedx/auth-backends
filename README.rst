@@ -6,10 +6,18 @@ auth-backends  |Travis|_ |Codecov|_
 .. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
 
-This repo houses a custom authentication backend, views, and pipeline steps used by edX services for single sign-on.
-This functionality is built atop the `OpenID Connect (OIDC) protocol <http://openid.net/connect/>`_.
+This package contains custom authentication backends, views, and pipeline steps used by edX services for single sign-on.
 
 This package is compatible with Python 2.7 and 3.5, and Django 1.8 through 1.11.
+
+We currently support two forms of authentication:
+
+- OAuth 2.0
+- OpenID Connect (deprecated)
+
+Support for OpenID Connect (OIDC) is deprecated. Clients should use the OAuth 2.0 backend. This backend behaves
+similarly to the OIDC backend, except we use a JWT as the access token instead of OIDC's ID token. This allows us to use
+any OAuth provider, and not rely on an implementation of an OIDC provider.
 
 Installation
 ------------
@@ -36,8 +44,32 @@ Adding single sign-on/out support to a service requires a few changes:
 3. Add the login/logout redirects
 
 
-Settings
-~~~~~~~~
+OAuth 2.0 Settings
+~~~~~~~~~~~~~~~~~~
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+| Setting                                                  | Purpose                                                                                   |
++==========================================================+===========================================================================================+
+| SOCIAL_AUTH_EDX_OAUTH2_KEY                               | Client key                                                                                |
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_EDX_OAUTH2_SECRET                            | Client secret                                                                             |
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_EDX_OAUTH2_ENDPOINT                          | Provider root (e.g. https://courses.stage.edx.org/oauth2)                                 |
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_EDX_OAUTH2_JWS_HMAC_SIGNING_KEY              | (Optional) Shared secret for JWT signed with HS512 algorithm                              |
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_EDX_OAUTH2_PROVIDER_CONFIGURATION_CACHE_TTL  | (Optional) Cache timeout for provider configuration. Defaults to 1 week.                  |
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_EDX_OAUTH2_JWKS_CACHE_TTL                    | (Optional) Cache timeout for provider's JWKS key data. Defaults to 1 day.                 |
++----------------------------------------------------------+-------------------------------------------------------------------------------------------+
+
+Note that the OAuth 2.0 provider uses ``SOCIAL_AUTH_EDX_OAUTH2_ENDPOINT`` to read configuration from a special path,
+``.well-known/openid-configuration`` (e.g. https://courses.stage.edx.org/oauth2/.well-known/openid-configuration). The
+data returned from this endpoint provides the URLs necessary for authentication as well as the public keys used to
+verify the signed JWT (JWS) access token.
+
+
+OIDC Settings (deprecated)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 The following settings MUST be set:
 
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
@@ -54,8 +86,6 @@ The following settings MUST be set:
 | SOCIAL_AUTH_EDX_OIDC_ISSUER                  | OAuth/OpenID Connect provider ID token issuer (e.g. https://courses.stage.edx.org/oauth2)   |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
 | SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL              | OAuth/OpenID Connect provider's logout page URL (e.g. https://courses.stage.edx.org/logout) |
-+----------------------------------------------+---------------------------------------------------------------------------------------------+
-| SOCIAL_AUTH_STRATEGY                         | Python Social Auth strategy. Set this to `'auth_backends.strategies.EdxDjangoStrategy'`     |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
 
 If your application requires additional user data in the identity token, you can specify additional claims by defining
@@ -102,11 +132,11 @@ below is sufficient for all edX services.
 Authentication Views
 ~~~~~~~~~~~~~~~~~~~~
 In order to make use of the authentication backend, your service's login/logout views need to be updated. The login
-view should be updated to redirect to the OpenID Connect provider's login page. The logout view should be updated to
-redirect to the OpenID Connect provider's logout page.
+view should be updated to redirect to the authentication provider's login page. The logout view should be updated to
+redirect to the authentication provider's logout page.
 
-This package includes views and urlpatterns configured for edX OpenID Connect. To use them, simply append/prepend
-``auth_urlpatterns`` to your service's urlpatterns in `urls.py`.
+This package includes views and urlpatterns configured for OIDC and OAuth 2.0. To use them, simply append/prepend
+either ``auth_urlpatterns`` or ``oauth2_urlpatterns`` to your service's urlpatterns in `urls.py`.
 
 .. code-block:: python
 
@@ -118,8 +148,8 @@ This package includes views and urlpatterns configured for edX OpenID Connect. T
     ]
 
 It is recommended that you not modify the login view. If, however, you need to modify the logout view (to redirect to
-a different URL, for example), you can subclass ``EdxOpenIdConnectLogoutView`` for the view and ``LogoutViewTestMixin``
-for your tests.
+a different URL, for example), you can subclass either ``EdxOAuth2LogoutView`` or ``EdxOpenIdConnectLogoutView`` for
+the view and ``LogoutViewTestMixin`` for your tests.
 
 Devstack
 --------
