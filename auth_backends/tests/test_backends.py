@@ -1,6 +1,7 @@
 """ Tests for the backends. """
 import datetime
 import json
+import unittest
 from calendar import timegm
 
 import ddt
@@ -35,6 +36,26 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
     def setUp(self):
         super(EdXOpenIdConnectTests, self).setUp()
         self.key = SYMKey(key=self.client_secret)
+
+    # NOTE (CCB): We are TEMPORARILY disabling the nonce validation while we transition our
+    # authentication provider to properly implement storing the nonce at the point of initial
+    # authorization, rather than when we request the access token.
+    def access_token_body(self, request, _url, headers):    # pylint: disable=method-hidden
+        """
+        Get the nonce from the request parameters, add it to the id_token, and
+        return the complete response.
+        """
+        # nonce = self.backend.data['nonce'].encode('utf-8')
+        # body = self.prepare_access_token_body(nonce=nonce)
+        body = self.prepare_access_token_body()
+        return 200, headers, body
+
+    @unittest.skip('Disabled until we release https://github.com/edx/edx-platform/pull/14966.')
+    def test_invalid_nonce(self):
+        self.authtoken_raised(
+            'Token error: Incorrect id_token: nonce',
+            nonce='something-wrong'
+        )
 
     def extra_settings(self):
         """ Define additional Django settings. """

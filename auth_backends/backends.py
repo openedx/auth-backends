@@ -2,13 +2,16 @@
 
 For more information visit https://docs.djangoproject.com/en/dev/topics/auth/customizing/.
 """
+import datetime
 import json
+from calendar import timegm
 
-from django.conf import settings
 import django.dispatch
 import six
+from django.conf import settings  # pylint: disable=ungrouped-imports
 from jwkest.jwk import KEYS
 from social_core.backends.open_id_connect import OpenIdConnectAuth
+from social_core.exceptions import AuthTokenError
 
 
 # pylint: disable=abstract-method
@@ -151,6 +154,53 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
                 dest[dest_key] = value
 
         return dest
+
+    # NOTE (CCB): We are TEMPORARILY disabling the nonce validation while we transition our
+    # authentication provider to properly implement storing the nonce at the point of initial
+    # authorization, rather than when we request the access token.
+    def auth_params(self, state=None):
+        return super(OpenIdConnectAuth, self).auth_params(state)    # pylint: disable=bad-super-call
+
+    def validate_claims(self, id_token):
+        if id_token['iss'] != self.id_token_issuer():
+            raise AuthTokenError(self, 'Invalid issuer')
+
+        client_id, __ = self.get_key_and_secret()
+
+        if isinstance(id_token['aud'], six.string_types):
+            id_token['aud'] = [id_token['aud']]
+
+        if client_id not in id_token['aud']:
+            raise AuthTokenError(self, 'Invalid audience')
+
+        if len(id_token['aud']) > 1 and 'azp' not in id_token:
+            raise AuthTokenError(self, 'Incorrect id_token: azp')
+
+        if 'azp' in id_token and id_token['azp'] != client_id:
+            raise AuthTokenError(self, 'Incorrect id_token: azp')
+
+        utc_timestamp = timegm(datetime.datetime.utcnow().utctimetuple())
+        if utc_timestamp > id_token['exp']:
+            raise AuthTokenError(self, 'Signature has expired')
+
+        if 'nbf' in id_token and utc_timestamp < id_token['nbf']:
+            raise AuthTokenError(self, 'Incorrect id_token: nbf')
+
+        # Verify the token was issued in the last 10 minutes
+        iat_leeway = self.setting('ID_TOKEN_MAX_AGE', self.ID_TOKEN_MAX_AGE)
+        if utc_timestamp > id_token['iat'] + iat_leeway:
+            raise AuthTokenError(self, 'Incorrect id_token: iat')
+
+        # Validate the nonce to ensure the request was not modified
+        # nonce = id_token.get('nonce')
+        # if not nonce:
+        #     raise AuthTokenError(self, 'Incorrect id_token: nonce')
+        #
+        # nonce_obj = self.get_nonce(nonce)
+        # if nonce_obj:
+        #     self.remove_nonce(nonce_obj.id)
+        # else:
+        #     raise AuthTokenError(self, 'Incorrect id_token: nonce')
 
 
 def _to_language(locale):
