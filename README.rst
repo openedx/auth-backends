@@ -18,6 +18,15 @@ The `auth_backends` package can be installed from PyPI using pip::
 
     $ pip install edx-auth-backends
 
+Update ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        'social_django',
+    )
+
+
 Configuration
 -------------
 Adding single sign-on/out support to a service requires a few changes:
@@ -41,6 +50,8 @@ The following settings MUST be set:
 | SOCIAL_AUTH_EDX_OIDC_ID_TOKEN_DECRYPTION_KEY | Identity token decryption key (same value as the client secret for edX OpenID Connect)      |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
 | SOCIAL_AUTH_EDX_OIDC_URL_ROOT                | OAuth/OpenID Connect provider root (e.g. https://courses.stage.edx.org/oauth2)              |
++----------------------------------------------+---------------------------------------------------------------------------------------------+
+| SOCIAL_AUTH_EDX_OIDC_ISSUER                  | OAuth/OpenID Connect provider ID token issuer (e.g. https://courses.stage.edx.org/oauth2)   |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+
 | SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL              | OAuth/OpenID Connect provider's logout page URL (e.g. https://courses.stage.edx.org/logout) |
 +----------------------------------------------+---------------------------------------------------------------------------------------------+

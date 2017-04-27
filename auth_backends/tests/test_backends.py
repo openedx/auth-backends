@@ -6,7 +6,9 @@ from calendar import timegm
 
 import ddt
 import mock
+import pytest
 import six
+from auth_backends.strategies import EdxDjangoStrategy
 from jwkest.jwk import SYMKey
 from jwkest.jws import JWS
 from jwkest.jwt import b64encode_item
@@ -65,6 +67,10 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
             'SOCIAL_AUTH_{0}_ISSUER'.format(self.name): self.issuer,
             'SOCIAL_AUTH_{0}_LOGOUT_URL'.format(self.name): self.logout_url,
         })
+
+        # Use settings from our default strategy so that we can validate them
+        settings.update(EdxDjangoStrategy.DEFAULT_SETTINGS)
+
         return settings
 
     def get_id_token(self, client_key=None, expiration_datetime=None, issue_datetime=None, nonce=None, issuer=None):
@@ -108,6 +114,7 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
 
         return json.dumps(body)
 
+    @pytest.mark.django_db(transaction=False)
     def test_login(self):
         user = self.do_login()
         self.assertIsNotNone(user)

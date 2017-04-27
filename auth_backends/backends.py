@@ -110,8 +110,8 @@ class EdXOpenIdConnect(OpenIdConnectAuth):
         return params
 
     def auth_complete(self, *args, **kwargs):
-        # WARNING: During testing, the user model class is `social.tests.models` and not the one
-        # specified for the application.
+        # WARNING: During testing, the user model class is `social_core.tests.models.User`,
+        # not the model specified for the application.
         user = super(EdXOpenIdConnect, self).auth_complete(*args, **kwargs)
         self.auth_complete_signal.send(sender=self.__class__, user=user, id_token=self.id_token)
         return user
