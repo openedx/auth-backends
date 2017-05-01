@@ -27,7 +27,11 @@ class EdxDjangoStrategy(DjangoStrategy):
             # from the provider conflicts with an existing username in this system. This custom pipeline function
             # loads existing users instead of creating new ones.
             'auth_backends.pipeline.get_user_if_exists',
-            'social_core.pipeline.user.get_username',
+
+            # social_core.pipeline.user.get_username is NOT used because the username should come from the JWS access
+            # token or ID token. There is no need to create a new username.
+            # 'social_core.pipeline.user.get_username',
+
             'social_core.pipeline.user.create_user',
             'social_core.pipeline.social_auth.associate_user',
             'social_core.pipeline.social_auth.load_extra_data',
