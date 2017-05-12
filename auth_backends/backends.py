@@ -8,7 +8,7 @@ import warnings
 from calendar import timegm
 
 import six
-from django.conf import settings  # pylint: disable=ungrouped-imports
+from django.conf import settings
 from django.core.cache import cache
 from django.dispatch import Signal
 from jwkest.jwk import KEYS
