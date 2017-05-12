@@ -38,7 +38,7 @@ setup(
     install_requires=[
         'Django>=1.8,<2.0',
         'six',
-        'social-auth-core[openidconnect]>1.0.0,<2.0.0',
-        'social-auth-app-django>1.0.0,<2.0.0',
+        'social-auth-core[openidconnect]>=1.3.0,<2.0.0',
+        'social-auth-app-django>=1.2.0,<2.0.0',
     ],
 )
