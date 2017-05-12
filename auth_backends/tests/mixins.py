@@ -44,8 +44,11 @@ class LogoutViewTestMixin(object):
         self.client.login(username=user.username, password=PASSWORD)
         self.assert_authentication_status(True)
 
-        response = self.client.get(self.get_logout_url())
+        qs = 'next=/test/'
+        response = self.client.get('{url}?{qs}'.format(url=self.get_logout_url(), qs=qs))
         self.assert_authentication_status(False)
+
+        # NOTE: The querystring parameters SHOULD be ignored
         self.assertRedirects(response, self.get_redirect_url(), fetch_redirect_response=False)
 
     def test_no_redirect(self):
