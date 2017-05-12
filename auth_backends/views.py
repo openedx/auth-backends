@@ -42,7 +42,10 @@ class LogoutRedirectBaseView(RedirectView):
 
         return super(LogoutRedirectBaseView, self).dispatch(request, *args, **kwargs)
 
-    def get_redirect_url(self, *args, **kwargs):
+    @property
+    def url(self):
+        # NOTE: We use a property here so that we can take advantage of the base class'
+        # get_redirect_url() with minimal effort.
         strategy = load_strategy(self.request)
         backend = load_backend(strategy, self.auth_backend_name, None)
         return backend.logout_url
@@ -54,7 +57,10 @@ class LoginRedirectBaseView(RedirectView):
     permanent = False
     query_string = True
 
-    def get_redirect_url(self, *args, **kwargs):
+    @property
+    def url(self):
+        # NOTE: We use a property here so that we can take advantage of the base class'
+        # get_redirect_url() with minimal effort.
         return reverse('social:begin', args=[self.auth_backend_name])
 
 

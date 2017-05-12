@@ -17,8 +17,10 @@ class EdxOpenIdConnectLoginViewTests(TestCase):
 
     def test_redirect(self):
         """ Verify the view redirects to the edX OIDC login page. """
-        response = self.client.get(reverse('login'))
-        self.assertRedirects(response, reverse('social:begin', args=['edx-oidc']), fetch_redirect_response=False)
+        qs = 'next=/test/'
+        response = self.client.get('{url}?{qs}'.format(url=reverse('login'), qs=qs))
+        expected = '{url}?{qs}'.format(url=reverse('social:begin', args=['edx-oidc']), qs=qs)
+        self.assertRedirects(response, expected, fetch_redirect_response=False)
 
 
 @override_settings(ROOT_URLCONF=__name__, SOCIAL_AUTH_EDX_OIDC_LOGOUT_URL=LOGOUT_REDIRECT_URL)
