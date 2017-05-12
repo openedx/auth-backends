@@ -234,7 +234,7 @@ class EdXOAuth2Tests(OAuth2Test):
             body=provider_keys.dump_jwks()
         )
 
-    def access_token_body(self, request, _url, headers):  # pylint: disable=method-hidden,unused-argument
+    def access_token_body(self, request, _url, headers):
         """ Generates a response from the provider's access token endpoint. """
         # The backend should always request JWT access tokens, not Bearer.
         body = six.moves.urllib.parse.parse_qs(request.body.decode('utf8'))
