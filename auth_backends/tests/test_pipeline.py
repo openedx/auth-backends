@@ -2,8 +2,9 @@
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from social_django.utils import load_strategy
 
-from auth_backends.pipeline import get_user_if_exists
+from auth_backends.pipeline import get_user_if_exists, update_email
 
 User = get_user_model()
 
@@ -32,3 +33,27 @@ class GetUserIfExistsPipelineTests(TestCase):
         user = User.objects.create(username=self.username)
         actual = get_user_if_exists(None, self.details, user=user)
         self.assertDictEqual(actual, {'is_new': False})
+
+
+class UpdateEmailPipelineTests(TestCase):
+    """ Tests for the update_email pipeline function. """
+
+    def setUp(self):
+        super(UpdateEmailPipelineTests, self).setUp()
+        self.user = User.objects.create()
+
+    def test_update_email(self):
+        """ Verify that user email is updated upon changing email. """
+        updated_email = 'updated@example.com'
+        self.assertNotEqual(self.user.email, updated_email)
+
+        update_email(load_strategy(), {'email': updated_email}, user=self.user)
+        self.user = User.objects.get(username=self.user.username)
+        self.assertEqual(self.user.email, updated_email)
+
+    def test_update_email_with_none(self):
+        """ Verify that user email is not updated if email value is None. """
+        old_email = self.user.email
+        update_email(load_strategy(), {'email': None}, user=self.user)
+        self.user = User.objects.get(username=self.user.username)
+        self.assertEqual(self.user.email, old_email)
