@@ -29,3 +29,13 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):
 
     # Nothing to return since we don't have a user
     return {}
+
+
+def update_email(strategy, details, user=None, *args, **kwargs):
+    """Update the user's email address using data from provider."""
+    if user:
+        email = details.get('email')
+
+        if user.email != email:
+            user.email = email
+            strategy.storage.user.changed(user)
