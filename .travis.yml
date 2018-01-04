@@ -30,7 +30,7 @@ script:
   - make test
 
 after_success:
-  - codecov
+  codecov
 
 deploy:
   provider: pypi
