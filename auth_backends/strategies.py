@@ -35,7 +35,11 @@ class EdxDjangoStrategy(DjangoStrategy):
             'social_core.pipeline.user.create_user',
             'social_core.pipeline.social_auth.associate_user',
             'social_core.pipeline.social_auth.load_extra_data',
-            'social_core.pipeline.user.user_details'
+            'social_core.pipeline.user.user_details',
+
+            # social_core consider's email field protected and won't let it change,
+            # added a new pipeline function to update email address.
+            'auth_backends.pipeline.update_email'
         ),
 
         # Always raise auth exceptions so that they are properly logged. Otherwise, the PSA middleware will redirect to
