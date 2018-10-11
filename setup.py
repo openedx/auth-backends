@@ -37,6 +37,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Django>=1.8,<2.0',
+        'pyjwt',
         'six',
         'social-auth-core[openidconnect]>=1.3.0,<2.0.0',
         'social-auth-app-django>=1.2.0,<2.0.0',

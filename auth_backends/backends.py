@@ -7,12 +7,11 @@ import json
 import warnings
 from calendar import timegm
 
+import jwt
 import six
 from django.conf import settings
-from django.core.cache import cache
 from django.dispatch import Signal
 from jwkest.jwk import KEYS
-from jwkest.jws import JWS
 from social_core.backends.oauth import BaseOAuth2
 from social_core.backends.open_id_connect import OpenIdConnectAuth
 from social_core.exceptions import AuthTokenError
@@ -243,61 +242,14 @@ def _to_language(locale):
 class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
     name = 'edx-oauth2'
 
-    def endpoint(self):
-        return self.setting('ENDPOINT').strip('/')
-
-    def provider_configuration(self):
-        cache_key = 'edx_oauth2_provider_configuration'
-        config = cache.get(cache_key)
-
-        if not config:
-            config = self.get_json(self.endpoint() + '/.well-known/openid-configuration')
-
-            # Cache for one week since the configuration rarely changes
-            cache.set(cache_key, config, self.setting('PROVIDER_CONFIGURATION_CACHE_TTL', 604800))
-
-        return config
-
     def authorization_url(self):
-        return self.provider_configuration().get('authorization_endpoint')
+        return '{}/oauth2/authorize'.format(self.setting('URL_ROOT'))
 
     def access_token_url(self):
-        return self.provider_configuration().get('token_endpoint')
+        return '{}/oauth2/access_token'.format(self.setting('URL_ROOT'))
 
     def end_session_url(self):
-        return self.provider_configuration().get('end_session_endpoint')
-
-    def jwt_issuer(self):
-        return self.provider_configuration().get('issuer')
-
-    def jwks_uri(self):
-        return self.provider_configuration().get('jwks_uri')
-
-    def get_jwks_keys(self):
-        cache_key = 'edx_oauth2_jwks'
-        keys = KEYS()
-        jwks = cache.get(cache_key)
-
-        # KEYS objects cannot be cached since they cannot be pickled. Therefore we cache the parsed JWKS
-        # response from the server since it is a string.
-        if jwks:
-            keys.load_jwks(jwks)
-        else:
-            keys.load_from_url(self.jwks_uri())
-            jwks = keys.dump_jwks()
-
-            # Cache for one day to account for key rotations
-            cache.set(cache_key, jwks, self.setting('JWKS_CACHE_TTL', 86400))
-
-        # Retain support for HMAC signing.
-        # Don't cache this since the frequency of its changes are not defined, and we don't necessarily want
-        # to force a cache clear every time the settings are changed/service deployed.
-        hmac_secret = self.setting('JWS_HMAC_SIGNING_KEY', None)
-
-        if hmac_secret:
-            keys.add({'key': hmac_secret, 'kty': 'oct'})
-
-        return keys
+        return '{}/logout'.format(self.setting('URL_ROOT'))
 
     def auth_complete_params(self, state=None):
         params = super(EdXOAuth2, self).auth_complete_params(state)
@@ -306,20 +258,8 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
         return params
 
     def user_data(self, access_token, *args, **kwargs):
-        access_token = JWS().verify_compact(access_token.encode('utf-8'), self.get_jwks_keys())
-
-        expected_issuer = self.jwt_issuer()
-        actual_issuer = access_token['iss']
-        if actual_issuer != expected_issuer:
-            error_msg = 'Invalid issuer. Expected {expected}. Received {actual}.'.format(
-                expected=expected_issuer, actual=actual_issuer
-            )
-            raise AuthTokenError(self, error_msg)
-
-        utc_timestamp = timegm(datetime.datetime.utcnow().utctimetuple())
-        if utc_timestamp > access_token['exp']:
-            raise AuthTokenError(self, 'Access token has expired')
+        decoded_access_token = jwt.decode(access_token, verify=False)
 
         keys = list(self.PROFILE_TO_DETAILS_KEY_MAP.keys()) + ['administrator']
-        user_data = {key: access_token[key] for key in keys if key in access_token}
+        user_data = {key: decoded_access_token[key] for key in keys if key in decoded_access_token}
         return user_data

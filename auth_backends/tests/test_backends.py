@@ -10,11 +10,9 @@ import pytest
 import six
 from Cryptodome.PublicKey import RSA
 from django.core.cache import cache
-from httpretty import HTTPretty
-from jwkest.jwk import SYMKey, RSAKey, KEYS
+from jwkest.jwk import SYMKey, RSAKey
 from jwkest.jws import JWS
 from jwkest.jwt import b64encode_item
-from social_core.exceptions import AuthTokenError
 from social_core.tests.backends.oauth import OAuth2Test
 from social_core.tests.backends.open_id_connect import OpenIdConnectTestMixin
 
@@ -182,57 +180,12 @@ class EdXOAuth2Tests(OAuth2Test):
     client_key = 'a-key'
     client_secret = 'a-secret-key'
     expected_username = 'jsmith'
-    hmac_key = SYMKey(key='fake-key')
-    openid_config_body = {
-        'access_token_signing_alg_values_supported': [
-            'RS512',
-            'HS256'
-        ],
-        'claims_supported': [
-            'sub',
-            'iss',
-            'name',
-            'given_name',
-            'family_name',
-            'email'
-        ],
-        'token_endpoint': 'https://example.com/oauth2/access_token',
-        'token_endpoint_auth_methods_supported': [
-            'client_secret_post'
-        ],
-        'jwks_uri': 'https://example.com/oauth2/jwks.json',
-        'end_session_endpoint': 'https://example.com/logout',
-        'authorization_endpoint': 'https://example.com/oauth2/authorize',
-        'scopes_supported': [
-            'openid',
-            'profile',
-            'email'
-        ],
-        'issuer': 'https://example.com/oauth2'
-    }
-    provider_endpoint = 'https://example.com/oauth2'
+    url_root = 'https://example.com'
 
     def setUp(self):
         cache.clear()
         super(EdXOAuth2Tests, self).setUp()
         self.key = RSAKey(kid='testkey', key=RSA.generate(2048))
-
-        HTTPretty.register_uri(
-            HTTPretty.GET,
-            self.provider_endpoint + '/.well-known/openid-configuration',
-            status=200,
-            body=json.dumps(self.openid_config_body)
-        )
-
-        provider_keys = KEYS()
-        provider_keys.add(self.key.serialize())
-
-        HTTPretty.register_uri(
-            HTTPretty.GET,
-            self.openid_config_body['jwks_uri'],
-            status=200,
-            body=provider_keys.dump_jwks()
-        )
 
     def access_token_body(self, request, _url, headers):
         """ Generates a response from the provider's access token endpoint. """
@@ -267,9 +220,8 @@ class EdXOAuth2Tests(OAuth2Test):
         now = datetime.datetime.utcnow()
         expiration_datetime = now + datetime.timedelta(seconds=expires_in)
         issue_datetime = now
-        issuer = issuer or self.openid_config_body['issuer']
         payload = {
-            'iss': issuer,
+            'iss': issuer or self.url_root,
             'administrator': False,
             'iat': timegm(issue_datetime.utctimetuple()),
             'given_name': 'Joe',
@@ -290,9 +242,7 @@ class EdXOAuth2Tests(OAuth2Test):
         settings.update({
             'SOCIAL_AUTH_{0}_KEY'.format(self.name): self.client_key,
             'SOCIAL_AUTH_{0}_SECRET'.format(self.name): self.client_secret,
-            'SOCIAL_AUTH_{0}_ENDPOINT'.format(self.name): self.provider_endpoint,
-            'SOCIAL_AUTH_{0}_JWS_HMAC_SIGNING_KEY'.format(self.name): self.hmac_key.key,
-
+            'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
         })
         return settings
 
@@ -304,46 +254,4 @@ class EdXOAuth2Tests(OAuth2Test):
 
     def test_end_session_url(self):
         """ The method should return the provider's logout URL. """
-        self.assertEqual(self.backend.end_session_url(), self.openid_config_body['end_session_endpoint'])
-
-    def test_invalid_issuer(self):
-        """ AuthTokenError should be raised if the access token's issuer is incorrect. """
-        access_token = self.create_jws_access_token(issuer='other-issuer')
-
-        expected_msg = 'Token error: Invalid issuer. Expected {}. Received other-issuer.'.format(
-            self.openid_config_body['issuer']
-        )
-        with self.assertRaisesRegex(AuthTokenError, expected_msg):
-            self.backend.user_data(access_token)
-
-    def test_expired_access_token(self):
-        """ AuthTokenError should be raised if the issued access token is expired. """
-        access_token = self.create_jws_access_token(expires_in=-3600)
-        with self.assertRaisesRegex(AuthTokenError, 'Access token has expired'):
-            self.backend.user_data(access_token)
-
-    def test_hmac_signing_key(self):
-        """ The backend should support HMAC signing keys in addition to asymmetric. """
-        access_token = self.create_jws_access_token(key=self.hmac_key, alg='HS512')
-        self.backend.user_data(access_token)
-
-    def test_provider_configuration_caching(self):
-        """ The provider configuration data should be cached by default. """
-        cache.clear()
-        self.assertEqual(self.backend.provider_configuration(), self.openid_config_body)
-
-        HTTPretty.disable()
-        self.assertEqual(self.backend.provider_configuration(), self.openid_config_body)
-
-    def test_get_jwks_keys_caching(self):
-        """ The JWKS keys should be cached by default. """
-        expected = KEYS()
-        expected.add(self.key.serialize())
-        expected.add(self.hmac_key.serialize())
-
-        # NOTE: KEYS objects have no __eq__ method defined, so we compare their string representations,
-        # which are JWK sets.
-        self.assertEqual(str(self.backend.get_jwks_keys()), str(expected))
-
-        HTTPretty.disable()
-        self.assertEqual(str(self.backend.get_jwks_keys()), str(expected))
+        self.assertEqual(self.backend.end_session_url(), '{}/logout'.format(self.url_root))
