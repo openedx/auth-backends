@@ -242,6 +242,10 @@ def _to_language(locale):
 class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
     name = 'edx-oauth2'
 
+    @property
+    def logout_url(self):
+        return self.end_session_url()
+
     def authorization_url(self):
         return '{}/oauth2/authorize'.format(self.setting('URL_ROOT'))
 

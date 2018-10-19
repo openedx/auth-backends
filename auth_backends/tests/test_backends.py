@@ -252,6 +252,10 @@ class EdXOAuth2Tests(OAuth2Test):
     def test_partial_pipeline(self):
         self.do_partial_pipeline()
 
+    def test_logout_url(self):
+        """ The property should return the provider's logout URL. """
+        self.assertEqual(self.backend.logout_url, '{}/logout'.format(self.url_root))
+
     def test_end_session_url(self):
         """ The method should return the provider's logout URL. """
         self.assertEqual(self.backend.end_session_url(), '{}/logout'.format(self.url_root))
