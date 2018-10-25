@@ -181,6 +181,7 @@ class EdXOAuth2Tests(OAuth2Test):
     client_secret = 'a-secret-key'
     expected_username = 'jsmith'
     url_root = 'https://example.com'
+    logout_redirect_url = 'https://example.com/logout_redirect'
 
     def setUp(self):
         cache.clear()
@@ -243,6 +244,7 @@ class EdXOAuth2Tests(OAuth2Test):
             'SOCIAL_AUTH_{0}_KEY'.format(self.name): self.client_key,
             'SOCIAL_AUTH_{0}_SECRET'.format(self.name): self.client_secret,
             'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
+            'SOCIAL_AUTH_{0}_LOGOUT_REDIRECT_URL'.format(self.name): self.logout_redirect_url,
         })
         return settings
 
@@ -254,7 +256,16 @@ class EdXOAuth2Tests(OAuth2Test):
 
     def test_logout_url(self):
         """ The property should return the provider's logout URL. """
-        self.assertEqual(self.backend.logout_url, '{}/logout'.format(self.url_root))
+        self.assertEqual(
+            self.backend.logout_url,
+            '{}/logout?{}'.format(
+                self.url_root,
+                six.moves.urllib.parse.urlencode({
+                    'client_id': self.client_key,
+                    'redirect_url': self.logout_redirect_url,
+                })
+            )
+        )
 
     def test_end_session_url(self):
         """ The method should return the provider's logout URL. """
