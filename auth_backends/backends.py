@@ -244,7 +244,18 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
 
     @property
     def logout_url(self):
-        return self.end_session_url()
+        params = {
+            'client_id': self.setting('KEY'),
+        }
+
+        redirect_url = self.setting('LOGOUT_REDIRECT_URL')
+        if redirect_url:
+            params.update({'redirect_url': redirect_url})
+
+        return '{}?{}'.format(
+            self.end_session_url(),
+            six.moves.urllib.parse.urlencode(params),
+        )
 
     def authorization_url(self):
         return '{}/oauth2/authorize'.format(self.setting('URL_ROOT'))
