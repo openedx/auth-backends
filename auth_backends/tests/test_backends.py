@@ -258,12 +258,10 @@ class EdXOAuth2Tests(OAuth2Test):
         """ The property should return the provider's logout URL. """
         self.assertEqual(
             self.backend.logout_url,
-            '{}/logout?{}'.format(
+            '{}/logout?client_id={}&redirect_url={}'.format(
                 self.url_root,
-                six.moves.urllib.parse.urlencode({
-                    'client_id': self.client_key,
-                    'redirect_url': self.logout_redirect_url,
-                })
+                self.client_key,
+                self.logout_redirect_url,
             )
         )
 
