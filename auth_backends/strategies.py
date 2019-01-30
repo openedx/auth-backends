@@ -52,10 +52,18 @@ class EdxDjangoStrategy(DjangoStrategy):
 
         # Fields passed to our custom user model when creating a new user
         'SOCIAL_AUTH_USER_FIELDS': ['username', 'email', 'first_name', 'last_name'],
+
+        # Allow callers to not specify a value for this URL
+        'LOGOUT_REDIRECT_URL': None,
     }
 
     def get_setting(self, name):
         try:
             return super(EdxDjangoStrategy, self).get_setting(name)
-        except AttributeError:
+        # Throws AttributeError if the setting is undefined, and the setting name DOES NOT end with "_URL".
+        # Throws TypeError if the setting is undefined, and the setting name DOES end with "_URL".
+        #
+        # Also, Throws TypeError for other TypeError reasons that we'd prefer not to capture, but the underlying
+        # framework is not so flexible.
+        except (AttributeError, TypeError):
             return self.DEFAULT_SETTINGS[name]
