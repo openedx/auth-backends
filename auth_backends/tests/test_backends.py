@@ -20,12 +20,26 @@ from auth_backends.backends import EdXOpenIdConnect
 from auth_backends.strategies import EdxDjangoStrategy
 
 
+class BackendTestMixin(object):
+    def set_social_auth_setting(self, setting_name, value):
+        """
+        Set a social auth django setting during the middle of a test.
+        """
+        # The inherited backend defines self.name, such as "EDX_OIDC" or "EDX_OAUTH2".
+        backend_name = self.name
+
+        # NOTE: We use the strategy's method, rather than override_settings, because the TestStrategy class being used
+        # does not rely on Django settings.
+        self.strategy.set_settings({'SOCIAL_AUTH_{}_{}'.format(backend_name, setting_name): value})
+
+
 @ddt.ddt
-class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
+class EdXOpenIdConnectTests(BackendTestMixin, OpenIdConnectTestMixin, OAuth2Test):
     """ Tests for the EdXOpenIdConnect backend. """
 
     backend_path = 'auth_backends.backends.EdXOpenIdConnect'
     url_root = 'http://www.example.com'
+    public_url_root = 'http://public.example.com'
     logout_url = 'http://www.example.com/logout/'
     issuer = url_root
     expected_username = 'test_user'
@@ -158,11 +172,9 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
         authorize_path = '/authorize/'
         self.assertEqual(self.backend.AUTHORIZATION_URL, self.url_root + authorize_path)
 
-        expected = 'http://public.example.com'
-        # NOTE (CCB): We use the strategy's method, rather than override_settings, because the TestStrategy
-        # class being used does not rely on Django settings.
-        self.strategy.set_settings({'SOCIAL_AUTH_EDX_OIDC_PUBLIC_URL_ROOT': expected})
-        self.assertEqual(self.backend.AUTHORIZATION_URL, expected + authorize_path)
+        # Now, add the public url root to the settings.
+        self.set_social_auth_setting('PUBLIC_URL_ROOT', self.public_url_root)
+        self.assertEqual(self.backend.AUTHORIZATION_URL, self.public_url_root + authorize_path)
 
     def test_deprecated(self):
         """ Attempts to instantiate EdXOpenIdConnect should fire a warning. """
@@ -173,7 +185,7 @@ class EdXOpenIdConnectTests(OpenIdConnectTestMixin, OAuth2Test):
             )
 
 
-class EdXOAuth2Tests(OAuth2Test):
+class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
     """ Tests for the EdXOAuth2 backend. """
 
     backend_path = 'auth_backends.backends.EdXOAuth2'
@@ -181,6 +193,7 @@ class EdXOAuth2Tests(OAuth2Test):
     client_secret = 'a-secret-key'
     expected_username = 'jsmith'
     url_root = 'https://example.com'
+    public_url_root = 'https://public.example.com'
     logout_redirect_url = 'https://example.com/logout_redirect'
 
     def setUp(self):
@@ -239,12 +252,14 @@ class EdXOAuth2Tests(OAuth2Test):
         return access_token
 
     def extra_settings(self):
+        """
+        Create extra Django settings for use with tests.
+        """
         settings = super(EdXOAuth2Tests, self).extra_settings()
         settings.update({
             'SOCIAL_AUTH_{0}_KEY'.format(self.name): self.client_key,
             'SOCIAL_AUTH_{0}_SECRET'.format(self.name): self.client_secret,
             'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
-            'SOCIAL_AUTH_{0}_LOGOUT_REDIRECT_URL'.format(self.name): self.logout_redirect_url,
         })
         return settings
 
@@ -255,16 +270,43 @@ class EdXOAuth2Tests(OAuth2Test):
         self.do_partial_pipeline()
 
     def test_logout_url(self):
-        """ The property should return the provider's logout URL. """
+        """
+        Verify the property returns the provider's logout URL.
+        """
+        logout_url_without_query_params = '{}/logout'.format(self.url_root)
+
         self.assertEqual(
             self.backend.logout_url,
-            '{}/logout?client_id={}&redirect_url={}'.format(
-                self.url_root,
-                self.client_key,
-                self.logout_redirect_url,
-            )
+            logout_url_without_query_params,
         )
 
+        self.set_social_auth_setting('LOGOUT_REDIRECT_URL', self.logout_redirect_url)
+
+        expected_query_params = '?client_id={}&redirect_url={}'.format(self.client_key, self.logout_redirect_url)
+
+        self.assertEqual(
+            self.backend.logout_url,
+            logout_url_without_query_params + expected_query_params,
+        )
+
+    def test_authorization_url(self):
+        """
+        Verify the method utilizes the public URL, if one is set.
+        """
+        authorize_location = '/oauth2/authorize'
+        self.assertEqual(self.backend.authorization_url(), self.url_root + authorize_location)
+
+        # Now, add the public url root to the settings.
+        self.set_social_auth_setting('PUBLIC_URL_ROOT', self.public_url_root)
+        self.assertEqual(self.backend.authorization_url(), self.public_url_root + authorize_location)
+
     def test_end_session_url(self):
-        """ The method should return the provider's logout URL. """
-        self.assertEqual(self.backend.end_session_url(), '{}/logout'.format(self.url_root))
+        """
+        Verify the method returns the provider's logout URL (sans any redirect URLs in the query parameters).
+        """
+        logout_location = '/logout'
+        self.assertEqual(self.backend.end_session_url(), self.url_root + logout_location)
+
+        # Now, add the public url root to the settings.
+        self.set_social_auth_setting('PUBLIC_URL_ROOT', self.public_url_root)
+        self.assertEqual(self.backend.end_session_url(), self.public_url_root + logout_location)

@@ -45,6 +45,9 @@ class EdXBackendMixin(object):
 
         return details
 
+    def get_public_or_internal_url_root(self):
+        return self.setting('PUBLIC_URL_ROOT') or self.setting('URL_ROOT')
+
     def _map_user_details(self, response):
         """Maps key/values from the response to key/values in the user model.
 
@@ -107,21 +110,12 @@ class EdXOpenIdConnect(EdXBackendMixin, OpenIdConnectAuth):
     @property
     def OIDC_ENDPOINT(self):  # pylint: disable=invalid-name
         """ OpenID Connect discovery endpoint. """
-        url_root = self.setting('PUBLIC_URL_ROOT')
-
-        if not url_root:
-            url_root = self.setting('URL_ROOT')
-
-        return url_root
+        return self.get_public_or_internal_url_root()
 
     @property
     def AUTHORIZATION_URL(self):  # pylint: disable=invalid-name
         """ URL of the auth provider's authorization endpoint. """
-        url_root = self.setting('PUBLIC_URL_ROOT')
-
-        if not url_root:
-            url_root = self.setting('URL_ROOT')
-
+        url_root = self.get_public_or_internal_url_root()
         return '{}/authorize/'.format(url_root)
 
     @property
@@ -244,20 +238,25 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
 
     @property
     def logout_url(self):
-        return '{}?client_id={}&redirect_url={}'.format(
-            self.end_session_url(),
-            self.setting('KEY'),
-            self.setting('LOGOUT_REDIRECT_URL')
-        )
+        if self.setting('LOGOUT_REDIRECT_URL'):
+            return '{}?client_id={}&redirect_url={}'.format(
+                self.end_session_url(),
+                self.setting('KEY'),
+                self.setting('LOGOUT_REDIRECT_URL')
+             )
+        else:
+            return self.end_session_url()
 
     def authorization_url(self):
-        return '{}/oauth2/authorize'.format(self.setting('URL_ROOT'))
+        url_root = self.get_public_or_internal_url_root()
+        return '{}/oauth2/authorize'.format(url_root)
 
     def access_token_url(self):
         return '{}/oauth2/access_token'.format(self.setting('URL_ROOT'))
 
     def end_session_url(self):
-        return '{}/logout'.format(self.setting('URL_ROOT'))
+        url_root = self.get_public_or_internal_url_root()
+        return '{}/logout'.format(url_root)
 
     def auth_complete_params(self, state=None):
         params = super(EdXOAuth2, self).auth_complete_params(state)
