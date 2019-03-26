@@ -210,7 +210,7 @@ class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
         expires_in = 3600
         access_token = self.create_jws_access_token(expires_in)
         body = json.dumps({
-            'scope': 'read write profile email',
+            'scope': 'read write profile email user_id',
             'token_type': 'JWT',
             'expires_in': expires_in,
             'access_token': access_token
@@ -242,11 +242,12 @@ class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
             'sub': 'e3bfe0e4e7c6693efba9c3a93ee7f31b',
             'preferred_username': self.expected_username,
             'aud': 'InkocujLikyucsEdwiWatdebrEackmevLakDuifKooshkakWow',
-            'scopes': ['read', 'write', 'profile', 'email'],
+            'scopes': ['read', 'write', 'profile', 'email', 'user_id'],
             'email': 'jsmith@example.com',
             'exp': timegm(expiration_datetime.utctimetuple()),
             'name': 'Joe Smith',
-            'family_name': 'Smith'
+            'family_name': 'Smith',
+            'user_id': '1',
         }
         access_token = JWS(payload, jwk=key, alg=alg).sign_compact()
         return access_token
@@ -310,3 +311,21 @@ class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
         # Now, add the public url root to the settings.
         self.set_social_auth_setting('PUBLIC_URL_ROOT', self.public_url_root)
         self.assertEqual(self.backend.end_session_url(), self.public_url_root + logout_location)
+
+    def test_user_data(self):
+        user_data = self.backend.user_data(self.create_jws_access_token())
+        self.assertDictEqual(user_data, {
+            'name': 'Joe Smith',
+            'preferred_username': 'jsmith',
+            'email': 'jsmith@example.com',
+            'given_name': 'Joe',
+            'user_id': '1',
+            'family_name': 'Smith',
+            'administrator': False
+        })
+
+    def test_extra_data(self):
+        """
+        Ensure that `user_id` stays in EXTRA_DATA.
+        """
+        self.assertEqual(self.backend.EXTRA_DATA, [('user_id', 'user_id', True)])
