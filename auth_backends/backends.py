@@ -16,21 +16,36 @@ from social_core.backends.oauth import BaseOAuth2
 from social_core.backends.open_id_connect import OpenIdConnectAuth
 from social_core.exceptions import AuthTokenError
 
+PROFILE_CLAIMS_TO_DETAILS_KEY_MAP = {
+    'preferred_username': 'username',
+    'email': 'email',
+    'name': 'full_name',
+    'given_name': 'first_name',
+    'family_name': 'last_name',
+    'locale': 'language',
+}
+
+
+def _merge_two_dicts(x, y):
+    """
+    Given two dicts, merge them into a new dict as a shallow copy.
+
+    Once Python 3.6+ only is supported, replace method with ``z = {**x, **y}``
+    """
+    z = x.copy()
+    z.update(y)
+    return z
+
 
 # pylint: disable=abstract-method,missing-docstring
 class EdXBackendMixin(object):
+    # used by social-auth
     ACCESS_TOKEN_METHOD = 'POST'
     DEFAULT_SCOPE = ['profile', 'email']
     ID_KEY = 'preferred_username'
-    PROFILE_TO_DETAILS_KEY_MAP = {
-        'preferred_username': 'username',
-        'email': 'email',
-        'name': 'full_name',
-        'given_name': 'first_name',
-        'family_name': 'last_name',
-        'locale': 'language',
-        'user_tracking_id': 'user_tracking_id',
-    }
+
+    # local only (not part of social-auth)
+    CLAIMS_TO_DETAILS_KEY_MAP = PROFILE_CLAIMS_TO_DETAILS_KEY_MAP
 
     def get_user_details(self, response):
         details = self._map_user_details(response)
@@ -54,7 +69,7 @@ class EdXBackendMixin(object):
         Does not transfer any key/value that is empty or not present in the response.
         """
         dest = {}
-        for source_key, dest_key in self.PROFILE_TO_DETAILS_KEY_MAP.items():
+        for source_key, dest_key in self.CLAIMS_TO_DETAILS_KEY_MAP.items():
             value = response.get(source_key)
             if value is not None:
                 dest[dest_key] = value
@@ -75,15 +90,9 @@ class EdXOpenIdConnect(EdXBackendMixin, OpenIdConnectAuth):
 
     DEFAULT_SCOPE = ['openid', 'profile', 'email'] + getattr(settings, 'EXTRA_SCOPE', [])
 
-    PROFILE_TO_DETAILS_KEY_MAP = {
-        'preferred_username': 'username',
-        'email': 'email',
-        'name': 'full_name',
-        'given_name': 'first_name',
-        'family_name': 'last_name',
-        'locale': 'language',
+    CLAIMS_TO_DETAILS_KEY_MAP = _merge_two_dicts(PROFILE_CLAIMS_TO_DETAILS_KEY_MAP, {
         'user_tracking_id': 'user_tracking_id',
-    }
+    })
 
     auth_complete_signal = Signal(providing_args=['user', 'id_token'])
 
@@ -234,7 +243,24 @@ def _to_language(locale):
 
 
 class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
+    """
+    IMPORTANT: The oauth2 application must have access to the ``user_id`` scope in order
+    to use this backend.
+    """
+    # used by social-auth
+
     name = 'edx-oauth2'
+
+    DEFAULT_SCOPE = ['user_id', 'profile', 'email']
+    discard_missing_values = True
+    # EXTRA_DATA is used to store the `user_id` from the details in the UserSocialAuth.extra_data field.
+    # See https://python-social-auth.readthedocs.io/en/latest/backends/oauth.html?highlight=extra_data
+    EXTRA_DATA = [('user_id', 'user_id', discard_missing_values)]
+
+    # local only (not part of social-auth)
+    CLAIMS_TO_DETAILS_KEY_MAP = _merge_two_dicts(PROFILE_CLAIMS_TO_DETAILS_KEY_MAP, {
+        'user_id': 'user_id',
+    })
 
     @property
     def logout_url(self):
@@ -267,6 +293,6 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
     def user_data(self, access_token, *args, **kwargs):
         decoded_access_token = jwt.decode(access_token, verify=False)
 
-        keys = list(self.PROFILE_TO_DETAILS_KEY_MAP.keys()) + ['administrator']
+        keys = list(self.CLAIMS_TO_DETAILS_KEY_MAP.keys()) + ['administrator']
         user_data = {key: decoded_access_token[key] for key in keys if key in decoded_access_token}
         return user_data

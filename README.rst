@@ -67,6 +67,10 @@ Note that the OAuth 2.0 provider uses ``SOCIAL_AUTH_EDX_OAUTH2_ENDPOINT`` to rea
 data returned from this endpoint provides the URLs necessary for authentication as well as the public keys used to
 verify the signed JWT (JWS) access token.
 
+As of auth-backends 2.0.0, oAuth2 Applications require access to the ``user_id`` scope in order for the ``EdXOAuth2`` backend to work.  The backend will write the ``user_id`` into the social-auth extra_data, and can be accessed within the User model as follows::
+
+    self.social_auth.first().extra_data[u'user_id']  # pylint: disable=no-member
+
 
 OIDC Settings (deprecated)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
