@@ -1,7 +1,7 @@
 """ Test mixins. """
 
 from django.contrib.auth import get_user, get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from social_django.models import UserSocialAuth
 
 PASSWORD = 'test'
@@ -28,7 +28,7 @@ class LogoutViewTestMixin(object):
     def assert_authentication_status(self, is_authenticated):
         """ Verifies the authentication status of the user attached to the test client. """
         user = get_user(self.client)
-        self.assertEqual(user.is_authenticated(), is_authenticated)
+        self.assertEqual(user.is_authenticated, is_authenticated)
 
     def test_x_frame_options_header(self):
         """ Verify no X-Frame-Options header is set in the resposne. """

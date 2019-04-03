@@ -2,7 +2,7 @@
 import logging
 
 from django.contrib.auth import logout
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt

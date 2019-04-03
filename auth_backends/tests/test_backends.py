@@ -60,7 +60,7 @@ class EdXOpenIdConnectTests(BackendTestMixin, OpenIdConnectTestMixin, OAuth2Test
     # NOTE (CCB): We are TEMPORARILY disabling the nonce validation while we transition our
     # authentication provider to properly implement storing the nonce at the point of initial
     # authorization, rather than when we request the access token.
-    def access_token_body(self, request, _url, headers):  # pylint: disable=method-hidden
+    def access_token_body(self, request, _url, headers):  # pylint: disable=method-hidden,unused-argument
         """
         Get the nonce from the request parameters, add it to the id_token, and
         return the complete response.

@@ -8,7 +8,7 @@ auth-backends  |Travis|_ |Codecov|_
 
 This package contains custom authentication backends, views, and pipeline steps used by edX services for single sign-on.
 
-This package is compatible with Python 2.7 and 3.5, and Django 1.8 through 1.11.
+This package is compatible with Python 2.7 and 3.5, and Django 1.11 through 2.2.
 
 We currently support two forms of authentication:
 
