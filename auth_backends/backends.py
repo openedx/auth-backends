@@ -55,8 +55,8 @@ class EdXBackendMixin(object):
         if locale:
             details['language'] = _to_language(response['locale'])
 
-        # Set superuser bit if the provider determines the user is an administrator
-        details['is_superuser'] = details['is_staff'] = response.get('administrator', False)
+        details['is_staff'] = response.get('administrator', False)
+        details['is_superuser'] = response.get('superuser', False)
 
         return details
 
