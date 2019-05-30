@@ -35,12 +35,19 @@ class LogoutRedirectBaseView(RedirectView):
     def dispatch(self, request, *args, **kwargs):
         # Keep track of the user so that child classes have access to it after logging out.
         self.user = request.user
-        logout(request)
 
         if request.GET.get('no_redirect'):
+            logout(request)
             return HttpResponse()
 
         return super(LogoutRedirectBaseView, self).dispatch(request, *args, **kwargs)
+
+    @method_decorator(xframe_options_exempt)
+    def post(self, request, *args, **kwargs):
+        # Keep track of the user so that child classes have access to it after logging out.
+        self.user = request.user
+        logout(request)
+        return HttpResponse()
 
     @property
     def url(self):
