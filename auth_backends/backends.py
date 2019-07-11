@@ -267,6 +267,9 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
         'user_id': 'user_id',
     })
 
+    # This signal is fired after the user has successfully logged in.
+    auth_complete_signal = Signal(providing_args=['user'])
+
     @property
     def logout_url(self):
         if self.setting('LOGOUT_REDIRECT_URL'):
@@ -294,6 +297,16 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
         # Request a JWT access token containing the user info
         params['token_type'] = 'jwt'
         return params
+
+    def auth_complete(self, *args, **kwargs):
+        """
+        This method is overwritten to emit the `EdXOAuth2.auth_complete_signal` signal.
+        """
+        # WARNING: During testing, the user model class is `social_core.tests.models.User`,
+        # not the model specified for the application.
+        user = super(EdXOAuth2, self).auth_complete(*args, **kwargs)
+        self.auth_complete_signal.send(sender=self.__class__, user=user)
+        return user
 
     def user_data(self, access_token, *args, **kwargs):
         decoded_access_token = jwt.decode(access_token, verify=False)
