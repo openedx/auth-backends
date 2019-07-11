@@ -253,9 +253,14 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
 
     DEFAULT_SCOPE = ['user_id', 'profile', 'email']
     discard_missing_values = True
-    # EXTRA_DATA is used to store the `user_id` from the details in the UserSocialAuth.extra_data field.
+    # EXTRA_DATA is used to store important data in the UserSocialAuth.extra_data field.
     # See https://python-social-auth.readthedocs.io/en/latest/backends/oauth.html?highlight=extra_data
-    EXTRA_DATA = [('user_id', 'user_id', discard_missing_values)]
+    EXTRA_DATA = [
+        # Update the stored user_id, if it's present in the response
+        ('user_id', 'user_id', discard_missing_values),
+        # Update the stored refresh_token, if it's present in the response
+        ('refresh_token', 'refresh_token', discard_missing_values),
+    ]
 
     # local only (not part of social-auth)
     CLAIMS_TO_DETAILS_KEY_MAP = _merge_two_dicts(PROFILE_CLAIMS_TO_DETAILS_KEY_MAP, {
