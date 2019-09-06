@@ -253,14 +253,22 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
 
     DEFAULT_SCOPE = ['user_id', 'profile', 'email']
     discard_missing_values = True
-    # EXTRA_DATA is used to store the `user_id` from the details in the UserSocialAuth.extra_data field.
+    # EXTRA_DATA is used to store important data in the UserSocialAuth.extra_data field.
     # See https://python-social-auth.readthedocs.io/en/latest/backends/oauth.html?highlight=extra_data
-    EXTRA_DATA = [('user_id', 'user_id', discard_missing_values)]
+    EXTRA_DATA = [
+        # Update the stored user_id, if it's present in the response
+        ('user_id', 'user_id', discard_missing_values),
+        # Update the stored refresh_token, if it's present in the response
+        ('refresh_token', 'refresh_token', discard_missing_values),
+    ]
 
     # local only (not part of social-auth)
     CLAIMS_TO_DETAILS_KEY_MAP = _merge_two_dicts(PROFILE_CLAIMS_TO_DETAILS_KEY_MAP, {
         'user_id': 'user_id',
     })
+
+    # This signal is fired after the user has successfully logged in.
+    auth_complete_signal = Signal(providing_args=['user'])
 
     @property
     def logout_url(self):
@@ -289,6 +297,16 @@ class EdXOAuth2(EdXBackendMixin, BaseOAuth2):
         # Request a JWT access token containing the user info
         params['token_type'] = 'jwt'
         return params
+
+    def auth_complete(self, *args, **kwargs):
+        """
+        This method is overwritten to emit the `EdXOAuth2.auth_complete_signal` signal.
+        """
+        # WARNING: During testing, the user model class is `social_core.tests.models.User`,
+        # not the model specified for the application.
+        user = super(EdXOAuth2, self).auth_complete(*args, **kwargs)
+        self.auth_complete_signal.send(sender=self.__class__, user=user)
+        return user
 
     def user_data(self, access_token, *args, **kwargs):
         decoded_access_token = jwt.decode(access_token, verify=False)

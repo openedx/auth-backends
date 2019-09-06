@@ -326,6 +326,13 @@ class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
 
     def test_extra_data(self):
         """
-        Ensure that `user_id` stays in EXTRA_DATA.
+        Ensure that `user_id` and `refresh_token` stay in EXTRA_DATA.
+        The refresh token is required to refresh the user's access
+        token in cases where the client_credentials grant type is not
+        being used, and the application is running on a completely
+        separate domain name.
         """
-        self.assertEqual(self.backend.EXTRA_DATA, [('user_id', 'user_id', True)])
+        self.assertEqual(self.backend.EXTRA_DATA, [
+            ('user_id', 'user_id', True),
+            ('refresh_token', 'refresh_token', True),
+        ])
