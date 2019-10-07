@@ -1,191 +1,17 @@
 """ Tests for the backends. """
 import datetime
 import json
-import unittest
 from calendar import timegm
 
-import ddt
-import mock
-import pytest
 import six
 from Cryptodome.PublicKey import RSA
 from django.core.cache import cache
-from jwkest.jwk import SYMKey, RSAKey
+from jwkest.jwk import RSAKey
 from jwkest.jws import JWS
-from jwkest.jwt import b64encode_item
 from social_core.tests.backends.oauth import OAuth2Test
-from social_core.tests.backends.open_id_connect import OpenIdConnectTestMixin
-
-from auth_backends.backends import EdXOpenIdConnect
-from auth_backends.strategies import EdxDjangoStrategy
 
 
-class BackendTestMixin(object):
-    def set_social_auth_setting(self, setting_name, value):
-        """
-        Set a social auth django setting during the middle of a test.
-        """
-        # The inherited backend defines self.name, such as "EDX_OIDC" or "EDX_OAUTH2".
-        backend_name = self.name
-
-        # NOTE: We use the strategy's method, rather than override_settings, because the TestStrategy class being used
-        # does not rely on Django settings.
-        self.strategy.set_settings({'SOCIAL_AUTH_{}_{}'.format(backend_name, setting_name): value})
-
-
-@ddt.ddt
-class EdXOpenIdConnectTests(BackendTestMixin, OpenIdConnectTestMixin, OAuth2Test):
-    """ Tests for the EdXOpenIdConnect backend. """
-
-    backend_path = 'auth_backends.backends.EdXOpenIdConnect'
-    url_root = 'http://www.example.com'
-    public_url_root = 'http://public.example.com'
-    logout_url = 'http://www.example.com/logout/'
-    issuer = url_root
-    expected_username = 'test_user'
-    fake_locale = 'en_US'
-    fake_data = {
-        'a-claim': 'some-data',
-        'another-claim': 'some-other-data'
-    }
-    fake_access_token = 'an-access-token'
-
-    # NOTE (CCB): We don't use this, but it's required by OpenIdConnectTestMixin.setUp().
-    openid_config_body = '{ "jwks_uri": "http://www.example.com" }'
-
-    def setUp(self):
-        super(EdXOpenIdConnectTests, self).setUp()
-        self.key = SYMKey(key=self.client_secret)
-
-    # NOTE (CCB): We are TEMPORARILY disabling the nonce validation while we transition our
-    # authentication provider to properly implement storing the nonce at the point of initial
-    # authorization, rather than when we request the access token.
-    def access_token_body(self, request, _url, headers):  # pylint: disable=method-hidden,unused-argument
-        """
-        Get the nonce from the request parameters, add it to the id_token, and
-        return the complete response.
-        """
-        # nonce = self.backend.data['nonce'].encode('utf-8')
-        # body = self.prepare_access_token_body(nonce=nonce)
-        body = self.prepare_access_token_body()
-        return 200, headers, body
-
-    @unittest.skip('Disabled until we release https://github.com/edx/edx-platform/pull/14966.')
-    def test_invalid_nonce(self):
-        self.authtoken_raised(
-            'Token error: Incorrect id_token: nonce',
-            nonce='something-wrong'
-        )
-
-    def extra_settings(self):
-        """ Define additional Django settings. """
-        settings = super(EdXOpenIdConnectTests, self).extra_settings()
-        settings.update({
-            'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
-            'SOCIAL_AUTH_{0}_ISSUER'.format(self.name): self.issuer,
-            'SOCIAL_AUTH_{0}_LOGOUT_URL'.format(self.name): self.logout_url,
-        })
-
-        # Use settings from our default strategy so that we can validate them
-        settings.update(EdxDjangoStrategy.DEFAULT_SETTINGS)
-
-        return settings
-
-    def get_id_token(self, client_key=None, expiration_datetime=None, issue_datetime=None, nonce=None, issuer=None):
-        data = super(EdXOpenIdConnectTests, self).get_id_token(
-            client_key, expiration_datetime, issue_datetime, nonce, issuer)
-
-        # Set the field used to derive the username of the logged user.
-        data['preferred_username'] = self.expected_username
-
-        # Exercise the locale name to language code path
-        data['locale'] = self.fake_locale
-
-        return data
-
-    def prepare_access_token_body(self, client_key=None, tamper_message=False, expiration_datetime=None,
-                                  issue_datetime=None, nonce=None, issuer=None):
-        """
-        Prepares a provider access token response.
-
-        Note:
-            We only override this method to force the JWS class to use the HS256 algorithm.
-        """
-
-        body = {'access_token': 'foobar', 'token_type': 'bearer'}
-        client_key = client_key or self.client_key
-        now = datetime.datetime.utcnow()
-        expiration_datetime = expiration_datetime or (now + datetime.timedelta(seconds=30))
-        issue_datetime = issue_datetime or now
-        nonce = nonce or 'a-nonce'
-        issuer = issuer or self.issuer
-        id_token = self.get_id_token(
-            client_key, timegm(expiration_datetime.utctimetuple()),
-            timegm(issue_datetime.utctimetuple()), nonce, issuer)
-
-        body['id_token'] = JWS(id_token, jwk=self.key, alg='HS256').sign_compact()
-        if tamper_message:
-            header, msg, sig = body['id_token'].split('.')
-            id_token['sub'] = '1235'
-            msg = b64encode_item(id_token).decode('utf-8')
-            body['id_token'] = '.'.join([header, msg, sig])
-
-        return json.dumps(body)
-
-    @pytest.mark.django_db(transaction=False)
-    def test_login(self):
-        user = self.do_login()
-        self.assertIsNotNone(user)
-
-    @ddt.data(None, 'Bearer', 'JWT')
-    def test_get_user_claims(self, token_type):
-        expected_token_type = token_type or 'Bearer'
-        with mock.patch('auth_backends.backends.EdXOpenIdConnect.get_json') as mock_get_json:
-            mock_get_json.return_value = self.fake_data
-
-            claim = six.next(six.iteritems(self.fake_data))
-            kwargs = {
-                'claims': [claim[0]],
-            }
-
-            if token_type:
-                kwargs['token_type'] = token_type
-
-            actual = self.backend.get_user_claims(self.fake_access_token, **kwargs)
-
-            # Verify the correct claim data is returned
-            self.assertDictEqual(actual, {claim[0]: claim[1]})
-
-            # Verify the call to the user info endpoint was made with the correct authorization headers
-            headers = {
-                'Authorization': '{token_type} {token}'.format(token_type=expected_token_type,
-                                                               token=self.fake_access_token)
-            }
-            mock_get_json.assert_called_once_with(self.backend.USER_INFO_URL, headers=headers)
-
-    def test_logout_url(self):
-        """ Verify the property returns the configured logout URL. """
-        self.assertEqual(self.backend.logout_url, self.logout_url)
-
-    def test_authorization_url(self):
-        """ Verify the method utilizes the public URL, if one is set. """
-        authorize_path = '/authorize/'
-        self.assertEqual(self.backend.AUTHORIZATION_URL, self.url_root + authorize_path)
-
-        # Now, add the public url root to the settings.
-        self.set_social_auth_setting('PUBLIC_URL_ROOT', self.public_url_root)
-        self.assertEqual(self.backend.AUTHORIZATION_URL, self.public_url_root + authorize_path)
-
-    def test_deprecated(self):
-        """ Attempts to instantiate EdXOpenIdConnect should fire a warning. """
-        with mock.patch('warnings.warn') as mock_warn:
-            EdXOpenIdConnect(self.strategy, redirect_uri=self.complete_url)
-            mock_warn.assert_called_once_with(
-                'EdXOpenIdConnect is deprecated. Please use EdXOAuth2.', DeprecationWarning
-            )
-
-
-class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
+class EdXOAuth2Tests(OAuth2Test):
     """ Tests for the EdXOAuth2 backend. """
 
     backend_path = 'auth_backends.backends.EdXOAuth2'
@@ -200,6 +26,17 @@ class EdXOAuth2Tests(BackendTestMixin, OAuth2Test):
         cache.clear()
         super(EdXOAuth2Tests, self).setUp()
         self.key = RSAKey(kid='testkey', key=RSA.generate(2048))
+
+    def set_social_auth_setting(self, setting_name, value):
+        """
+        Set a social auth django setting during the middle of a test.
+        """
+        # The inherited backend defines self.name, i.e. "EDX_OAUTH2".
+        backend_name = self.name
+
+        # NOTE: We use the strategy's method, rather than override_settings, because the TestStrategy class being used
+        # does not rely on Django settings.
+        self.strategy.set_settings({'SOCIAL_AUTH_{}_{}'.format(backend_name, setting_name): value})
 
     def access_token_body(self, request, _url, headers):
         """ Generates a response from the provider's access token endpoint. """

@@ -42,6 +42,6 @@ EXTRA_SCOPE = []
 COURSE_PERMISSIONS_CLAIMS = []
 
 AUTHENTICATION_BACKENDS = (
-    'auth_backends.backends.EdXOpenIdConnect',
+    'auth_backends.backends.EdXOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )

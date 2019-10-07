@@ -14,7 +14,7 @@ class LogoutViewTestMixin(object):
     def create_user(self):
         """ Create a new user. """
         user = User.objects.create_user('test', password=PASSWORD)
-        UserSocialAuth.objects.create(user=user, provider='edx-oidc', uid=user.username)
+        UserSocialAuth.objects.create(user=user, provider='edx-oauth2', uid=user.username)
         return user
 
     def get_logout_url(self):
