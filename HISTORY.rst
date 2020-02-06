@@ -3,8 +3,8 @@
 History
 =======
 
-3.0.0 (2020-02-05)
----------
+3.0.0 (2020-02-06)
+------------------
 
 - Add support for Django 2 and drop support for some older versions (support changes from 1.8–1.11 to 1.11–2.2)
 - Remove (deprecated) OpenID Connect support
