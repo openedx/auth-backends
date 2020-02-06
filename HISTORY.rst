@@ -3,6 +3,16 @@
 History
 =======
 
+3.0.2 (2020-02-06)
+------------------
+
+Re-release of 3.0.0 with proper version, matching tag.
+
+3.0.1 (2020-02-06)
+------------------
+
+Re-release of 3.0.0, although failed to update package version.
+
 3.0.0 (2020-02-06)
 ------------------
 
