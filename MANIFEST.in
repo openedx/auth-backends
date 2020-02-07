@@ -1,1 +1,2 @@
 include *.rst LICENSE.txt AUTHORS
+include requirements/base.in

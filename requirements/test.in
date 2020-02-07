@@ -1,0 +1,15 @@
+# Requirements for test runs
+-c constraints.txt
+
+-r base.txt                # Core dependencies
+
+coverage
+edx-lint
+httpretty
+pep8
+pyjwkest                   # used for crypto tests
+pytest-catchlog
+pytest-cov
+pytest-django
+tox
+unittest2

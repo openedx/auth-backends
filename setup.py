@@ -7,6 +7,28 @@ from auth_backends import __version__
 with open('README.rst') as a, open('HISTORY.rst') as b, open('AUTHORS') as c:
     long_description = '{}\n\n{}\n\n{}'.format(a.read(), b.read(), c.read())
 
+def load_requirements(*requirements_paths):
+    """
+    Load all requirements from the specified requirements files.
+    Returns a list of requirement strings.
+    """
+    requirements = set()
+    for path in requirements_paths:
+        with open(path) as reqs:
+            requirements.update(
+                line.split('#')[0].strip() for line in reqs
+                if is_requirement(line.strip())
+            )
+    return list(requirements)
+
+
+def is_requirement(line):
+    """
+    Return True if the requirement line is a package requirement;
+    that is, it is not blank, a comment, a URL, or an included file.
+    """
+    return line and not line.startswith(('-r', '#', '-e', 'git+', '-c'))
+
 setup(
     name='edx-auth-backends',
     version=__version__,
@@ -34,11 +56,5 @@ setup(
     author_email='oscm@edx.org',
     license='AGPL',
     packages=find_packages(),
-    install_requires=[
-        'Django>=1.11,<2.3',
-        'pyjwt',
-        'six',
-        'social-auth-core>=3.1.0,<4.0.0',
-        'social-auth-app-django>=3.1.0,<4.0.0',
-    ],
+    install_requires=load_requirements('requirements/base.in'),
 )
