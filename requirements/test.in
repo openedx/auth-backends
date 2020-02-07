@@ -6,9 +6,8 @@
 coverage
 edx-lint
 httpretty
-pep8
+pycodestyle
 pyjwkest                   # used for crypto tests
-pytest-catchlog
 pytest-cov
 pytest-django
 tox

@@ -9,6 +9,12 @@
 # linking to it here is good.
 
 
+# futures is not valid for Python 3, and will cause dependency
+# conflicts in tox if not constrained here, possibly because only the
+# most recent versions of futures declare this.
+futures ; python_version < "3"
+
+
 # NOTE: The following allows us to run "make upgrade" under Python 3 and get dependencies
 # that work for Python 2.
 
@@ -21,23 +27,3 @@ astroid<2.0.0
 
 # Constrained for Python 2 support
 edx-lint<1.4.0
-
-
-
-
-# Temporarily pinned versions from old setup.py and test_requirements.txt
-coverage==4.5.4
-Django==1.11.28
-edx-lint==0.6.0
-httpretty==0.9.7
-pep8==1.7.1
-pyjwkest==1.4.2
-PyJWT==1.7.1
-pytest-catchlog==1.2.2
-pytest-cov==2.8.1
-pytest-django==3.8.0
-six==1.14.0
-social-auth-app-django==3.1.0
-social-auth-core==3.2.0
-tox==2.9.1
-unittest2==1.1.0
