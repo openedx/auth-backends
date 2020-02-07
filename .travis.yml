@@ -23,7 +23,7 @@ cache:
 
 install:
   - pip install -U pip wheel codecov
-  - make requirements
+  - pip install -r requirements/travis.txt
 
 script:
   - make test

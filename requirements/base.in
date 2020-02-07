@@ -1,0 +1,8 @@
+# Core requirements for using this package template
+-c constraints.txt
+
+Django
+PyJWT
+six
+social-auth-app-django
+social-auth-core
