@@ -7,7 +7,8 @@ from django.dispatch import Signal
 from social_core.backends.oauth import BaseOAuth2
 
 PROFILE_CLAIMS_TO_DETAILS_KEY_MAP = {
-    'preferred_username': 'username',
+    'preferred_username': 'username',  # deprecated username
+    'display_name': 'display_name',
     'email': 'email',
     'name': 'full_name',
     'given_name': 'first_name',
@@ -34,8 +35,23 @@ def _to_language(locale):
 # pylint: disable=abstract-method
 class EdXOAuth2(BaseOAuth2):
     """
-    IMPORTANT: The oauth2 application must have access to the ``user_id`` scope in order
-    to use this backend.
+    The oauth2 application must have access to the ``user_id`` scope in order to use
+    this backend.
+
+    Additionally, in order to get the ``display_name`` from the JWT to your user object,
+    you must add the following properties to your User class::
+
+        @property
+        def display_name(self):
+            return CachedAuthenticatedUserDetails(self.id).display_name
+
+        @display_name.setter
+        def display_name(self, value):
+            cached_user_details = CachedAuthenticatedUserDetails(self.id)
+            cached_user_details.set_cached_authenticated_user_details(value)
+
+    Note: The above relies on CachedAuthenticatedUserDetails and TieredCache from edx-django-utils.
+
     """
     # used by social-auth
     ACCESS_TOKEN_METHOD = 'POST'

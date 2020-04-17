@@ -39,7 +39,7 @@ class EdxDjangoStrategy(DjangoStrategy):
 
             # social_core consider's email field protected and won't let it change,
             # added a new pipeline function to update email address.
-            'auth_backends.pipeline.update_email'
+            'auth_backends.pipeline.update_email',
         ),
 
         # Always raise auth exceptions so that they are properly logged. Otherwise, the PSA middleware will redirect to
