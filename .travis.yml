@@ -7,16 +7,8 @@ python:
   - 3.5
 
 env:
-  - TOXENV=django111
-  - TOXENV=django20
-  - TOXENV=django21
   - TOXENV=django22
   - TOXENV=quality
-
-matrix:
- include:
-  - python: 2.7
-    env: TOXENV=django111
 
 cache:
   - pip
@@ -40,4 +32,4 @@ deploy:
   on:
     tags: true
     python: 3.5
-    condition: '$TOXENV = django111'
+    condition: '$TOXENV = quality'
