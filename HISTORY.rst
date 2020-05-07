@@ -3,6 +3,11 @@
 History
 =======
 
+3.1.0 (2020-05-08)
+------------------
+- Added support for python 3.8
+- Removed support for Django versions older than 2.2
+
 3.0.2 (2020-02-06)
 ------------------
 

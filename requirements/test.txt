@@ -6,65 +6,62 @@
 #
 appdirs==1.4.3            # via virtualenv
 argparse==1.4.0           # via unittest2
-astroid==1.5.3            # via pylint, pylint-celery
-atomicwrites==1.3.0       # via pytest
+astroid==2.3.3            # via pylint, pylint-celery
 attrs==19.3.0             # via pytest
-backports.functools-lru-cache==1.6.1  # via astroid, isort, pylint
-certifi==2019.11.28
-chardet==3.0.4
+certifi==2020.4.5.1       # via -r requirements/base.txt, requests
+cffi==1.14.0              # via -r requirements/base.txt, cryptography
+chardet==3.0.4            # via -r requirements/base.txt, requests
 click-log==0.3.2          # via edx-lint
-click==7.0                # via click-log, edx-lint
-configparser==4.0.2       # via importlib-metadata, pylint
-contextlib2==0.6.0.post1  # via importlib-metadata, virtualenv, zipp
-coverage==5.0.3
-edx-lint==1.3.1
-enum34==1.1.6             # via astroid
+click==7.1.2              # via click-log, edx-lint
+coverage==5.1             # via -r requirements/test.in, pytest-cov
+cryptography==2.9.2       # via -r requirements/base.txt, social-auth-core
+defusedxml==0.6.0         # via -r requirements/base.txt, python3-openid, social-auth-core
+distlib==0.3.0            # via virtualenv
+edx-lint==1.4.1           # via -r requirements/test.in
 filelock==3.0.12          # via tox, virtualenv
-funcsigs==1.0.2           # via pytest
 future==0.18.2            # via pyjwkest
-futures==3.3.0 ; python_version < "3"  # via isort
-httpretty==0.9.7
-idna==2.8
-importlib-metadata==1.5.0  # via pluggy, pytest, tox, virtualenv
-importlib-resources==1.0.2  # via virtualenv
+httpretty==1.0.2          # via -r requirements/test.in
+idna==2.9                 # via -r requirements/base.txt, requests
+importlib-metadata==1.6.0  # via importlib-resources, pluggy, pytest, tox, virtualenv
+importlib-resources==1.5.0  # via virtualenv
 isort==4.3.21             # via pylint
 lazy-object-proxy==1.4.3  # via astroid
 linecache2==1.0.0         # via traceback2
 mccabe==0.6.1             # via pylint
-more-itertools==5.0.0     # via pytest
-oauthlib==3.1.0
-packaging==20.1           # via pytest, tox
-pathlib2==2.3.5           # via importlib-metadata, importlib-resources, pytest, pytest-django, virtualenv
+more-itertools==8.2.0     # via pytest
+oauthlib==3.1.0           # via -r requirements/base.txt, requests-oauthlib, social-auth-core
+packaging==20.3           # via pytest, tox
+pathlib2==2.3.5           # via pytest
 pluggy==0.13.1            # via pytest, tox
 py==1.8.1                 # via pytest, tox
-pycodestyle==2.5.0
-pycryptodomex==3.9.6      # via pyjwkest
-pyjwkest==1.4.2
-pyjwt==1.7.1
+pycodestyle==2.5.0        # via -r requirements/test.in
+pycparser==2.20           # via -r requirements/base.txt, cffi
+pycryptodomex==3.9.7      # via pyjwkest
+pyjwkest==1.4.2           # via -r requirements/test.in
+pyjwt==1.7.1              # via -r requirements/base.txt, social-auth-core
 pylint-celery==0.3        # via edx-lint
-pylint-django==0.7.2      # via edx-lint
+pylint-django==2.0.11     # via edx-lint
 pylint-plugin-utils==0.6  # via pylint-celery, pylint-django
-pylint==1.7.6             # via edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
-pyparsing==2.4.6          # via packaging
-pytest-cov==2.8.1
-pytest-django==3.8.0
-pytest==4.6.9             # via pytest-cov, pytest-django
-python-openid==2.2.5
-pytz==2019.3
-requests-oauthlib==1.3.0
-requests==2.22.0
-scandir==1.10.0           # via pathlib2
-singledispatch==3.4.0.3   # via astroid, pylint
-six==1.14.0
-social-auth-app-django==3.1.0
-social-auth-core==3.2.0
+pylint==2.4.2             # via edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
+pyparsing==2.4.7          # via packaging
+pytest-cov==2.8.1         # via -r requirements/test.in
+pytest-django==3.9.0      # via -r requirements/test.in
+pytest==5.4.1             # via pytest-cov, pytest-django
+python3-openid==3.1.0     # via -r requirements/base.txt, social-auth-core
+pytz==2020.1              # via -r requirements/base.txt, django
+requests-oauthlib==1.3.0  # via -r requirements/base.txt, social-auth-core
+requests==2.23.0          # via -r requirements/base.txt, pyjwkest, requests-oauthlib, social-auth-core
+six==1.14.0               # via -r requirements/base.txt, astroid, cryptography, edx-lint, packaging, pathlib2, pyjwkest, social-auth-app-django, social-auth-core, tox, unittest2, virtualenv
+social-auth-app-django==3.1.0  # via -r requirements/base.txt
+social-auth-core==3.3.3   # via -r requirements/base.txt, social-auth-app-django
+sqlparse==0.3.1           # via -r requirements/base.txt, django
 toml==0.10.0              # via tox
-tox==3.14.3
+tox==3.15.0               # via -r requirements/test.in
 traceback2==1.4.0         # via unittest2
-typing==3.7.4.1           # via importlib-resources
-unittest2==1.1.0
-urllib3==1.25.8
-virtualenv==20.0.0        # via tox
-wcwidth==0.1.8            # via pytest
+typed-ast==1.4.1          # via astroid
+unittest2==1.1.0          # via -r requirements/test.in
+urllib3==1.25.9           # via -r requirements/base.txt, requests
+virtualenv==20.0.20       # via tox
+wcwidth==0.1.9            # via pytest
 wrapt==1.11.2             # via astroid
-zipp==1.1.0               # via importlib-metadata
+zipp==1.2.0               # via importlib-metadata, importlib-resources
