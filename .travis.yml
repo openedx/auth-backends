@@ -5,24 +5,18 @@ language: python
 
 python:
   - 3.5
+  - 3.8
 
 env:
-  - TOXENV=django111
-  - TOXENV=django20
-  - TOXENV=django21
   - TOXENV=django22
   - TOXENV=quality
-
-matrix:
- include:
-  - python: 2.7
-    env: TOXENV=django111
 
 cache:
   - pip
 
 install:
-  - pip install -U pip wheel codecov
+  - pip install pip==20.0.2
+  - pip install -U wheel codecov
   - pip install -r requirements/travis.txt
 
 script:
@@ -40,4 +34,4 @@ deploy:
   on:
     tags: true
     python: 3.5
-    condition: '$TOXENV = django111'
+    condition: '$TOXENV = django22'

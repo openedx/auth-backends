@@ -43,6 +43,7 @@ class EdxOAuth2LogoutView(RedirectView):
         return super(EdxOAuth2LogoutView, self).dispatch(request, *args, **kwargs)
 
     @property
+    # pylint: disable= missing-function-docstring
     def url(self):
         # NOTE: We use a property here so that we can take advantage of the base class'
         # get_redirect_url() with minimal effort.

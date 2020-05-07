@@ -8,22 +8,8 @@
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
 
-
-# futures is not valid for Python 3, and will cause dependency
-# conflicts in tox if not constrained here, possibly because only the
-# most recent versions of futures declare this.
-futures ; python_version < "3"
+# stay on LTS
+Django<2.3
 
 
-# NOTE: The following allows us to run "make upgrade" under Python 3 and get dependencies
-# that work for Python 2.
 
-# A dependency of pytest.  Pytest doesn't constrain it and 6.0.0 onward
-# only works with python 3
-more-itertools<6.0.0
-
-# Constrained for Python 2 support
-astroid<2.0.0
-
-# Constrained for Python 2 support
-edx-lint<1.4.0

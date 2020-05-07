@@ -7,6 +7,7 @@ from auth_backends import __version__
 with open('README.rst') as a, open('HISTORY.rst') as b, open('AUTHORS') as c:
     long_description = '{}\n\n{}\n\n{}'.format(a.read(), b.read(), c.read())
 
+
 def load_requirements(*requirements_paths):
     """
     Load all requirements from the specified requirements files.
@@ -29,6 +30,7 @@ def is_requirement(line):
     """
     return line and not line.startswith(('-r', '#', '-e', 'git+', '-c'))
 
+
 setup(
     name='edx-auth-backends',
     version=__version__,
@@ -40,13 +42,10 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Affero General Public License v3',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.8',
         'Framework :: Django',
-        'Framework :: Django :: 1.11',
-        'Framework :: Django :: 2.0',
-        'Framework :: Django :: 2.1',
         'Framework :: Django :: 2.2',
         'Topic :: Internet',
     ],

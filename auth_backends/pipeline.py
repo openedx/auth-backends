@@ -11,7 +11,7 @@ User = get_user_model()
 # pylint: disable=unused-argument
 # The function parameters must be named exactly as they are below.
 # Do not change them to appease Pylint.
-def get_user_if_exists(strategy, details, user=None, *args, **kwargs):
+def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint: disable=keyword-arg-before-vararg
     """Return a User with the given username iff the User exists."""
     if user:
         return {'is_new': False}
@@ -31,7 +31,7 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):
     return {}
 
 
-def update_email(strategy, details, user=None, *args, **kwargs):
+def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disable=keyword-arg-before-vararg
     """Update the user's email address using data from provider."""
     if user:
         email = details.get('email')

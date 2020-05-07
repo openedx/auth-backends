@@ -61,6 +61,7 @@ class EdXOAuth2(BaseOAuth2):
     auth_complete_signal = Signal(providing_args=['user'])
 
     @property
+    # pylint: disable= missing-function-docstring
     def logout_url(self):
         if self.setting('LOGOUT_REDIRECT_URL'):
             return '{}?client_id={}&redirect_url={}'.format(

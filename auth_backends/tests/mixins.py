@@ -8,7 +8,7 @@ PASSWORD = 'test'
 User = get_user_model()
 
 
-class LogoutViewTestMixin(object):
+class LogoutViewTestMixin:
     """ Mixin for tests of the LogoutRedirectBaseView children. """
 
     def create_user(self):
