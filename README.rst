@@ -114,6 +114,16 @@ Testing
 
 Call ``make test``.
 
+Publishing a Release
+--------------------
+
+After a PR merges, a new version of the package will automatically be released by Travis when the commit is tagged. Use::
+
+    git tag -a X.Y.Z -m "Releasing version X.Y.Z"
+    git push origin X.Y.Z
+
+Do **not** create a Github Release, or ensure its message points to the CHANGELOG.rst and ADR 0001-use-changelog.rst.
+
 License
 -------
 
