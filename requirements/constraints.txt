@@ -12,4 +12,5 @@
 Django<2.3
 
 
-
+# stay on 3.2.0, details here https://openedx.atlassian.net/browse/BOM-1629
+social-auth-core==3.2.0
