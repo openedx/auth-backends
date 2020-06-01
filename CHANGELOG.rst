@@ -12,7 +12,7 @@ Change Log
 Unreleased
 ----------
 
-*
+* Added a decisions directory for recording any architectural changes made to this repo.
 
 
 [3.1.0] - 2020-05-08
