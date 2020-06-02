@@ -11,6 +11,11 @@
 # stay on LTS
 Django<2.3
 
+# stay on social-auth-app-django 3.1.0 because newer versions require versions of social-auth-core > 3.4.0
+social-auth-app-django==3.1.0
 
 # stay on 3.2.0, details here https://openedx.atlassian.net/browse/BOM-1629
 social-auth-core==3.2.0
+
+# zipp > 1.2.0 does not support Python 3.5
+zipp==1.2.0
