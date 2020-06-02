@@ -2,5 +2,9 @@ oeps:
     oep-7: true
     oep-18: true
 
+owner:
+    type: team
+    team: edx/arch-bom
+
 tags:
     - library
