@@ -1,7 +1,7 @@
 auth-backends  |Travis|_ |Codecov|_
 ===================================
-.. |Travis| image:: https://travis-ci.org/edx/auth-backends.svg?branch=master
-.. _Travis: https://travis-ci.org/edx/auth-backends
+.. |Travis| image:: https://travis-ci.com/edx/auth-backends.svg?branch=master
+.. _Travis: https://travis-ci.com/edx/auth-backends
 
 .. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
