@@ -1,14 +1,14 @@
-auth-backends  |Travis|_ |Codecov|_
+auth-backends  |CI|_ |Codecov|_
 ===================================
-.. |Travis| image:: https://travis-ci.org/edx/auth-backends.svg?branch=master
-.. _Travis: https://travis-ci.org/edx/auth-backends
+.. |CI| image:: https://github.com/edx/auth-backends/workflows/Python%20CI/badge.svg?branch=master
+.. _CI: https://github.com/edx/edx-cookiecutters/actions?query=workflow%3A%22Python+CI%22
 
 .. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
 
 This package contains custom authentication backends, views, and pipeline steps used by edX services for single sign-on.
 
-This package is compatible with Python 2.7 and 3.5, and Django 1.11 through 2.2.
+This package is compatible with Python 3.8, Django 2.2 and Django 3.0
 
 We currently support OAuth 2.0 authentication. Support for OpenID Connect (OIDC) was removed as of version 3.0. Use version 2.x if you require OIDC and are not able to migrate to OAuth2.
 
@@ -117,12 +117,10 @@ Call ``make test``.
 Publishing a Release
 --------------------
 
-After a PR merges, a new version of the package will automatically be released by Travis when the commit is tagged. Use::
+After a PR merges, create a new tag from ``master`` branch with a new version of the package and create a
+`Github release <https://github.com/edx/auth-backends/releases>`_
+using the new tag that will automatically publish the package to PyPi when a release is created.
 
-    git tag -a X.Y.Z -m "Releasing version X.Y.Z"
-    git push origin X.Y.Z
-
-Do **not** create a Github Release, or ensure its message points to the CHANGELOG.rst and ADR 0001-use-changelog.rst.
 
 License
 -------
