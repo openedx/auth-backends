@@ -22,6 +22,8 @@ filelock==3.0.12          # via -r requirements/ci.txt, -r requirements/test.txt
 future==0.18.2            # via -r requirements/test.txt, pyjwkest
 httpretty==1.0.3          # via -r requirements/test.txt
 idna==2.10                # via -r requirements/ci.txt, -r requirements/test.txt, requests
+importlib-metadata==2.1.1  # via -r requirements/ci.txt, -r requirements/test.txt, pluggy, pytest, tox, virtualenv
+importlib-resources==3.2.1  # via -r requirements/ci.txt, -r requirements/test.txt, virtualenv
 iniconfig==1.1.1          # via -r requirements/test.txt, pytest
 isort==4.3.21             # via -r requirements/test.txt, pylint
 lazy-object-proxy==1.4.3  # via -r requirements/test.txt, astroid
@@ -29,6 +31,7 @@ linecache2==1.0.0         # via -r requirements/test.txt, traceback2
 mccabe==0.6.1             # via -r requirements/test.txt, pylint
 oauthlib==3.1.0           # via -r requirements/test.txt, requests-oauthlib, social-auth-core
 packaging==20.7           # via -r requirements/ci.txt, -r requirements/test.txt, pytest, tox
+pathlib2==2.3.5           # via -r requirements/test.txt, pytest
 pip-tools==5.4.0          # via -r requirements/pip-tools.txt
 pluggy==0.13.1            # via -r requirements/ci.txt, -r requirements/test.txt, pytest, tox
 py==1.9.0                 # via -r requirements/ci.txt, -r requirements/test.txt, pytest, tox
@@ -48,7 +51,7 @@ python3-openid==3.2.0     # via -r requirements/test.txt, social-auth-core
 pytz==2020.4              # via -r requirements/test.txt, django
 requests-oauthlib==1.3.0  # via -r requirements/test.txt, social-auth-core
 requests==2.25.0          # via -r requirements/ci.txt, -r requirements/test.txt, codecov, pyjwkest, requests-oauthlib, social-auth-core
-six==1.15.0               # via -r requirements/ci.txt, -r requirements/pip-tools.txt, -r requirements/test.txt, astroid, edx-lint, pip-tools, pyjwkest, social-auth-app-django, social-auth-core, tox, unittest2, virtualenv
+six==1.15.0               # via -r requirements/ci.txt, -r requirements/pip-tools.txt, -r requirements/test.txt, astroid, edx-lint, pathlib2, pip-tools, pyjwkest, social-auth-app-django, social-auth-core, tox, unittest2, virtualenv
 social-auth-app-django==3.1.0  # via -c requirements/constraints.txt, -r requirements/test.txt
 social-auth-core==3.2.0   # via -c requirements/constraints.txt, -r requirements/test.txt, social-auth-app-django
 sqlparse==0.4.1           # via -r requirements/test.txt, django
@@ -56,10 +59,12 @@ toml==0.10.2              # via -r requirements/ci.txt, -r requirements/test.txt
 tox-battery==0.6.1        # via -r requirements/ci.txt
 tox==3.20.1               # via -r requirements/ci.txt, -r requirements/test.txt, tox-battery
 traceback2==1.4.0         # via -r requirements/test.txt, unittest2
+typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 unittest2==1.1.0          # via -r requirements/test.txt
 urllib3==1.26.2           # via -r requirements/ci.txt, -r requirements/test.txt, requests
 virtualenv==20.2.1        # via -r requirements/ci.txt, -r requirements/test.txt, tox
 wrapt==1.11.2             # via -r requirements/test.txt, astroid
+zipp==1.2.0               # via -c requirements/constraints.txt, -r requirements/ci.txt, -r requirements/test.txt, importlib-metadata, importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
