@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-certifi==2020.11.8        # via requests
+certifi==2020.12.5        # via requests
 chardet==3.0.4            # via requests
 defusedxml==0.6.0         # via python3-openid, social-auth-core
 django==2.2.17            # via -c requirements/constraints.txt, -r requirements/base.in
