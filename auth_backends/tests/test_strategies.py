@@ -11,7 +11,7 @@ class EdxDjangoStrategyTests(TestCase):
     """ Tests for the EdxDjangoStrategy Python Social Auth strategy. """
 
     def setUp(self):
-        super(EdxDjangoStrategyTests, self).setUp()
+        super().setUp()
         self.strategy = load_strategy()
 
     def test_load_strategy(self):

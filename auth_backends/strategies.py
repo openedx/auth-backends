@@ -59,7 +59,7 @@ class EdxDjangoStrategy(DjangoStrategy):
 
     def get_setting(self, name):
         try:
-            return super(EdxDjangoStrategy, self).get_setting(name)
+            return super().get_setting(name)
         # Throws AttributeError if the setting is undefined, and the setting name DOES NOT end with "_URL".
         # Throws TypeError if the setting is undefined, and the setting name DOES end with "_URL".
         #

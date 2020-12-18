@@ -24,7 +24,7 @@ class EdXOAuth2Tests(OAuth2Test):
 
     def setUp(self):
         cache.clear()
-        super(EdXOAuth2Tests, self).setUp()
+        super().setUp()
         self.key = RSAKey(kid='testkey', key=RSA.generate(2048))
 
     def set_social_auth_setting(self, setting_name, value):
@@ -93,7 +93,7 @@ class EdXOAuth2Tests(OAuth2Test):
         """
         Create extra Django settings for use with tests.
         """
-        settings = super(EdXOAuth2Tests, self).extra_settings()
+        settings = super().extra_settings()
         settings.update({
             'SOCIAL_AUTH_{0}_KEY'.format(self.name): self.client_key,
             'SOCIAL_AUTH_{0}_SECRET'.format(self.name): self.client_secret,

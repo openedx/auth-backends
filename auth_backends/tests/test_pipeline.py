@@ -13,7 +13,7 @@ class GetUserIfExistsPipelineTests(TestCase):
     """ Tests for the get_user_if_exists pipeline function. """
 
     def setUp(self):
-        super(GetUserIfExistsPipelineTests, self).setUp()
+        super().setUp()
         self.username = 'edx'
         self.details = {'username': self.username}
 
@@ -39,7 +39,7 @@ class UpdateEmailPipelineTests(TestCase):
     """ Tests for the update_email pipeline function. """
 
     def setUp(self):
-        super(UpdateEmailPipelineTests, self).setUp()
+        super().setUp()
         self.user = User.objects.create()
 
     def test_update_email(self):

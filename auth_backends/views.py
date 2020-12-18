@@ -40,7 +40,7 @@ class EdxOAuth2LogoutView(RedirectView):
         if request.GET.get('no_redirect'):
             return HttpResponse()
 
-        return super(EdxOAuth2LogoutView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     @property
     # pylint: disable= missing-function-docstring

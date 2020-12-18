@@ -84,7 +84,7 @@ class EdXOAuth2(BaseOAuth2):
         return '{}/logout'.format(url_root)
 
     def auth_complete_params(self, state=None):
-        params = super(EdXOAuth2, self).auth_complete_params(state)
+        params = super().auth_complete_params(state)
         # Request a JWT access token containing the user info
         params['token_type'] = 'jwt'
         return params
@@ -95,7 +95,7 @@ class EdXOAuth2(BaseOAuth2):
         """
         # WARNING: During testing, the user model class is `social_core.tests.models.User`,
         # not the model specified for the application.
-        user = super(EdXOAuth2, self).auth_complete(*args, **kwargs)
+        user = super().auth_complete(*args, **kwargs)
         self.auth_complete_signal.send(sender=self.__class__, user=user)
         return user
 
