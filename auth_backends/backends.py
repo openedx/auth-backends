@@ -115,7 +115,6 @@ class EdXOAuth2(BaseOAuth2):
             details['language'] = _to_language(response['locale'])
 
         details['is_staff'] = response.get('administrator', False)
-        details['is_superuser'] = response.get('superuser', False)
 
         return details
 
