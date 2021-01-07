@@ -39,7 +39,7 @@ pycodestyle==2.6.0        # via -r requirements/test.txt
 pycparser==2.20           # via -r requirements/test.txt, cffi
 pycryptodomex==3.9.9      # via -r requirements/test.txt, pyjwkest
 pyjwkest==1.4.2           # via -r requirements/test.txt
-pyjwt==2.0.0              # via -r requirements/test.txt, social-auth-core
+pyjwt==1.7.1              # via -c requirements/constraints.txt, -r requirements/test.txt, social-auth-core
 pylint-celery==0.3        # via -r requirements/test.txt, edx-lint
 pylint-django==2.3.0      # via -r requirements/test.txt, edx-lint
 pylint-plugin-utils==0.6  # via -r requirements/test.txt, pylint-celery, pylint-django

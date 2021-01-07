@@ -35,7 +35,7 @@ pycodestyle==2.6.0        # via -r requirements/test.in
 pycparser==2.20           # via -r requirements/base.txt, cffi
 pycryptodomex==3.9.9      # via pyjwkest
 pyjwkest==1.4.2           # via -r requirements/test.in
-pyjwt==2.0.0              # via -r requirements/base.txt, social-auth-core
+pyjwt==1.7.1              # via -c requirements/constraints.txt, -r requirements/base.txt, social-auth-core
 pylint-celery==0.3        # via edx-lint
 pylint-django==2.3.0      # via edx-lint
 pylint-plugin-utils==0.6  # via pylint-celery, pylint-django

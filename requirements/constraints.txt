@@ -10,3 +10,6 @@
 
 # stay on LTS
 Django<2.3
+
+# Test fails on newer versions with `It is required that you pass in a value for the "algorithms" argument when calling decode()`
+pyjwt<2.0
