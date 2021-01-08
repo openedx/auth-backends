@@ -18,7 +18,7 @@ distlib==0.3.1            # via virtualenv
 edx-lint==1.6             # via -r requirements/test.in
 filelock==3.0.12          # via tox, virtualenv
 future==0.18.2            # via pyjwkest
-httpretty==1.0.3          # via -r requirements/test.in
+httpretty==1.0.5          # via -r requirements/test.in
 idna==2.10                # via -r requirements/base.txt, requests
 importlib-metadata==2.1.1  # via pluggy, pytest, tox, virtualenv
 importlib-resources==3.2.1  # via virtualenv
@@ -55,7 +55,7 @@ sqlparse==0.4.1           # via -r requirements/base.txt, django
 toml==0.10.2              # via pylint, pytest, tox
 tox==3.20.1               # via -r requirements/test.in
 traceback2==1.4.0         # via unittest2
-typed-ast==1.4.1          # via astroid
+typed-ast==1.4.2          # via astroid
 unittest2==1.1.0          # via -r requirements/test.in
 urllib3==1.26.2           # via -r requirements/base.txt, requests
 virtualenv==20.2.2        # via tox
