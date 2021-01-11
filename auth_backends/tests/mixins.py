@@ -45,7 +45,7 @@ class LogoutViewTestMixin:
         self.assert_authentication_status(True)
 
         qs = 'next=/test/'
-        response = self.client.get('{url}?{qs}'.format(url=self.get_logout_url(), qs=qs))
+        response = self.client.get(f'{self.get_logout_url()}?{qs}')
         self.assert_authentication_status(False)
 
         # NOTE: The querystring parameters SHOULD be ignored
