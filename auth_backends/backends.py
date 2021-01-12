@@ -74,14 +74,14 @@ class EdXOAuth2(BaseOAuth2):
 
     def authorization_url(self):
         url_root = self.get_public_or_internal_url_root()
-        return '{}/oauth2/authorize'.format(url_root)
+        return f'{url_root}/oauth2/authorize'
 
     def access_token_url(self):
         return '{}/oauth2/access_token'.format(self.setting('URL_ROOT'))
 
     def end_session_url(self):
         url_root = self.get_public_or_internal_url_root()
-        return '{}/logout'.format(url_root)
+        return f'{url_root}/logout'
 
     def auth_complete_params(self, state=None):
         params = super().auth_complete_params(state)

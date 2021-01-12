@@ -36,7 +36,7 @@ class EdXOAuth2Tests(OAuth2Test):
 
         # NOTE: We use the strategy's method, rather than override_settings, because the TestStrategy class being used
         # does not rely on Django settings.
-        self.strategy.set_settings({'SOCIAL_AUTH_{}_{}'.format(backend_name, setting_name): value})
+        self.strategy.set_settings({f'SOCIAL_AUTH_{backend_name}_{setting_name}': value})
 
     def access_token_body(self, request, _url, headers):
         """ Generates a response from the provider's access token endpoint. """
@@ -95,9 +95,9 @@ class EdXOAuth2Tests(OAuth2Test):
         """
         settings = super().extra_settings()
         settings.update({
-            'SOCIAL_AUTH_{0}_KEY'.format(self.name): self.client_key,
-            'SOCIAL_AUTH_{0}_SECRET'.format(self.name): self.client_secret,
-            'SOCIAL_AUTH_{0}_URL_ROOT'.format(self.name): self.url_root,
+            f'SOCIAL_AUTH_{self.name}_KEY': self.client_key,
+            f'SOCIAL_AUTH_{self.name}_SECRET': self.client_secret,
+            f'SOCIAL_AUTH_{self.name}_URL_ROOT': self.url_root,
         })
         return settings
 
@@ -111,7 +111,7 @@ class EdXOAuth2Tests(OAuth2Test):
         """
         Verify the property returns the provider's logout URL.
         """
-        logout_url_without_query_params = '{}/logout'.format(self.url_root)
+        logout_url_without_query_params = f'{self.url_root}/logout'
 
         self.assertEqual(
             self.backend.logout_url,
@@ -120,7 +120,7 @@ class EdXOAuth2Tests(OAuth2Test):
 
         self.set_social_auth_setting('LOGOUT_REDIRECT_URL', self.logout_redirect_url)
 
-        expected_query_params = '?client_id={}&redirect_url={}'.format(self.client_key, self.logout_redirect_url)
+        expected_query_params = f'?client_id={self.client_key}&redirect_url={self.logout_redirect_url}'
 
         self.assertEqual(
             self.backend.logout_url,

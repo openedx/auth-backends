@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 from auth_backends import __version__
 
 with open('README.rst') as a, open('HISTORY.rst') as b, open('AUTHORS') as c:
-    long_description = '{}\n\n{}\n\n{}'.format(a.read(), b.read(), c.read())
+    long_description = f'{a.read()}\n\n{b.read()}\n\n{c.read()}'
 
 
 def load_requirements(*requirements_paths):
