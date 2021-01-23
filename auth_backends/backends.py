@@ -100,7 +100,7 @@ class EdXOAuth2(BaseOAuth2):
         return user
 
     def user_data(self, access_token, *args, **kwargs):
-        decoded_access_token = jwt.decode(access_token, verify=False)
+        decoded_access_token = jwt.decode(access_token, options={"verify_signature": False})
 
         keys = list(self.CLAIMS_TO_DETAILS_KEY_MAP.keys()) + ['administrator', 'superuser']
         user_data = {key: decoded_access_token[key] for key in keys if key in decoded_access_token}

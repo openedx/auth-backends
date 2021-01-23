@@ -48,7 +48,7 @@ defusedxml==0.6.0
 distlib==0.3.1
     # via virtualenv
     # via
-    #   -c requirements/constraints.txt
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.txt
 edx-lint==1.6
     # via -r requirements/test.in
@@ -101,9 +101,8 @@ pycryptodomex==3.9.9
     # via pyjwkest
 pyjwkest==1.4.2
     # via -r requirements/test.in
-pyjwt==1.7.1
+pyjwt==2.0.1
     # via
-    #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-core
 pylint-celery==0.3
@@ -122,7 +121,7 @@ pylint==2.6.0
     #   pylint-plugin-utils
 pyparsing==2.4.7
     # via packaging
-pytest-cov==2.10.1
+pytest-cov==2.11.1
     # via -r requirements/test.in
 pytest-django==4.1.0
     # via -r requirements/test.in
@@ -156,13 +155,12 @@ six==1.15.0
     #   edx-lint
     #   pyjwkest
     #   social-auth-app-django
-    #   social-auth-core
     #   tox
     #   unittest2
     #   virtualenv
 social-auth-app-django==4.0.0
     # via -r requirements/base.txt
-social-auth-core==4.0.2
+social-auth-core==4.0.3
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
@@ -175,7 +173,7 @@ toml==0.10.2
     #   pylint
     #   pytest
     #   tox
-tox==3.21.0
+tox==3.21.2
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
@@ -185,7 +183,7 @@ urllib3==1.26.2
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.3.0
+virtualenv==20.4.0
     # via tox
 wrapt==1.12.1
     # via astroid

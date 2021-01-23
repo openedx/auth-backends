@@ -8,8 +8,6 @@
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
 
-# stay on LTS
-Django<2.3
 
-# Test fails on newer versions with `It is required that you pass in a value for the "algorithms" argument when calling decode()`
-pyjwt<2.0
+# This file contains all common constraints for edx-repos
+-c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
