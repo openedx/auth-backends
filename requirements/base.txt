@@ -18,7 +18,7 @@ defusedxml==0.6.0
     #   social-auth-core
 django==2.2.17
     # via
-    #   -c requirements/constraints.txt
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
 idna==2.10
     # via requests
@@ -28,9 +28,8 @@ oauthlib==3.1.0
     #   social-auth-core
 pycparser==2.20
     # via cffi
-pyjwt==1.7.1
+pyjwt==2.0.1
     # via
-    #   -c requirements/constraints.txt
     #   -r requirements/base.in
     #   social-auth-core
 python3-openid==3.2.0
@@ -48,10 +47,9 @@ six==1.15.0
     #   -r requirements/base.in
     #   cryptography
     #   social-auth-app-django
-    #   social-auth-core
 social-auth-app-django==4.0.0
     # via -r requirements/base.in
-social-auth-core==4.0.2
+social-auth-core==4.0.3
     # via
     #   -r requirements/base.in
     #   social-auth-app-django
