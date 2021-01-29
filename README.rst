@@ -1,7 +1,7 @@
 auth-backends  |CI|_ |Codecov|_
 ===================================
 .. |CI| image:: https://github.com/edx/auth-backends/workflows/Python%20CI/badge.svg?branch=master
-.. _CI: https://github.com/edx/edx-cookiecutters/actions?query=workflow%3A%22Python+CI%22
+.. _CI: https://github.com/edx/auth-backends/actions?query=workflow%3A%22Python+CI%22
 
 .. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
