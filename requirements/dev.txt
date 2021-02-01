@@ -107,7 +107,7 @@ isort==5.7.0
     # via
     #   -r requirements/test.txt
     #   pylint
-jinja2==2.11.2
+jinja2==2.11.3
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -132,7 +132,7 @@ oauthlib==3.1.0
     #   -r requirements/test.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==20.8
+packaging==20.9
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -170,6 +170,7 @@ pyjwkest==1.4.2
     # via -r requirements/test.txt
 pyjwt==1.7.1
     # via
+    #   -c requirements/constraints.txt
     #   -r requirements/test.txt
     #   social-auth-core
 pylint-celery==0.3
@@ -291,7 +292,7 @@ urllib3==1.26.3
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.4.0
+virtualenv==20.4.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt

@@ -14,3 +14,8 @@
 
 # This file contains all common constraints for edx-repos
 -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+
+
+
+# greater versions causing failures in IDAs.
+pyjwt==1.7.1

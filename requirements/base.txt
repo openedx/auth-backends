@@ -30,6 +30,7 @@ pycparser==2.20
     # via cffi
 pyjwt==1.7.1
     # via
+    #   -c requirements/constraints.txt
     #   -r requirements/base.in
     #   social-auth-core
 python3-openid==3.2.0
