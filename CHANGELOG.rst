@@ -14,22 +14,13 @@ Unreleased
 
 *
 
-[3.1.2] - 2021-01-25
+[3.3.3] - 2021-02-02
 --------------------
 
 Changed
-~~~~~
+~~~~~~~
 
-* Reverting pyjwt latest version. It was causing issues in IDAs.
-
-[3.1.1] - 2021-01-25
---------------------
-
-Changed
-~~~~~
-
-* Fixed pyjwt issue.
-
+* Fixed the changelog to match the package version
 
 [3.1.0] - 2020-05-08
 --------------------
