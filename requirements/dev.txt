@@ -48,7 +48,7 @@ click==7.1.2
     #   code-annotations
     #   edx-lint
     #   pip-tools
-code-annotations==1.0.2
+code-annotations==1.1.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -74,13 +74,13 @@ distlib==0.3.1
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==2.2.17
+django==2.2.18
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/test.txt
     #   code-annotations
     #   edx-lint
-edx-lint==3.0.2
+edx-lint==4.0.1
     # via -r requirements/test.txt
 filelock==3.0.12
     # via
@@ -215,7 +215,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pytz==2020.5
+pytz==2021.1
     # via
     #   -r requirements/test.txt
     #   django
@@ -276,7 +276,7 @@ toml==0.10.2
     #   tox
 tox-battery==0.6.1
     # via -r requirements/ci.txt
-tox==3.21.3
+tox==3.21.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -292,7 +292,7 @@ urllib3==1.26.3
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.4.1
+virtualenv==20.4.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt

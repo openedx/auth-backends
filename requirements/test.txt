@@ -33,7 +33,7 @@ click==7.1.2
     #   click-log
     #   code-annotations
     #   edx-lint
-code-annotations==1.0.2
+code-annotations==1.1.0
     # via edx-lint
 coverage==5.4
     # via
@@ -55,7 +55,7 @@ distlib==0.3.1
     #   -r requirements/base.txt
     #   code-annotations
     #   edx-lint
-edx-lint==3.0.2
+edx-lint==4.0.1
     # via -r requirements/test.in
 filelock==3.0.12
     # via
@@ -147,7 +147,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pytz==2020.5
+pytz==2021.1
     # via
     #   -r requirements/base.txt
     #   django
@@ -195,7 +195,7 @@ toml==0.10.2
     #   pylint
     #   pytest
     #   tox
-tox==3.21.3
+tox==3.21.4
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
@@ -205,7 +205,7 @@ urllib3==1.26.3
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.4.1
+virtualenv==20.4.2
     # via tox
 wrapt==1.12.1
     # via astroid
