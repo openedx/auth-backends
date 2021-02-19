@@ -60,7 +60,7 @@ coverage==5.4
     #   -r requirements/test.txt
     #   codecov
     #   pytest-cov
-cryptography==3.4.4
+cryptography==3.4.6
     # via
     #   -r requirements/test.txt
     #   social-auth-core
@@ -186,7 +186,7 @@ pylint-plugin-utils==0.6
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pylint==2.6.0
+pylint==2.6.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -275,7 +275,7 @@ toml==0.10.2
     #   tox
 tox-battery==0.6.1
     # via -r requirements/ci.txt
-tox==3.21.4
+tox==3.22.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
