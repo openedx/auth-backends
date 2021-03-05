@@ -13,7 +13,7 @@ argparse==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-astroid==2.5
+astroid==2.5.1
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -54,7 +54,7 @@ code-annotations==1.1.0
     #   edx-lint
 codecov==2.1.11
     # via -r requirements/ci.txt
-coverage==5.4
+coverage==5.5
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -64,7 +64,7 @@ cryptography==3.4.6
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-defusedxml==0.6.0
+defusedxml==0.7.0
     # via
     #   -r requirements/test.txt
     #   python3-openid
@@ -186,7 +186,7 @@ pylint-plugin-utils==0.6
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pylint==2.7.1
+pylint==2.7.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -274,7 +274,7 @@ toml==0.10.2
     #   tox
 tox-battery==0.6.1
     # via -r requirements/ci.txt
-tox==3.22.0
+tox==3.23.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
