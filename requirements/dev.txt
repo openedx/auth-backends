@@ -64,7 +64,7 @@ cryptography==3.4.6
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-defusedxml==0.7.0
+defusedxml==0.7.1
     # via
     #   -r requirements/test.txt
     #   python3-openid
