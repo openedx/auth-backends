@@ -55,7 +55,7 @@ distlib==0.3.1
     #   -r requirements/base.txt
     #   code-annotations
     #   edx-lint
-edx-lint==4.1.0
+edx-lint==4.1.1
     # via -r requirements/test.in
 filelock==3.0.12
     # via
@@ -102,7 +102,7 @@ py==1.10.0
     # via
     #   pytest
     #   tox
-pycodestyle==2.6.0
+pycodestyle==2.7.0
     # via -r requirements/test.in
 pycparser==2.20
     # via
@@ -199,11 +199,11 @@ traceback2==1.4.0
     # via unittest2
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==1.26.3
+urllib3==1.26.4
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.4.2
+virtualenv==20.4.3
     # via tox
 wrapt==1.12.1
     # via astroid
