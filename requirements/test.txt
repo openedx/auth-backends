@@ -39,7 +39,7 @@ coverage==5.5
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==3.4.6
+cryptography==3.4.7
     # via
     #   -r requirements/base.txt
     #   social-auth-core
@@ -55,7 +55,7 @@ distlib==0.3.1
     #   -r requirements/base.txt
     #   code-annotations
     #   edx-lint
-edx-lint==4.1.1
+edx-lint==5.0.0
     # via -r requirements/test.in
 filelock==3.0.12
     # via
@@ -71,11 +71,11 @@ idna==2.10
     #   requests
 iniconfig==1.1.1
     # via pytest
-isort==5.7.0
+isort==5.8.0
     # via pylint
 jinja2==2.11.3
     # via code-annotations
-lazy-object-proxy==1.5.2
+lazy-object-proxy==1.6.0
     # via astroid
 linecache2==1.0.0
     # via traceback2
