@@ -74,7 +74,7 @@ distlib==0.3.1
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==2.2.19
+django==2.2.20
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/test.txt
@@ -206,7 +206,7 @@ pytest-cov==2.11.1
     # via -r requirements/test.txt
 pytest-django==4.1.0
     # via -r requirements/test.txt
-pytest==6.2.2
+pytest==6.2.3
     # via
     #   -r requirements/test.txt
     #   pytest-cov
