@@ -16,7 +16,7 @@ defusedxml==0.7.1
     # via
     #   python3-openid
     #   social-auth-core
-django==2.2.19
+django==2.2.20
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
