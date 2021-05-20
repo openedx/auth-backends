@@ -8,11 +8,11 @@ appdirs==1.4.4
     # via virtualenv
 argparse==1.4.0
     # via unittest2
-astroid==2.5.3
+astroid==2.5.6
     # via
     #   pylint
     #   pylint-celery
-attrs==20.3.0
+attrs==21.2.0
     # via pytest
 certifi==2020.12.5
     # via
@@ -30,18 +30,20 @@ click-log==0.3.2
     # via edx-lint
 click==7.1.2
     # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   click-log
     #   code-annotations
     #   edx-lint
 code-annotations==1.1.1
     # via edx-lint
-coverage==5.5
+coverage[toml]==5.5
     # via
     #   -r requirements/test.in
     #   pytest-cov
 cryptography==3.4.7
     # via
     #   -r requirements/base.txt
+    #   pyjwt
     #   social-auth-core
 defusedxml==0.7.1
     # via
@@ -63,7 +65,7 @@ filelock==3.0.12
     #   virtualenv
 future==0.18.2
     # via pyjwkest
-httpretty==1.0.5
+httpretty==1.1.1
     # via -r requirements/test.in
 idna==2.10
     # via
@@ -74,13 +76,17 @@ iniconfig==1.1.1
 isort==5.8.0
     # via pylint
 jinja2==2.11.3
-    # via code-annotations
+    # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   code-annotations
 lazy-object-proxy==1.6.0
     # via astroid
 linecache2==1.0.0
     # via traceback2
 markupsafe==1.1.1
-    # via jinja2
+    # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   jinja2
 mccabe==0.6.1
     # via pylint
 oauthlib==3.1.0
@@ -92,7 +98,7 @@ packaging==20.9
     # via
     #   pytest
     #   tox
-pbr==5.5.1
+pbr==5.6.0
     # via stevedore
 pluggy==0.13.1
     # via
@@ -112,20 +118,21 @@ pycryptodomex==3.10.1
     # via pyjwkest
 pyjwkest==1.4.2
     # via -r requirements/test.in
-pyjwt==1.7.1
+pyjwt[crypto]==1.7.1
     # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-core
 pylint-celery==0.3
     # via edx-lint
-pylint-django==2.4.3
+pylint-django==2.4.4
     # via edx-lint
 pylint-plugin-utils==0.6
     # via
     #   pylint-celery
     #   pylint-django
-pylint==2.7.4
+pylint==2.8.2
     # via
     #   edx-lint
     #   pylint-celery
@@ -133,15 +140,15 @@ pylint==2.7.4
     #   pylint-plugin-utils
 pyparsing==2.4.7
     # via packaging
-pytest-cov==2.11.1
+pytest-cov==2.12.0
     # via -r requirements/test.in
-pytest-django==4.2.0
+pytest-django==4.3.0
     # via -r requirements/test.in
-pytest==6.2.3
+pytest==6.2.4
     # via
     #   pytest-cov
     #   pytest-django
-python-slugify==4.0.1
+python-slugify==5.0.2
     # via code-annotations
 python3-openid==3.2.0
     # via
@@ -163,7 +170,7 @@ requests==2.25.1
     #   pyjwkest
     #   requests-oauthlib
     #   social-auth-core
-six==1.15.0
+six==1.16.0
     # via
     #   -r requirements/base.txt
     #   edx-lint
@@ -177,7 +184,7 @@ social-auth-app-django==4.0.0
     # via -r requirements/base.txt
 social-auth-core==4.0.2
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-app-django
 sqlparse==0.4.1
@@ -190,10 +197,11 @@ text-unidecode==1.3
     # via python-slugify
 toml==0.10.2
     # via
+    #   coverage
     #   pylint
     #   pytest
     #   tox
-tox==3.23.0
+tox==3.23.1
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
@@ -203,7 +211,7 @@ urllib3==1.26.4
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.4.3
+virtualenv==20.4.6
     # via tox
 wrapt==1.12.1
     # via astroid
