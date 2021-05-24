@@ -28,13 +28,12 @@ chardet==4.0.0
     #   requests
 click-log==0.3.2
     # via edx-lint
-click==7.1.2
+click==8.0.1
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   click-log
     #   code-annotations
     #   edx-lint
-code-annotations==1.1.1
+code-annotations==1.1.2
     # via edx-lint
 coverage[toml]==5.5
     # via
@@ -55,7 +54,6 @@ distlib==0.3.1
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.txt
-    #   code-annotations
     #   edx-lint
 edx-lint==5.0.0
     # via -r requirements/test.in
@@ -65,7 +63,7 @@ filelock==3.0.12
     #   virtualenv
 future==0.18.2
     # via pyjwkest
-httpretty==1.1.1
+httpretty==1.1.2
     # via -r requirements/test.in
 idna==2.10
     # via
@@ -75,18 +73,14 @@ iniconfig==1.1.1
     # via pytest
 isort==5.8.0
     # via pylint
-jinja2==2.11.3
-    # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   code-annotations
+jinja2==3.0.1
+    # via code-annotations
 lazy-object-proxy==1.6.0
     # via astroid
 linecache2==1.0.0
     # via traceback2
-markupsafe==1.1.1
-    # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   jinja2
+markupsafe==2.0.1
+    # via jinja2
 mccabe==0.6.1
     # via pylint
 oauthlib==3.1.0
