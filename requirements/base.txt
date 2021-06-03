@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-certifi==2020.12.5
+certifi==2021.5.30
     # via requests
 cffi==1.14.5
     # via cryptography
@@ -18,13 +18,13 @@ defusedxml==0.7.1
     # via
     #   python3-openid
     #   social-auth-core
-django==2.2.23
+django==2.2.24
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.in
 idna==2.10
     # via requests
-oauthlib==3.1.0
+oauthlib==3.1.1
     # via
     #   requests-oauthlib
     #   social-auth-core
