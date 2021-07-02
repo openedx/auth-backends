@@ -46,6 +46,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Framework :: Django',
         'Framework :: Django :: 2.2',
+        'Framework :: Django :: 3.2',
         'Topic :: Internet',
     ],
     keywords='authentication edx',
