@@ -132,7 +132,7 @@ oauthlib==3.1.1
     #   -r requirements/test.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==20.9
+packaging==21.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -178,7 +178,7 @@ pyjwt[crypto]==1.7.1
     #   -c requirements/constraints.txt
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.9.1
+pylint==2.9.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
