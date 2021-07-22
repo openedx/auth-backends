@@ -6,7 +6,7 @@
 #
 argparse==1.4.0
     # via unittest2
-astroid==2.6.2
+astroid==2.6.5
     # via
     #   pylint
     #   pylint-celery
@@ -22,7 +22,7 @@ cffi==1.14.6
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.2
+charset-normalizer==2.0.3
     # via
     #   -r requirements/base.txt
     #   requests
@@ -120,7 +120,7 @@ pyjwt[crypto]==1.7.1
     #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.9.3
+pylint==2.9.5
     # via
     #   edx-lint
     #   pylint-celery
@@ -211,3 +211,6 @@ virtualenv==20.6.0
     # via tox
 wrapt==1.12.1
     # via astroid
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
