@@ -48,7 +48,7 @@ click-log==0.3.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
-code-annotations==1.1.2
+code-annotations==1.2.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -148,7 +148,7 @@ pep517==0.11.0
     #   pip-tools
 pip-tools==6.2.0
     # via -r requirements/pip-tools.txt
-platformdirs==2.0.2
+platformdirs==2.1.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -183,7 +183,7 @@ pyjwt[crypto]==1.7.1
     #   -c requirements/constraints.txt
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.9.5
+pylint==2.9.6
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -283,7 +283,7 @@ toml==0.10.2
     #   pytest
     #   pytest-cov
     #   tox
-tomli==1.0.4
+tomli==1.1.0
     # via
     #   -r requirements/pip-tools.txt
     #   pep517
