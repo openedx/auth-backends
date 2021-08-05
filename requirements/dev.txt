@@ -8,7 +8,7 @@ argparse==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-astroid==2.6.5
+astroid==2.6.6
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -31,7 +31,7 @@ cffi==1.14.6
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==2.0.3
+charset-normalizer==2.0.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -52,7 +52,7 @@ code-annotations==1.2.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-codecov==2.1.11
+codecov==2.1.12
     # via -r requirements/ci.txt
 coverage==5.5
     # via
@@ -103,7 +103,7 @@ iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==5.9.2
+isort==5.9.3
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -148,7 +148,7 @@ pep517==0.11.0
     #   pip-tools
 pip-tools==6.2.0
     # via -r requirements/pip-tools.txt
-platformdirs==2.1.0
+platformdirs==2.2.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -260,6 +260,7 @@ social-auth-app-django==4.0.0
     # via -r requirements/test.txt
 social-auth-core==4.0.2
     # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -c requirements/constraints.txt
     #   -r requirements/test.txt
     #   social-auth-app-django
@@ -283,11 +284,11 @@ toml==0.10.2
     #   pytest
     #   pytest-cov
     #   tox
-tomli==1.1.0
+tomli==1.2.0
     # via
     #   -r requirements/pip-tools.txt
     #   pep517
-tox==3.24.0
+tox==3.24.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -305,7 +306,7 @@ urllib3==1.26.6
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.6.0
+virtualenv==20.7.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
