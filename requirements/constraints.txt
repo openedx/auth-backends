@@ -9,8 +9,3 @@
 # linking to it here is good.
 
 -c common_constraints.txt
-
-# greater versions causing failures in IDAs.
-pyjwt==1.7.1
-# social-auth-core>=4.0.3 requires PyJWT>=2.0.0
-social-auth-core<4.0.3

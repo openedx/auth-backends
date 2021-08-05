@@ -100,8 +100,9 @@ class EdXOAuth2(BaseOAuth2):
         return user
 
     def user_data(self, access_token, *args, **kwargs):
-        decoded_access_token = jwt.decode(access_token, verify=False)
-
+        # The algorithm is required but unused because signature verification is skipped.
+        # Note: signature verification happens earlier during the authentication process.
+        decoded_access_token = jwt.decode(access_token, algorithms=["HS256"], options={"verify_signature": False})
         keys = list(self.CLAIMS_TO_DETAILS_KEY_MAP.keys()) + ['administrator', 'superuser']
         user_data = {key: decoded_access_token[key] for key in keys if key in decoded_access_token}
         return user_data

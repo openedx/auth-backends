@@ -114,10 +114,8 @@ pycryptodomex==3.10.1
     # via pyjwkest
 pyjwkest==1.4.2
     # via -r requirements/test.in
-pyjwt[crypto]==1.7.1
+pyjwt[crypto]==2.1.0
     # via
-    #   -c requirements/common_constraints.txt
-    #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-core
 pylint==2.9.6
@@ -172,7 +170,6 @@ six==1.16.0
     #   edx-lint
     #   pyjwkest
     #   social-auth-app-django
-    #   social-auth-core
     #   tox
     #   unittest2
     #   virtualenv
@@ -180,10 +177,8 @@ social-auth-app-django==4.0.0
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
-social-auth-core==4.0.2
+social-auth-core==4.1.0
     # via
-    #   -c requirements/common_constraints.txt
-    #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-app-django
 sqlparse==0.4.1
