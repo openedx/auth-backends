@@ -8,7 +8,7 @@ certifi==2021.5.30
     # via requests
 cffi==1.14.6
     # via cryptography
-charset-normalizer==2.0.3
+charset-normalizer==2.0.4
     # via requests
 cryptography==3.4.7
     # via
@@ -55,6 +55,7 @@ social-auth-app-django==4.0.0
     # via -r requirements/base.in
 social-auth-core==4.0.2
     # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -c requirements/constraints.txt
     #   -r requirements/base.in
     #   social-auth-app-django
