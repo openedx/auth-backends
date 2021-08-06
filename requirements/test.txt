@@ -52,7 +52,7 @@ defusedxml==0.7.1
 distlib==0.3.2
     # via virtualenv
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
     #   edx-lint
 edx-lint==5.0.0
@@ -116,7 +116,7 @@ pyjwkest==1.4.2
     # via -r requirements/test.in
 pyjwt[crypto]==1.7.1
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-core
@@ -177,10 +177,12 @@ six==1.16.0
     #   unittest2
     #   virtualenv
 social-auth-app-django==4.0.0
-    # via -r requirements/base.txt
+    # via
+    #   -c requirements/common_constraints.txt
+    #   -r requirements/base.txt
 social-auth-core==4.0.2
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   -c requirements/common_constraints.txt
     #   -c requirements/constraints.txt
     #   -r requirements/base.txt
     #   social-auth-app-django

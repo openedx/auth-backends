@@ -8,9 +8,7 @@
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
 
-
-# This file contains all common constraints for edx-repos
--c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+-c common_constraints.txt
 
 # greater versions causing failures in IDAs.
 pyjwt==1.7.1
