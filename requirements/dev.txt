@@ -79,8 +79,7 @@ django==2.2.24
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
-    #   edx-lint
-edx-lint==5.0.0
+edx-lint==5.1.0
     # via -r requirements/test.txt
 filelock==3.0.12
     # via
@@ -154,9 +153,8 @@ platformdirs==2.3.0
     #   -r requirements/test.txt
     #   pylint
     #   virtualenv
-pluggy==0.13.1
+pluggy==1.0.0
     # via
-    #   -c requirements/common_constraints.txt
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pytest

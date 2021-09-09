@@ -54,8 +54,7 @@ distlib==0.3.2
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
-    #   edx-lint
-edx-lint==5.0.0
+edx-lint==5.1.0
     # via -r requirements/test.in
 filelock==3.0.12
     # via
@@ -98,9 +97,8 @@ platformdirs==2.3.0
     # via
     #   pylint
     #   virtualenv
-pluggy==0.13.1
+pluggy==1.0.0
     # via
-    #   -c requirements/common_constraints.txt
     #   pytest
     #   tox
 py==1.10.0
