@@ -64,11 +64,8 @@ class EdXOAuth2(BaseOAuth2):
     # pylint: disable= missing-function-docstring
     def logout_url(self):
         if self.setting('LOGOUT_REDIRECT_URL'):
-            return '{}?client_id={}&redirect_url={}'.format(
-                self.end_session_url(),
-                self.setting('KEY'),
-                self.setting('LOGOUT_REDIRECT_URL')
-             )
+            return f"{self.end_session_url()}?client_id={self.setting('KEY')}&" \
+                   f"redirect_url={self.setting('LOGOUT_REDIRECT_URL')}"
         else:
             return self.end_session_url()
 
@@ -77,7 +74,7 @@ class EdXOAuth2(BaseOAuth2):
         return f'{url_root}/oauth2/authorize'
 
     def access_token_url(self):
-        return '{}/oauth2/access_token'.format(self.setting('URL_ROOT'))
+        return f"{self.setting('URL_ROOT')}/oauth2/access_token"
 
     def end_session_url(self):
         url_root = self.get_public_or_internal_url_root()

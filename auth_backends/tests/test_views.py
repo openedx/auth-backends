@@ -20,8 +20,8 @@ class EdxOAuth2LoginViewTests(TestCase):
     def test_redirect(self):
         """ Verify the view redirects to the edX OAuth2 login page. """
         qs = 'next=/test/'
-        response = self.client.get('{url}?{qs}'.format(url=reverse('login'), qs=qs))
-        expected = '{url}?{qs}'.format(url=reverse('social:begin', args=['edx-oauth2']), qs=qs)
+        response = self.client.get(f"{reverse('login')}?{qs}")
+        expected = f"{reverse('social:begin', args=['edx-oauth2'])}?{qs}"
         self.assertRedirects(response, expected, fetch_redirect_response=False)
 
 
