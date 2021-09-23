@@ -9,7 +9,7 @@ from auth_backends.views import (
     EdxOAuth2LogoutView,
 )
 
-oauth2_urlpatterns = [  # pylint: disable=invalid-name
+oauth2_urlpatterns = [
     url(r'^login/$', EdxOAuth2LoginView.as_view(), name='login'),
     url(r'^logout/$', EdxOAuth2LogoutView.as_view(), name='logout'),
     url('', include('social_django.urls', namespace='social')),
