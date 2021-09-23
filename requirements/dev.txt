@@ -8,7 +8,7 @@ argparse==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-astroid==2.7.3
+astroid==2.8.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -31,7 +31,7 @@ cffi==1.14.6
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==2.0.4
+charset-normalizer==2.0.6
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -70,7 +70,7 @@ defusedxml==0.7.1
     #   -r requirements/test.txt
     #   python3-openid
     #   social-auth-core
-distlib==0.3.2
+distlib==0.3.3
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -79,8 +79,7 @@ django==2.2.24
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
-    #   edx-lint
-edx-lint==5.0.0
+edx-lint==5.1.0
     # via -r requirements/test.txt
 filelock==3.0.12
     # via
@@ -146,7 +145,7 @@ pep517==0.11.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-pip-tools==6.2.0
+pip-tools==6.3.0
     # via -r requirements/pip-tools.txt
 platformdirs==2.3.0
     # via
@@ -154,9 +153,8 @@ platformdirs==2.3.0
     #   -r requirements/test.txt
     #   pylint
     #   virtualenv
-pluggy==0.13.1
+pluggy==1.0.0
     # via
-    #   -c requirements/common_constraints.txt
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pytest
@@ -183,7 +181,7 @@ pyjwt[crypto]==2.1.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.10.2
+pylint==2.11.1
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -263,7 +261,7 @@ social-auth-core==4.1.0
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   -r requirements/test.txt
     #   django
@@ -287,7 +285,7 @@ tomli==1.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   pep517
-tox==3.24.3
+tox==3.24.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -298,14 +296,19 @@ traceback2==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
+typing-extensions==3.10.0.2
+    # via
+    #   -r requirements/test.txt
+    #   astroid
+    #   pylint
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==1.26.6
+urllib3==1.26.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.7.2
+virtualenv==20.8.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt

@@ -6,7 +6,7 @@
 #
 argparse==1.4.0
     # via unittest2
-astroid==2.7.3
+astroid==2.8.0
     # via
     #   pylint
     #   pylint-celery
@@ -22,7 +22,7 @@ cffi==1.14.6
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.4
+charset-normalizer==2.0.6
     # via
     #   -r requirements/base.txt
     #   requests
@@ -49,13 +49,12 @@ defusedxml==0.7.1
     #   -r requirements/base.txt
     #   python3-openid
     #   social-auth-core
-distlib==0.3.2
+distlib==0.3.3
     # via virtualenv
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
-    #   edx-lint
-edx-lint==5.0.0
+edx-lint==5.1.0
     # via -r requirements/test.in
 filelock==3.0.12
     # via
@@ -98,9 +97,8 @@ platformdirs==2.3.0
     # via
     #   pylint
     #   virtualenv
-pluggy==0.13.1
+pluggy==1.0.0
     # via
-    #   -c requirements/common_constraints.txt
     #   pytest
     #   tox
 py==1.10.0
@@ -121,7 +119,7 @@ pyjwt[crypto]==2.1.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.10.2
+pylint==2.11.1
     # via
     #   edx-lint
     #   pylint-celery
@@ -184,7 +182,7 @@ social-auth-core==4.1.0
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   -r requirements/base.txt
     #   django
@@ -198,17 +196,21 @@ toml==0.10.2
     #   pytest
     #   pytest-cov
     #   tox
-tox==3.24.3
+tox==3.24.4
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
+typing-extensions==3.10.0.2
+    # via
+    #   astroid
+    #   pylint
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==1.26.6
+urllib3==1.26.7
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.7.2
+virtualenv==20.8.0
     # via tox
 wrapt==1.12.1
     # via astroid
