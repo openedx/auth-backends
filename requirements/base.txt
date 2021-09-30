@@ -45,13 +45,9 @@ requests==2.26.0
 requests-oauthlib==1.3.0
     # via social-auth-core
 six==1.16.0
-    # via
-    #   -r requirements/base.in
-    #   social-auth-app-django
-social-auth-app-django==4.0.0
-    # via
-    #   -c requirements/common_constraints.txt
-    #   -r requirements/base.in
+    # via -r requirements/base.in
+social-auth-app-django==5.0.0
+    # via -r requirements/base.in
 social-auth-core==4.1.0
     # via
     #   -r requirements/base.in

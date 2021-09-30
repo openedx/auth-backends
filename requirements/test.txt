@@ -54,9 +54,9 @@ distlib==0.3.3
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
-edx-lint==5.1.0
+edx-lint==5.2.0
     # via -r requirements/test.in
-filelock==3.0.12
+filelock==3.2.0
     # via
     #   tox
     #   virtualenv
@@ -93,7 +93,7 @@ packaging==21.0
     #   tox
 pbr==5.6.0
     # via stevedore
-platformdirs==2.3.0
+platformdirs==2.4.0
     # via
     #   pylint
     #   virtualenv
@@ -111,7 +111,7 @@ pycparser==2.20
     # via
     #   -r requirements/base.txt
     #   cffi
-pycryptodomex==3.10.1
+pycryptodomex==3.10.4
     # via pyjwkest
 pyjwkest==1.4.2
     # via -r requirements/test.in
@@ -170,14 +170,11 @@ six==1.16.0
     #   -r requirements/base.txt
     #   edx-lint
     #   pyjwkest
-    #   social-auth-app-django
     #   tox
     #   unittest2
     #   virtualenv
-social-auth-app-django==4.0.0
-    # via
-    #   -c requirements/common_constraints.txt
-    #   -r requirements/base.txt
+social-auth-app-django==5.0.0
+    # via -r requirements/base.txt
 social-auth-core==4.1.0
     # via
     #   -r requirements/base.txt
@@ -210,7 +207,7 @@ urllib3==1.26.7
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.8.0
+virtualenv==20.8.1
     # via tox
 wrapt==1.12.1
     # via astroid
