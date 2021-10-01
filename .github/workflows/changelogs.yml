@@ -1,0 +1,11 @@
+
+name: Generate changelogs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  changelogs:
+    uses: edx/.github/.github/workflows/changelogs.yml@jawayria/semantic-release

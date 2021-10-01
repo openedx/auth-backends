@@ -35,7 +35,6 @@ Changed
 
 * Resolve RemovedInDjango4.0 warnings.
 
-
 [4.0.0] - 2021-08-05
 --------------------
 

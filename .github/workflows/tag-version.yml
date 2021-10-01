@@ -1,0 +1,13 @@
+
+name: Tag and release
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+    types:
+      - closed
+
+jobs:
+  tag-version:
+    uses: edx/.github/.github/workflows/tag-version.yml@jawayria/semantic-release
