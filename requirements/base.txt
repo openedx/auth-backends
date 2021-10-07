@@ -10,7 +10,7 @@ cffi==1.14.6
     # via cryptography
 charset-normalizer==2.0.6
     # via requests
-cryptography==3.4.8
+cryptography==35.0.0
     # via
     #   pyjwt
     #   social-auth-core
@@ -30,13 +30,13 @@ oauthlib==3.1.1
     #   social-auth-core
 pycparser==2.20
     # via cffi
-pyjwt[crypto]==2.1.0
+pyjwt[crypto]==2.2.0
     # via
     #   -r requirements/base.in
     #   social-auth-core
 python3-openid==3.2.0
     # via social-auth-core
-pytz==2021.1
+pytz==2021.3
     # via django
 requests==2.26.0
     # via
