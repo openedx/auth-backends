@@ -6,7 +6,7 @@
 #
 argparse==1.4.0
     # via unittest2
-astroid==2.8.0
+astroid==2.8.2
     # via
     #   pylint
     #   pylint-celery
@@ -14,19 +14,19 @@ attrs==21.2.0
     # via pytest
 backports.entry-points-selectable==1.1.0
     # via virtualenv
-certifi==2021.5.30
+certifi==2021.10.8
     # via
     #   -r requirements/base.txt
     #   requests
-cffi==1.14.6
+cffi==1.15.0
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.6
+charset-normalizer==2.0.7
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.0.1
+click==8.0.3
     # via
     #   click-log
     #   code-annotations
@@ -35,7 +35,7 @@ click-log==0.3.2
     # via edx-lint
 code-annotations==1.2.0
     # via edx-lint
-coverage[toml]==6.0.1
+coverage[toml]==6.0.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
@@ -64,7 +64,7 @@ future==0.18.2
     # via pyjwkest
 httpretty==1.1.4
     # via -r requirements/test.in
-idna==3.2
+idna==3.3
     # via
     #   -r requirements/base.txt
     #   requests
@@ -105,13 +105,13 @@ py==1.10.0
     # via
     #   pytest
     #   tox
-pycodestyle==2.7.0
+pycodestyle==2.8.0
     # via -r requirements/test.in
 pycparser==2.20
     # via
     #   -r requirements/base.txt
     #   cffi
-pycryptodomex==3.10.4
+pycryptodomex==3.11.0
     # via pyjwkest
 pyjwkest==1.4.2
     # via -r requirements/test.in
@@ -153,7 +153,7 @@ pytz==2021.3
     # via
     #   -r requirements/base.txt
     #   django
-pyyaml==5.4.1
+pyyaml==6.0
     # via code-annotations
 requests==2.26.0
     # via
