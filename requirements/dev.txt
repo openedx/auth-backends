@@ -8,7 +8,7 @@ argparse==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-astroid==2.8.0
+astroid==2.8.2
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -22,21 +22,21 @@ backports.entry-points-selectable==1.1.0
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-certifi==2021.5.30
+certifi==2021.10.8
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-cffi==1.14.6
+cffi==1.15.0
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==2.0.6
+charset-normalizer==2.0.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-click==8.0.1
+click==8.0.3
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/test.txt
@@ -54,7 +54,7 @@ code-annotations==1.2.0
     #   edx-lint
 codecov==2.1.12
     # via -r requirements/ci.txt
-coverage[toml]==6.0.1
+coverage[toml]==6.0.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -93,7 +93,7 @@ future==0.18.2
     #   pyjwkest
 httpretty==1.1.4
     # via -r requirements/test.txt
-idna==3.2
+idna==3.3
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -145,7 +145,7 @@ pep517==0.11.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-pip-tools==6.3.0
+pip-tools==6.4.0
     # via -r requirements/pip-tools.txt
 platformdirs==2.4.0
     # via
@@ -165,13 +165,13 @@ py==1.10.0
     #   -r requirements/test.txt
     #   pytest
     #   tox
-pycodestyle==2.7.0
+pycodestyle==2.8.0
     # via -r requirements/test.txt
 pycparser==2.20
     # via
     #   -r requirements/test.txt
     #   cffi
-pycryptodomex==3.10.4
+pycryptodomex==3.11.0
     # via
     #   -r requirements/test.txt
     #   pyjwkest
@@ -227,7 +227,7 @@ pytz==2021.3
     # via
     #   -r requirements/test.txt
     #   django
-pyyaml==5.4.1
+pyyaml==6.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
