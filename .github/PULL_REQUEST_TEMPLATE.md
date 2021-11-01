@@ -14,7 +14,6 @@ Describe in a couple of sentences what this PR adds
 * **Author concerns:** List any concerns about this PR
 
 **Reviewers:**
-- [ ] @edx/arch-review
 - [ ] tag reviewer
 
 **Merge checklist:**
