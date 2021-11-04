@@ -54,7 +54,7 @@ code-annotations==1.2.0
     #   edx-lint
 codecov==2.1.12
     # via -r requirements/ci.txt
-coverage[toml]==6.0.2
+coverage[toml]==6.1.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -81,7 +81,7 @@ django==2.2.24
     #   -r requirements/test.txt
 edx-lint==5.2.1
     # via -r requirements/test.txt
-filelock==3.3.1
+filelock==3.3.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -102,7 +102,7 @@ iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==5.9.3
+isort==5.10.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -131,7 +131,7 @@ oauthlib==3.1.1
     #   -r requirements/test.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==21.0
+packaging==21.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -201,7 +201,7 @@ pylint-plugin-utils==0.6
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pyparsing==3.0.3
+pyparsing==2.4.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -306,7 +306,7 @@ urllib3==1.26.7
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.9.0
+virtualenv==20.10.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -315,7 +315,7 @@ wheel==0.37.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-wrapt==1.13.2
+wrapt==1.13.3
     # via
     #   -r requirements/test.txt
     #   astroid
