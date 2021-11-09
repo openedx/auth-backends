@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+import os
+import re
 
 from setuptools import setup, find_packages
 
-from auth_backends import __version__
 
 with open('README.rst') as a, open('HISTORY.rst') as b, open('AUTHORS') as c:
     long_description = f'{a.read()}\n\n{b.read()}\n\n{c.read()}'
@@ -31,9 +32,24 @@ def is_requirement(line):
     return line and not line.startswith(('-r', '#', '-e', 'git+', '-c'))
 
 
+def get_version(*file_paths):
+    """
+    Extract the version string from the file at the given relative path fragments.
+    """
+    filename = os.path.join(os.path.dirname(__file__), *file_paths)
+    version_file = open(filename).read()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
+VERSION = get_version("auth_backends", "__init__.py")
+
+
 setup(
     name='edx-auth-backends',
-    version=__version__,
+    version=VERSION,
     description='Custom edX authentication backends and pipeline steps',
     long_description=long_description,
     classifiers=[
