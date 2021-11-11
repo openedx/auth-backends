@@ -17,7 +17,7 @@ attrs==21.2.0
     # via
     #   -r requirements/test.txt
     #   pytest
-backports.entry-points-selectable==1.1.0
+backports.entry-points-selectable==1.1.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -54,7 +54,7 @@ code-annotations==1.2.0
     #   edx-lint
 codecov==2.1.12
     # via -r requirements/ci.txt
-coverage[toml]==6.1.1
+coverage[toml]==6.1.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -102,11 +102,11 @@ iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==5.10.0
+isort==5.10.1
     # via
     #   -r requirements/test.txt
     #   pylint
-jinja2==3.0.2
+jinja2==3.0.3
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -137,7 +137,7 @@ packaging==21.2
     #   -r requirements/test.txt
     #   pytest
     #   tox
-pbr==5.6.0
+pbr==5.7.0
     # via
     #   -r requirements/test.txt
     #   stevedore
@@ -159,7 +159,7 @@ pluggy==1.0.0
     #   -r requirements/test.txt
     #   pytest
     #   tox
-py==1.10.0
+py==1.11.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -167,7 +167,7 @@ py==1.10.0
     #   tox
 pycodestyle==2.8.0
     # via -r requirements/test.txt
-pycparser==2.20
+pycparser==2.21
     # via
     #   -r requirements/test.txt
     #   cffi

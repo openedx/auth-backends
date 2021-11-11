@@ -12,7 +12,7 @@ astroid==2.8.4
     #   pylint-celery
 attrs==21.2.0
     # via pytest
-backports.entry-points-selectable==1.1.0
+backports.entry-points-selectable==1.1.1
     # via virtualenv
 certifi==2021.10.8
     # via
@@ -35,7 +35,7 @@ click-log==0.3.2
     # via edx-lint
 code-annotations==1.2.0
     # via edx-lint
-coverage[toml]==6.1.1
+coverage[toml]==6.1.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
@@ -70,9 +70,9 @@ idna==3.3
     #   requests
 iniconfig==1.1.1
     # via pytest
-isort==5.10.0
+isort==5.10.1
     # via pylint
-jinja2==3.0.2
+jinja2==3.0.3
     # via code-annotations
 lazy-object-proxy==1.6.0
     # via astroid
@@ -91,7 +91,7 @@ packaging==21.2
     # via
     #   pytest
     #   tox
-pbr==5.6.0
+pbr==5.7.0
     # via stevedore
 platformdirs==2.4.0
     # via
@@ -101,13 +101,13 @@ pluggy==1.0.0
     # via
     #   pytest
     #   tox
-py==1.10.0
+py==1.11.0
     # via
     #   pytest
     #   tox
 pycodestyle==2.8.0
     # via -r requirements/test.in
-pycparser==2.20
+pycparser==2.21
     # via
     #   -r requirements/base.txt
     #   cffi
