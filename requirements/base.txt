@@ -4,13 +4,15 @@
 #
 #    make upgrade
 #
+asgiref==3.4.1
+    # via django
 certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.7
+charset-normalizer==2.0.8
     # via requests
-cryptography==35.0.0
+cryptography==36.0.0
     # via
     #   pyjwt
     #   social-auth-core
@@ -18,7 +20,7 @@ defusedxml==0.7.1
     # via
     #   python3-openid
     #   social-auth-core
-django==2.2.24
+django==3.2.9
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
