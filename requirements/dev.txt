@@ -12,7 +12,7 @@ asgiref==3.4.1
     # via
     #   -r requirements/test.txt
     #   django
-astroid==2.8.6
+astroid==2.9.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -58,7 +58,7 @@ code-annotations==1.2.0
     #   edx-lint
 codecov==2.1.12
     # via -r requirements/ci.txt
-coverage[toml]==6.1.2
+coverage[toml]==6.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -185,7 +185,7 @@ pyjwt[crypto]==2.3.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.11.1
+pylint==2.12.1
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -217,7 +217,7 @@ pytest==6.2.5
     #   pytest-django
 pytest-cov==3.0.0
     # via -r requirements/test.txt
-pytest-django==4.4.0
+pytest-django==4.5.0
     # via -r requirements/test.txt
 python-slugify==5.0.2
     # via
@@ -298,7 +298,7 @@ traceback2==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-typing-extensions==4.0.0
+typing-extensions==4.0.1
     # via
     #   -r requirements/test.txt
     #   astroid
