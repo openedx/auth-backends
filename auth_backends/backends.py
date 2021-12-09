@@ -58,7 +58,8 @@ class EdXOAuth2(BaseOAuth2):
     CLAIMS_TO_DETAILS_KEY_MAP = PROFILE_CLAIMS_TO_DETAILS_KEY_MAP
 
     # This signal is fired after the user has successfully logged in.
-    auth_complete_signal = Signal(providing_args=['user'])
+    # providing_args=['user']
+    auth_complete_signal = Signal()
 
     @property
     # pylint: disable= missing-function-docstring
