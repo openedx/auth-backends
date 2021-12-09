@@ -35,7 +35,7 @@ cffi==1.15.0
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==2.0.8
+charset-normalizer==2.0.9
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -74,12 +74,12 @@ defusedxml==0.7.1
     #   -r requirements/test.txt
     #   python3-openid
     #   social-auth-core
-distlib==0.3.3
+distlib==0.3.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==3.2.9
+django==3.2.10
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -175,7 +175,7 @@ pycparser==2.21
     # via
     #   -r requirements/test.txt
     #   cffi
-pycryptodomex==3.11.0
+pycryptodomex==3.12.0
     # via
     #   -r requirements/test.txt
     #   pyjwkest
@@ -185,7 +185,7 @@ pyjwt[crypto]==2.3.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.12.1
+pylint==2.12.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -217,7 +217,7 @@ pytest==6.2.5
     #   pytest-django
 pytest-cov==3.0.0
     # via -r requirements/test.txt
-pytest-django==4.5.0
+pytest-django==4.5.2
     # via -r requirements/test.txt
 python-slugify==5.0.2
     # via
