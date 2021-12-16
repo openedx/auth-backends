@@ -43,7 +43,7 @@ coverage[toml]==6.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==36.0.0
+cryptography==36.0.1
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -78,7 +78,7 @@ isort==5.10.1
     # via pylint
 jinja2==3.0.3
     # via code-annotations
-lazy-object-proxy==1.6.0
+lazy-object-proxy==1.7.1
     # via astroid
 linecache2==1.0.0
     # via traceback2
@@ -196,7 +196,7 @@ toml==0.10.2
     #   pylint
     #   pytest
     #   tox
-tomli==1.2.2
+tomli==2.0.0
     # via coverage
 tox==3.24.4
     # via -r requirements/test.in
