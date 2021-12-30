@@ -1,4 +1,4 @@
-jenkins/upgrade-python-requirements-09edde7
+-c constraints.txt
 # Core dependencies for installing other packages
 
 pip
