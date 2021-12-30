@@ -14,10 +14,8 @@ astroid==2.9.0
     # via
     #   pylint
     #   pylint-celery
-attrs==21.2.0
+attrs==21.4.0
     # via pytest
-backports.entry-points-selectable==1.1.1
-    # via virtualenv
 certifi==2021.10.8
     # via
     #   -r requirements/base.txt
@@ -60,7 +58,7 @@ distlib==0.3.4
     #   -r requirements/base.txt
 edx-lint==5.2.1
     # via -r requirements/test.in
-filelock==3.4.0
+filelock==3.4.2
     # via
     #   tox
     #   virtualenv
@@ -97,7 +95,7 @@ packaging==21.3
     #   tox
 pbr==5.8.0
     # via stevedore
-platformdirs==2.4.0
+platformdirs==2.4.1
     # via
     #   pylint
     #   virtualenv
@@ -133,7 +131,7 @@ pylint-celery==0.3
     # via edx-lint
 pylint-django==2.4.4
     # via edx-lint
-pylint-plugin-utils==0.6
+pylint-plugin-utils==0.7
     # via
     #   pylint-celery
     #   pylint-django
@@ -198,7 +196,7 @@ toml==0.10.2
     #   tox
 tomli==2.0.0
     # via coverage
-tox==3.24.4
+tox==3.24.5
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
@@ -212,7 +210,7 @@ urllib3==1.26.7
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.10.0
+virtualenv==20.11.2
     # via tox
 wrapt==1.13.3
     # via astroid

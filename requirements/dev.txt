@@ -17,15 +17,10 @@ astroid==2.9.0
     #   -r requirements/test.txt
     #   pylint
     #   pylint-celery
-attrs==21.2.0
+attrs==21.4.0
     # via
     #   -r requirements/test.txt
     #   pytest
-backports.entry-points-selectable==1.1.1
-    # via
-    #   -r requirements/ci.txt
-    #   -r requirements/test.txt
-    #   virtualenv
 certifi==2021.10.8
     # via
     #   -r requirements/ci.txt
@@ -85,7 +80,7 @@ django==3.2.10
     #   -r requirements/test.txt
 edx-lint==5.2.1
     # via -r requirements/test.txt
-filelock==3.4.0
+filelock==3.4.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -151,7 +146,7 @@ pep517==0.12.0
     #   pip-tools
 pip-tools==6.4.0
     # via -r requirements/pip-tools.txt
-platformdirs==2.4.0
+platformdirs==2.4.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -200,7 +195,7 @@ pylint-django==2.4.4
     # via
     #   -r requirements/test.txt
     #   edx-lint
-pylint-plugin-utils==0.6
+pylint-plugin-utils==0.7
     # via
     #   -r requirements/test.txt
     #   pylint-celery
@@ -287,7 +282,7 @@ tomli==2.0.0
     #   -r requirements/test.txt
     #   coverage
     #   pep517
-tox==3.24.4
+tox==3.24.5
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -310,12 +305,12 @@ urllib3==1.26.7
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.10.0
+virtualenv==20.11.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   tox
-wheel==0.37.0
+wheel==0.37.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
