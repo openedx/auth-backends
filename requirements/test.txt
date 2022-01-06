@@ -10,7 +10,7 @@ asgiref==3.4.1
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.9.0
+astroid==2.9.2
     # via
     #   pylint
     #   pylint-celery
@@ -24,7 +24,7 @@ cffi==1.15.0
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.9
+charset-normalizer==2.0.10
     # via
     #   -r requirements/base.txt
     #   requests
@@ -129,7 +129,7 @@ pylint==2.12.2
     #   pylint-plugin-utils
 pylint-celery==0.3
     # via edx-lint
-pylint-django==2.4.4
+pylint-django==2.5.0
     # via edx-lint
 pylint-plugin-utils==0.7
     # via
@@ -157,7 +157,7 @@ pytz==2021.3
     #   django
 pyyaml==6.0
     # via code-annotations
-requests==2.26.0
+requests==2.27.1
     # via
     #   -r requirements/base.txt
     #   pyjwkest
@@ -210,7 +210,7 @@ urllib3==1.26.7
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.11.2
+virtualenv==20.13.0
     # via tox
 wrapt==1.13.3
     # via astroid
