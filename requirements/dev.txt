@@ -12,7 +12,7 @@ asgiref==3.4.1
     # via
     #   -r requirements/test.txt
     #   django
-astroid==2.9.2
+astroid==2.9.3
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -300,7 +300,7 @@ typing-extensions==4.0.1
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==1.26.7
+urllib3==1.26.8
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
