@@ -253,7 +253,7 @@ six==1.16.0
     #   virtualenv
 social-auth-app-django==5.0.0
     # via -r requirements/test.txt
-social-auth-core==4.1.0
+social-auth-core==4.2.0
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
