@@ -1,4 +1,4 @@
-.PHONY: clean quality requirements test upgrade
+.PHONY: clean quality requirements test upgrade check_keywords
 
 clean:
 	coverage erase
@@ -43,3 +43,6 @@ upgrade: $(COMMON_CONSTRAINTS_TXT)  ## update the requirements/*.txt files with 
 	# Let tox control the Django version for tests
 	sed '/^[dD]jango==/d' requirements/test.txt > requirements/test.tmp
 	mv requirements/test.tmp requirements/test.txt
+
+check_keywords: ## Scan the Django models in all installed apps in this project for restricted field names
+	python manage.py check_reserved_keywords --override_file db_keyword_overrides.yml
