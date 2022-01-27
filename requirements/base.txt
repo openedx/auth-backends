@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.4.1
+asgiref==3.5.0
     # via django
 certifi==2021.10.8
     # via requests
