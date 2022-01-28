@@ -14,6 +14,19 @@ Unreleased
 
 *
 
+[4.1.0] - 2022-01-28
+--------------------
+
+Removed
+~~~~~~~
+
+* Removed Django22, 30, 31
+
+Added
+~~~~~~~
+* Added Django40 support in CI
+
+
 [4.0.1] - 2021-11-01
 --------------------
 
