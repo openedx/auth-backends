@@ -10,7 +10,7 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.10
+charset-normalizer==2.0.11
     # via requests
 cryptography==36.0.1
     # via
@@ -20,13 +20,13 @@ defusedxml==0.7.1
     # via
     #   python3-openid
     #   social-auth-core
-django==3.2.11
+django==3.2.12
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
 idna==3.3
     # via requests
-oauthlib==3.1.1
+oauthlib==3.2.0
     # via
     #   requests-oauthlib
     #   social-auth-core
@@ -44,7 +44,7 @@ requests==2.27.1
     # via
     #   requests-oauthlib
     #   social-auth-core
-requests-oauthlib==1.3.0
+requests-oauthlib==1.3.1
     # via social-auth-core
 six==1.16.0
     # via -r requirements/base.in
