@@ -24,7 +24,7 @@ cffi==1.15.0
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.0.11
+charset-normalizer==2.0.12
     # via
     #   -r requirements/base.txt
     #   requests
@@ -58,7 +58,7 @@ distlib==0.3.4
     #   -r requirements/base.txt
 edx-lint==5.2.1
     # via -r requirements/test.in
-filelock==3.4.2
+filelock==3.5.1
     # via
     #   tox
     #   virtualenv
@@ -129,7 +129,7 @@ pylint==2.12.2
     #   pylint-plugin-utils
 pylint-celery==0.3
     # via edx-lint
-pylint-django==2.5.0
+pylint-django==2.5.1
     # via edx-lint
 pylint-plugin-utils==0.7
     # via
@@ -137,7 +137,7 @@ pylint-plugin-utils==0.7
     #   pylint-django
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.0
+pytest==7.0.1
     # via
     #   pytest-cov
     #   pytest-django
@@ -145,7 +145,7 @@ pytest-cov==3.0.0
     # via -r requirements/test.in
 pytest-django==4.5.2
     # via -r requirements/test.in
-python-slugify==5.0.2
+python-slugify==6.0.1
     # via code-annotations
 python3-openid==3.2.0
     # via
@@ -201,7 +201,7 @@ tox==3.24.5
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
-typing-extensions==4.0.1
+typing-extensions==4.1.1
     # via
     #   astroid
     #   pylint
