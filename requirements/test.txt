@@ -145,7 +145,7 @@ pytest-cov==3.0.0
     # via -r requirements/test.in
 pytest-django==4.5.2
     # via -r requirements/test.in
-python-slugify==6.1.0
+python-slugify==6.1.1
     # via code-annotations
 python3-openid==3.2.0
     # via
@@ -211,7 +211,7 @@ urllib3==1.26.8
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.13.1
+virtualenv==20.13.2
     # via tox
 wrapt==1.13.3
     # via astroid
