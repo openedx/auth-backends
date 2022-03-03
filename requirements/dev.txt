@@ -214,7 +214,7 @@ pytest-cov==3.0.0
     # via -r requirements/test.txt
 pytest-django==4.5.2
     # via -r requirements/test.txt
-python-slugify==6.1.0
+python-slugify==6.1.1
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -305,7 +305,7 @@ urllib3==1.26.8
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.13.1
+virtualenv==20.13.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
