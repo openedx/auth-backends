@@ -43,7 +43,7 @@ click==8.0.4
     #   code-annotations
     #   edx-lint
     #   pip-tools
-click-log==0.3.2
+click-log==0.4.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -59,7 +59,7 @@ coverage[toml]==6.3.2
     #   -r requirements/test.txt
     #   codecov
     #   pytest-cov
-cryptography==36.0.1
+cryptography==36.0.2
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -117,7 +117,7 @@ linecache2==1.0.0
     # via
     #   -r requirements/test.txt
     #   traceback2
-markupsafe==2.1.0
+markupsafe==2.1.1
     # via
     #   -r requirements/test.txt
     #   jinja2
@@ -205,7 +205,7 @@ pyparsing==3.0.7
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   packaging
-pytest==7.0.1
+pytest==7.1.0
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -300,7 +300,7 @@ typing-extensions==4.1.1
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==1.26.8
+urllib3==1.26.9
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
