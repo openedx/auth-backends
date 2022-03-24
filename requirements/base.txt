@@ -38,7 +38,7 @@ pyjwt[crypto]==2.3.0
     #   social-auth-core
 python3-openid==3.2.0
     # via social-auth-core
-pytz==2021.3
+pytz==2022.1
     # via django
 requests==2.27.1
     # via

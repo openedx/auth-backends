@@ -137,7 +137,7 @@ pylint-plugin-utils==0.7
     #   pylint-django
 pyparsing==3.0.7
     # via packaging
-pytest==7.1.0
+pytest==7.1.1
     # via
     #   pytest-cov
     #   pytest-django
@@ -151,7 +151,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pytz==2021.3
+pytz==2022.1
     # via
     #   -r requirements/base.txt
     #   django
@@ -211,7 +211,7 @@ urllib3==1.26.9
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.13.3
+virtualenv==20.13.4
     # via tox
 wrapt==1.13.3
     # via astroid
