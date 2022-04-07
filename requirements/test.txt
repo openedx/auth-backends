@@ -28,7 +28,7 @@ charset-normalizer==2.0.12
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.1.1
+click==8.1.2
     # via
     #   click-log
     #   code-annotations
@@ -123,7 +123,7 @@ pyjwt[crypto]==2.3.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.13.3
+pylint==2.13.5
     # via
     #   edx-lint
     #   pylint-celery
