@@ -41,7 +41,7 @@ coverage[toml]==6.3.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==36.0.2
+cryptography==37.0.1
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -139,7 +139,7 @@ pylint-plugin-utils==0.7
     #   pylint-django
 pyparsing==3.0.8
     # via packaging
-pytest==7.1.1
+pytest==7.1.2
     # via
     #   pytest-cov
     #   pytest-django
@@ -147,7 +147,7 @@ pytest-cov==3.0.0
     # via -r requirements/test.in
 pytest-django==4.5.2
     # via -r requirements/test.in
-python-slugify==6.1.1
+python-slugify==6.1.2
     # via code-annotations
 python3-openid==3.2.0
     # via
