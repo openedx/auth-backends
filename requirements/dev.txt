@@ -59,7 +59,7 @@ coverage[toml]==6.3.2
     #   -r requirements/test.txt
     #   codecov
     #   pytest-cov
-cryptography==36.0.2
+cryptography==37.0.1
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -209,7 +209,7 @@ pyparsing==3.0.8
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   packaging
-pytest==7.1.1
+pytest==7.1.2
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -218,7 +218,7 @@ pytest-cov==3.0.0
     # via -r requirements/test.txt
 pytest-django==4.5.2
     # via -r requirements/test.txt
-python-slugify==6.1.1
+python-slugify==6.1.2
     # via
     #   -r requirements/test.txt
     #   code-annotations
