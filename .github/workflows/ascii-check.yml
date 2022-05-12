@@ -19,7 +19,7 @@ jobs:
 
     - name: Get non-ascii characters
       id: getascii
-      run: grep --color='auto' -P -n "universal" setup.cfg
+      run: grep --color='auto' -P -n "‘" setup.cfg
       
 #    - name: check value
 #      if: ${{ steps.getascii.outputs.version == null }}
