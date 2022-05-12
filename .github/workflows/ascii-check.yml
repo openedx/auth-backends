@@ -1,0 +1,28 @@
+#check package-lock file version
+
+name: lockfileVersion check
+
+on:
+  push:
+    branches:
+    - 'master'
+  pull_request:
+
+jobs:
+  version-check:
+    runs-on:  ubuntu-20.04
+    outputs:
+      output1: ${{ steps.getversion.outputs.version }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Retrieve version
+      id: getascii
+      run: grep --color='auto' -P -n "[\x80-\xFF]" setup.cfg
+      
+#    - name: check value
+#      if: ${{ steps.getascii.outputs.version == null }}
+#      run: |
+#        echo "ERROR: Outdated package-lock file. Use NPM8 to install dependencies "
+#        exit 1
