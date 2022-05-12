@@ -18,11 +18,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get non-ascii characters
-      id: getascii
-      run: grep -P "[^\x00-\x7F]" setup.cfg
+      id: getnonascii
+      run: echo "::set-output name=characters::$(grep -P "[^\x00-\x7F]" setup.cfg)"
       
-#    - name: check value
-#      if: ${{ steps.getascii.outputs.version == null }}
-#      run: |
-#        echo "ERROR: Outdated package-lock file. Use NPM8 to install dependencies "
-#        exit 1
+    - name: check value
+      if: ${{ steps.getnonascii.outputs.characters == null }}
+      run: |
+        echo "ERROR: Non-ASCII characters found in setup.cfg."
+        exit 1
