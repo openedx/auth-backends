@@ -10,7 +10,7 @@ asgiref==3.5.1
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.11.4
+astroid==2.11.5
     # via
     #   pylint
     #   pylint-celery
@@ -95,7 +95,7 @@ packaging==21.3
     # via
     #   pytest
     #   tox
-pbr==5.8.1
+pbr==5.9.0
     # via stevedore
 platformdirs==2.5.2
     # via
@@ -137,7 +137,7 @@ pylint-plugin-utils==0.7
     # via
     #   pylint-celery
     #   pylint-django
-pyparsing==3.0.8
+pyparsing==3.0.9
     # via packaging
 pytest==7.1.2
     # via
