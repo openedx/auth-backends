@@ -11,8 +11,6 @@ on:
 jobs:
   ascii-check:
     runs-on:  ubuntu-20.04
-    outputs:
-      output1: ${{ steps.getversion.outputs.version }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
