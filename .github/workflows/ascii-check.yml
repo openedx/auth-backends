@@ -17,9 +17,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Retrieve version
+    - name: Get non-ascii characters
       id: getascii
-      run: grep --color='auto' -P -n "[\x80-\xFF]" setup.cfg
+      run: grep --color='auto' -P -n "universal" setup.cfg
       
 #    - name: check value
 #      if: ${{ steps.getascii.outputs.version == null }}
