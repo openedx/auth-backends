@@ -1,6 +1,6 @@
 #check package-lock file version
 
-name: lockfileVersion check
+name: ASCII check
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   pull_request:
 
 jobs:
-  version-check:
+  ascii-check:
     runs-on:  ubuntu-20.04
     outputs:
       output1: ${{ steps.getversion.outputs.version }}
