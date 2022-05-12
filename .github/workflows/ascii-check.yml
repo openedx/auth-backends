@@ -1,26 +1,14 @@
-#check package-lock file version
+#verifies setup.cfg doesn't have any non-ascii characters
 
 name: ASCII check
 
 on:
   push:
     branches:
-    - 'master'
+    - master
   pull_request:
 
 jobs:
   ascii-check:
-    runs-on:  ubuntu-20.04
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Get non-ascii characters
-      id: getnonascii
-      run: echo "::set-output name=characters::$(grep -m 1 -P "[^[:ascii:]]" setup.cfg)"
-      
-    - name: check value
-      if: ${{ steps.getnonascii.outputs.characters != null }}
-      run: |
-        echo "ERROR: Non-ASCII characters found in setup.cfg."
-        exit 1
+    uses: openedx/.github/.github/workflows/ascii-check.yml@jawayria/ascii-check
+    
