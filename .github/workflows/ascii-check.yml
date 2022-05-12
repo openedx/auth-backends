@@ -19,7 +19,7 @@ jobs:
 
     - name: Get non-ascii characters
       id: getnonascii
-      run: echo "::set-output name=characters::$(grep -P "[^\x00-\x7F]" setup.cfg)"
+      run: echo "::set-output name=characters::$(grep -m 1 -P "[^\x00-\x7F]" setup.cfg)"
       
     - name: check value
       if: ${{ steps.getnonascii.outputs.characters != null }}
