@@ -22,7 +22,7 @@ jobs:
       run: echo "::set-output name=characters::$(grep -P "[^\x00-\x7F]" setup.cfg)"
       
     - name: check value
-      if: ${{ steps.getnonascii.outputs.characters == null }}
+      if: ${{ steps.getnonascii.outputs.characters != null }}
       run: |
         echo "ERROR: Non-ASCII characters found in setup.cfg."
         exit 1
