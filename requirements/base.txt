@@ -6,7 +6,7 @@
 #
 asgiref==3.5.2
     # via django
-certifi==2022.5.18
+certifi==2022.5.18.1
     # via requests
 cffi==1.15.0
     # via cryptography
