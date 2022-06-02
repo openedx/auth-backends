@@ -84,7 +84,7 @@ django==3.2.13
     #   -r requirements/test.txt
 edx-lint==5.2.2
     # via -r requirements/test.txt
-filelock==3.7.0
+filelock==3.7.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -184,7 +184,7 @@ pyjwt[crypto]==2.4.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.13.9
+pylint==2.14.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -286,6 +286,10 @@ tomli==2.0.1
     #   pep517
     #   pylint
     #   pytest
+tomlkit==0.11.0
+    # via
+    #   -r requirements/test.txt
+    #   pylint
 tox==3.25.0
     # via
     #   -r requirements/ci.txt
