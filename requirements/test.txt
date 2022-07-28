@@ -176,7 +176,6 @@ six==1.16.0
     #   pyjwkest
     #   tox
     #   unittest2
-    #   virtualenv
 social-auth-app-django==5.0.0
     # via -r requirements/base.txt
 social-auth-core==4.3.0
@@ -210,11 +209,11 @@ typing-extensions==4.3.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==1.26.10
+urllib3==1.26.11
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.15.1
+virtualenv==20.16.2
     # via tox
 wrapt==1.14.1
     # via astroid
