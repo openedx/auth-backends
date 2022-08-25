@@ -10,7 +10,7 @@ certifi==2022.6.15
     # via requests
 cffi==1.15.1
     # via cryptography
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
     # via requests
 cryptography==37.0.4
     # via
@@ -56,5 +56,5 @@ social-auth-core==4.3.0
     #   social-auth-app-django
 sqlparse==0.4.2
     # via django
-urllib3==1.26.11
+urllib3==1.26.12
     # via requests
