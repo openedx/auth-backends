@@ -34,7 +34,7 @@ cffi==1.15.1
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -315,7 +315,7 @@ typing-extensions==4.3.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==1.26.11
+urllib3==1.26.12
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
