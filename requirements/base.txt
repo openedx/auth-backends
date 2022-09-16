@@ -6,7 +6,7 @@
 #
 asgiref==3.5.2
     # via django
-certifi==2022.6.15
+certifi==2022.9.14
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -24,9 +24,9 @@ django==3.2.15
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
-idna==3.3
+idna==3.4
     # via requests
-oauthlib==3.2.0
+oauthlib==3.2.1
     # via
     #   requests-oauthlib
     #   social-auth-core
