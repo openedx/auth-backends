@@ -112,7 +112,7 @@ setup(
         'Topic :: Internet',
     ],
     keywords='authentication edx',
-    url='https://github.com/edx/auth-backends',
+    url='https://github.com/openedx/auth-backends',
     author='edX',
     author_email='oscm@edx.org',
     license='AGPL',
