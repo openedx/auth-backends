@@ -10,7 +10,7 @@ asgiref==3.5.2
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.12.9
+astroid==2.12.10
     # via
     #   pylint
     #   pylint-celery
@@ -58,7 +58,7 @@ distlib==0.3.6
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
-edx-lint==5.2.5
+edx-lint==5.3.0
     # via -r requirements/test.in
 filelock==3.8.0
     # via
@@ -119,11 +119,11 @@ pycryptodomex==3.15.0
     # via pyjwkest
 pyjwkest==1.4.2
     # via -r requirements/test.in
-pyjwt[crypto]==2.4.0
+pyjwt[crypto]==2.5.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.15.2
+pylint==2.15.3
     # via
     #   edx-lint
     #   pylint-celery
@@ -202,6 +202,10 @@ tox==3.26.0
     # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
+types-cryptography==3.3.23
+    # via
+    #   -r requirements/base.txt
+    #   pyjwt
 typing-extensions==4.3.0
     # via
     #   astroid
