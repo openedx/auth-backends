@@ -6,7 +6,7 @@
 #
 asgiref==3.5.2
     # via django
-certifi==2022.9.14
+certifi==2022.9.24
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -54,7 +54,7 @@ social-auth-core==4.3.0
     # via
     #   -r requirements/base.in
     #   social-auth-app-django
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via django
 types-cryptography==3.3.23
     # via pyjwt
