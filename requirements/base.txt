@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.5.2
+asgiref==3.6.0
     # via django
 certifi==2022.12.7
     # via requests
@@ -38,7 +38,7 @@ pyjwt[crypto]==2.6.0
     #   social-auth-core
 python3-openid==3.2.0
     # via social-auth-core
-pytz==2022.6
+pytz==2022.7
     # via django
 requests==2.28.1
     # via
