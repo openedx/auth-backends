@@ -24,7 +24,7 @@ cffi==1.15.1
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==2.1.1
+charset-normalizer==3.0.1
     # via
     #   -r requirements/base.txt
     #   requests
@@ -66,7 +66,7 @@ filelock==3.9.0
     # via
     #   tox
     #   virtualenv
-future==0.18.2
+future==0.18.3
     # via pyjwkest
 httpretty==1.1.4
     # via -r requirements/test.in
@@ -84,7 +84,7 @@ lazy-object-proxy==1.9.0
     # via astroid
 linecache2==1.0.0
     # via traceback2
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via jinja2
 mccabe==0.7.0
     # via pylint
@@ -137,7 +137,7 @@ pylint-plugin-utils==0.7
     # via
     #   pylint-celery
     #   pylint-django
-pytest==7.2.0
+pytest==7.2.1
     # via
     #   pytest-cov
     #   pytest-django
@@ -151,13 +151,13 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pytz==2022.7
+pytz==2022.7.1
     # via
     #   -r requirements/base.txt
     #   django
 pyyaml==6.0
     # via code-annotations
-requests==2.28.1
+requests==2.28.2
     # via
     #   -r requirements/base.txt
     #   pyjwkest
