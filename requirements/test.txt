@@ -10,7 +10,7 @@ asgiref==3.6.0
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.14.2
+astroid==2.15.0
     # via
     #   pylint
     #   pylint-celery
@@ -24,7 +24,7 @@ cffi==1.15.1
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0
     # via
     #   -r requirements/base.txt
     #   requests
@@ -41,7 +41,7 @@ coverage[toml]==7.2.1
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==39.0.1
+cryptography==39.0.2
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -58,11 +58,11 @@ distlib==0.3.6
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
-edx-lint==5.3.2
+edx-lint==5.3.4
     # via -r requirements/test.in
-exceptiongroup==1.1.0
+exceptiongroup==1.1.1
     # via pytest
-filelock==3.9.0
+filelock==3.10.0
     # via
     #   tox
     #   virtualenv
@@ -99,7 +99,7 @@ packaging==23.0
     #   tox
 pbr==5.11.1
     # via stevedore
-platformdirs==3.0.0
+platformdirs==3.1.1
     # via
     #   pylint
     #   virtualenv
@@ -123,7 +123,7 @@ pyjwt[crypto]==2.6.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.16.2
+pylint==2.17.0
     # via
     #   edx-lint
     #   pylint-celery
@@ -137,7 +137,7 @@ pylint-plugin-utils==0.7
     # via
     #   pylint-celery
     #   pylint-django
-pytest==7.2.1
+pytest==7.2.2
     # via
     #   pytest-cov
     #   pytest-django
@@ -174,9 +174,9 @@ six==1.16.0
     #   pyjwkest
     #   tox
     #   unittest2
-social-auth-app-django==5.0.0
+social-auth-app-django==5.1.0
     # via -r requirements/base.txt
-social-auth-core==4.3.0
+social-auth-core==4.4.0
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
@@ -208,11 +208,11 @@ typing-extensions==4.5.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==1.26.14
+urllib3==1.26.15
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.20.0
+virtualenv==20.21.0
     # via tox
 wrapt==1.15.0
     # via astroid
