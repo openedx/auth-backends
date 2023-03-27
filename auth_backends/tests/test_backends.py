@@ -7,7 +7,6 @@ import jwt
 import six
 from Cryptodome.PublicKey import RSA
 from django.core.cache import cache
-from jwt.algorithms import get_default_algorithms
 from social_core.tests.backends.oauth import OAuth2Test
 
 
@@ -25,6 +24,7 @@ class EdXOAuth2Tests(OAuth2Test):
     def setUp(self):
         cache.clear()
         super().setUp()
+        self.key = RSA.generate(2048).export_key('PEM')
 
     def set_social_auth_setting(self, setting_name, value):
         """
@@ -60,14 +60,13 @@ class EdXOAuth2Tests(OAuth2Test):
         Arguments:
             expires_in (int): Number of seconds after which the token expires.
             issuer (str): Issuer of the token.
-            key (cryptography.hazmat.backends.openssl.rsa._RSAPrivateKey): Key used to sign the token.
+            key (bytes PEM-format): Key used to sign the token.
             alg (str): Signing algorithm.
 
         Returns:
             str: JWT
         """
-        algorithm = get_default_algorithms()[alg]
-        key = key or algorithm.prepare_key(RSA.generate(2048).export_key('PEM'))
+        key = key or self.key
         now = datetime.datetime.utcnow()
         expiration_datetime = now + datetime.timedelta(seconds=expires_in)
         issue_datetime = now
