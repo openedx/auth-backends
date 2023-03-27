@@ -3,11 +3,11 @@ import datetime
 import json
 from calendar import timegm
 
+import jwt
 import six
 from Cryptodome.PublicKey import RSA
 from django.core.cache import cache
-from jwkest.jwk import RSAKey
-from jwkest.jws import JWS
+from jwt.algorithms import get_default_algorithms
 from social_core.tests.backends.oauth import OAuth2Test
 
 
@@ -25,7 +25,6 @@ class EdXOAuth2Tests(OAuth2Test):
     def setUp(self):
         cache.clear()
         super().setUp()
-        self.key = RSAKey(kid='testkey', key=RSA.generate(2048))
 
     def set_social_auth_setting(self, setting_name, value):
         """
@@ -45,7 +44,7 @@ class EdXOAuth2Tests(OAuth2Test):
         self.assertEqual(body['token_type'], ['jwt'])
 
         expires_in = 3600
-        access_token = self.create_jws_access_token(expires_in)
+        access_token = self.create_jwt_access_token(expires_in)
         body = json.dumps({
             'scope': 'read write profile email user_id',
             'token_type': 'JWT',
@@ -54,20 +53,21 @@ class EdXOAuth2Tests(OAuth2Test):
         })
         return 200, headers, body
 
-    def create_jws_access_token(self, expires_in=3600, issuer=None, key=None, alg='RS512'):
+    def create_jwt_access_token(self, expires_in=3600, issuer=None, key=None, alg='RS512'):
         """
-        Creates a signed (JWS) access token.
+        Creates a signed (JWT) access token.
 
         Arguments:
             expires_in (int): Number of seconds after which the token expires.
             issuer (str): Issuer of the token.
-            key (jwkest.jwk.Key): Key used to sign the token.
+            key (cryptography.hazmat.backends.openssl.rsa._RSAPrivateKey): Key used to sign the token.
             alg (str): Signing algorithm.
 
         Returns:
-            str: JWS
+            str: JWT
         """
-        key = key or self.key
+        algorithm = get_default_algorithms()[alg]
+        key = key or algorithm.prepare_key(RSA.generate(2048).export_key('PEM'))
         now = datetime.datetime.utcnow()
         expiration_datetime = now + datetime.timedelta(seconds=expires_in)
         issue_datetime = now
@@ -86,8 +86,8 @@ class EdXOAuth2Tests(OAuth2Test):
             'family_name': 'Smith',
             'user_id': '1',
         }
-        access_token = JWS(payload, jwk=key, alg=alg).sign_compact()
-        return access_token
+
+        return jwt.encode(payload, key, algorithm=alg)
 
     def extra_settings(self):
         """
@@ -150,7 +150,7 @@ class EdXOAuth2Tests(OAuth2Test):
         self.assertEqual(self.backend.end_session_url(), self.public_url_root + logout_location)
 
     def test_user_data(self):
-        user_data = self.backend.user_data(self.create_jws_access_token())
+        user_data = self.backend.user_data(self.create_jwt_access_token())
         self.assertDictEqual(user_data, {
             'name': 'Joe Smith',
             'preferred_username': 'jsmith',
