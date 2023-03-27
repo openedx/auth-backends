@@ -10,7 +10,7 @@ asgiref==3.6.0
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.15.0
+astroid==2.15.1
     # via
     #   pylint
     #   pylint-celery
@@ -41,7 +41,7 @@ coverage[toml]==7.2.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==39.0.2
+cryptography==40.0.1
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -62,12 +62,10 @@ edx-lint==5.3.4
     # via -r requirements/test.in
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.10.2
+filelock==3.10.7
     # via
     #   tox
     #   virtualenv
-future==0.18.3
-    # via pyjwkest
 httpretty==1.1.4
     # via -r requirements/test.in
 idna==3.4
@@ -99,7 +97,7 @@ packaging==23.0
     #   tox
 pbr==5.11.1
     # via stevedore
-platformdirs==3.1.1
+platformdirs==3.2.0
     # via
     #   pylint
     #   virtualenv
@@ -116,8 +114,6 @@ pycparser==2.21
     #   -r requirements/base.txt
     #   cffi
 pycryptodomex==3.17
-    # via pyjwkest
-pyjwkest==1.4.2
     # via -r requirements/test.in
 pyjwt[crypto]==2.6.0
     # via
@@ -151,7 +147,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pytz==2022.7.1
+pytz==2023.2
     # via
     #   -r requirements/base.txt
     #   django
@@ -160,7 +156,6 @@ pyyaml==6.0
 requests==2.28.2
     # via
     #   -r requirements/base.txt
-    #   pyjwkest
     #   requests-oauthlib
     #   social-auth-core
 requests-oauthlib==1.3.1
@@ -171,7 +166,6 @@ six==1.16.0
     # via
     #   -r requirements/base.txt
     #   edx-lint
-    #   pyjwkest
     #   tox
     #   unittest2
 social-auth-app-django==5.1.0
@@ -194,7 +188,7 @@ tomli==2.0.1
     #   pylint
     #   pytest
     #   tox
-tomlkit==0.11.6
+tomlkit==0.11.7
     # via pylint
 tox==3.28.0
     # via
