@@ -12,7 +12,7 @@ asgiref==3.6.0
     # via
     #   -r requirements/test.txt
     #   django
-astroid==2.15.0
+astroid==2.15.1
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -63,7 +63,7 @@ coverage[toml]==7.2.2
     #   -r requirements/test.txt
     #   codecov
     #   pytest-cov
-cryptography==39.0.2
+cryptography==40.0.1
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -92,7 +92,7 @@ exceptiongroup==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-filelock==3.10.2
+filelock==3.10.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -156,7 +156,7 @@ pbr==5.11.1
     #   stevedore
 pip-tools==6.12.3
     # via -r requirements/pip-tools.txt
-platformdirs==3.1.1
+platformdirs==3.2.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -230,7 +230,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pytz==2022.7.1
+pytz==2023.3
     # via
     #   -r requirements/test.txt
     #   django
@@ -287,7 +287,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.11.6
+tomlkit==0.11.7
     # via
     #   -r requirements/test.txt
     #   pylint
