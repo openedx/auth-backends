@@ -89,10 +89,6 @@ filelock==3.12.0
     #   -r requirements/test.txt
     #   tox
     #   virtualenv
-future==0.18.3
-    # via
-    #   -r requirements/test.txt
-    #   pyjwkest
 httpretty==1.1.4
     # via -r requirements/test.txt
 idna==3.4
@@ -170,10 +166,6 @@ pycparser==2.21
     #   -r requirements/test.txt
     #   cffi
 pycryptodomex==3.17
-    # via
-    #   -r requirements/test.txt
-    #   pyjwkest
-pyjwkest==1.4.2
     # via -r requirements/test.txt
 pyjwt[crypto]==2.6.0
     # via
@@ -243,7 +235,6 @@ six==1.16.0
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   edx-lint
-    #   pyjwkest
     #   tox
     #   unittest2
 social-auth-app-django==5.2.0
