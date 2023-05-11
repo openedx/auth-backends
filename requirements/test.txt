@@ -14,7 +14,7 @@ astroid==2.15.4
     # via
     #   pylint
     #   pylint-celery
-certifi==2022.12.7
+certifi==2023.5.7
     # via
     #   -r requirements/base.txt
     #   requests
@@ -114,11 +114,11 @@ pycparser==2.21
     #   cffi
 pycryptodomex==3.17
     # via -r requirements/test.in
-pyjwt[crypto]==2.6.0
+pyjwt[crypto]==2.7.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.17.3
+pylint==2.17.4
     # via
     #   edx-lint
     #   pylint-celery
@@ -152,7 +152,7 @@ pytz==2023.3
     #   django
 pyyaml==6.0
     # via code-annotations
-requests==2.29.0
+requests==2.30.0
     # via
     #   -r requirements/base.txt
     #   requests-oauthlib
@@ -201,7 +201,7 @@ typing-extensions==4.5.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==1.26.15
+urllib3==2.0.2
     # via
     #   -r requirements/base.txt
     #   requests
