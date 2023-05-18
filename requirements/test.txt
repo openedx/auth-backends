@@ -10,11 +10,11 @@ asgiref==3.6.0
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.15.4
+astroid==2.15.5
     # via
     #   pylint
     #   pylint-celery
-certifi==2022.12.7
+certifi==2023.5.7
     # via
     #   -r requirements/base.txt
     #   requests
@@ -96,7 +96,7 @@ packaging==23.1
     #   tox
 pbr==5.11.1
     # via stevedore
-platformdirs==3.5.0
+platformdirs==3.5.1
     # via
     #   pylint
     #   virtualenv
@@ -114,11 +114,11 @@ pycparser==2.21
     #   cffi
 pycryptodomex==3.17
     # via -r requirements/test.in
-pyjwt[crypto]==2.6.0
+pyjwt[crypto]==2.7.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==2.17.3
+pylint==2.17.4
     # via
     #   edx-lint
     #   pylint-celery
@@ -128,7 +128,7 @@ pylint-celery==0.3
     # via edx-lint
 pylint-django==2.5.3
     # via edx-lint
-pylint-plugin-utils==0.7
+pylint-plugin-utils==0.8.1
     # via
     #   pylint-celery
     #   pylint-django
@@ -152,7 +152,7 @@ pytz==2023.3
     #   django
 pyyaml==6.0
     # via code-annotations
-requests==2.29.0
+requests==2.30.0
     # via
     #   -r requirements/base.txt
     #   requests-oauthlib
@@ -177,7 +177,7 @@ sqlparse==0.4.4
     # via
     #   -r requirements/base.txt
     #   django
-stevedore==5.0.0
+stevedore==5.1.0
     # via code-annotations
 text-unidecode==1.3
     # via python-slugify
@@ -201,7 +201,7 @@ typing-extensions==4.5.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==1.26.15
+urllib3==2.0.2
     # via
     #   -r requirements/base.txt
     #   requests
