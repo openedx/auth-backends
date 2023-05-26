@@ -7,7 +7,7 @@ coverage
 edx-lint
 httpretty
 pycodestyle
-pyjwkest                   # used for crypto tests
+pycryptodomex                   # used for crypto tests
 pytest-cov
 pytest-django
 tox
