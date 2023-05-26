@@ -12,7 +12,7 @@ asgiref==3.6.0
     # via
     #   -r requirements/test.txt
     #   django
-astroid==2.15.3
+astroid==2.15.4
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -49,7 +49,7 @@ code-annotations==1.3.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.2.3
+coverage[toml]==7.2.5
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -72,7 +72,7 @@ distlib==0.3.6
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==3.2.18
+django==3.2.19
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -89,10 +89,6 @@ filelock==3.12.0
     #   -r requirements/test.txt
     #   tox
     #   virtualenv
-future==0.18.3
-    # via
-    #   -r requirements/test.txt
-    #   pyjwkest
 httpretty==1.1.4
     # via -r requirements/test.txt
 idna==3.4
@@ -146,7 +142,7 @@ pbr==5.11.1
     #   stevedore
 pip-tools==6.13.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.2.0
+platformdirs==3.5.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -170,16 +166,12 @@ pycparser==2.21
     #   -r requirements/test.txt
     #   cffi
 pycryptodomex==3.17
-    # via
-    #   -r requirements/test.txt
-    #   pyjwkest
-pyjwkest==1.4.2
     # via -r requirements/test.txt
 pyjwt[crypto]==2.6.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.17.2
+pylint==2.17.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -228,7 +220,7 @@ pyyaml==6.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
-requests==2.28.2
+requests==2.29.0
     # via
     #   -r requirements/test.txt
     #   pyjwkest
@@ -243,12 +235,11 @@ six==1.16.0
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   edx-lint
-    #   pyjwkest
     #   tox
     #   unittest2
 social-auth-app-django==5.2.0
     # via -r requirements/test.txt
-social-auth-core==4.4.1
+social-auth-core==4.4.2
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
@@ -275,7 +266,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.11.7
+tomlkit==0.11.8
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -302,7 +293,7 @@ urllib3==1.26.15
     # via
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.22.0
+virtualenv==20.23.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
