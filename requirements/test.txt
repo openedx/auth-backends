@@ -61,7 +61,7 @@ edx-lint==5.3.4
     # via -r requirements/test.in
 exceptiongroup==1.1.1
     # via pytest
-filelock==3.12.0
+filelock==3.12.2
     # via
     #   tox
     #   virtualenv
@@ -96,7 +96,7 @@ packaging==23.1
     #   tox
 pbr==5.11.1
     # via stevedore
-platformdirs==3.5.1
+platformdirs==3.5.3
     # via
     #   pylint
     #   virtualenv
@@ -132,7 +132,7 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==7.3.1
+pytest==7.3.2
     # via
     #   pytest-cov
     #   pytest-django
