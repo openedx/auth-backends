@@ -96,11 +96,11 @@ packaging==23.1
     #   tox
 pbr==5.11.1
     # via stevedore
-platformdirs==3.5.3
+platformdirs==3.7.0
     # via
     #   pylint
     #   virtualenv
-pluggy==1.0.0
+pluggy==1.2.0
     # via
     #   pytest
     #   tox
@@ -207,7 +207,7 @@ urllib3==2.0.3
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.23.0
+virtualenv==20.23.1
     # via tox
 wrapt==1.15.0
     # via astroid
