@@ -142,13 +142,13 @@ pbr==5.11.1
     #   stevedore
 pip-tools==6.13.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.5.3
+platformdirs==3.7.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pylint
     #   virtualenv
-pluggy==1.0.0
+pluggy==1.2.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -293,7 +293,7 @@ urllib3==2.0.3
     # via
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.23.0
+virtualenv==20.23.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
