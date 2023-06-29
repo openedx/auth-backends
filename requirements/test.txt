@@ -96,7 +96,7 @@ packaging==23.1
     #   tox
 pbr==5.11.1
     # via stevedore
-platformdirs==3.7.0
+platformdirs==3.8.0
     # via
     #   pylint
     #   virtualenv
@@ -132,7 +132,7 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==7.3.2
+pytest==7.4.0
     # via
     #   pytest-cov
     #   pytest-django
@@ -195,7 +195,7 @@ tox==3.28.0
     #   -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
-typing-extensions==4.6.3
+typing-extensions==4.7.0
     # via
     #   -r requirements/base.txt
     #   asgiref

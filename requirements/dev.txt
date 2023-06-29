@@ -142,7 +142,7 @@ pbr==5.11.1
     #   stevedore
 pip-tools==6.13.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.7.0
+platformdirs==3.8.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -195,7 +195,7 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
-pytest==7.3.2
+pytest==7.4.0
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -281,7 +281,7 @@ traceback2==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-typing-extensions==4.6.3
+typing-extensions==4.7.0
     # via
     #   -r requirements/test.txt
     #   asgiref
