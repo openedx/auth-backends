@@ -59,7 +59,7 @@ distlib==0.3.6
     #   social-auth-app-django
 edx-lint==5.3.4
     # via -r requirements/test.in
-exceptiongroup==1.1.1
+exceptiongroup==1.1.2
     # via pytest
 filelock==3.12.2
     # via
@@ -195,7 +195,7 @@ tox==3.28.0
     #   -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via
     #   -r requirements/base.txt
     #   asgiref
