@@ -72,14 +72,14 @@ distlib==0.3.6
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==3.2.19
+django==3.2.20
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
     #   social-auth-app-django
 edx-lint==5.3.4
     # via -r requirements/test.txt
-exceptiongroup==1.1.1
+exceptiongroup==1.1.2
     # via
     #   -r requirements/test.txt
     #   pytest
@@ -140,7 +140,7 @@ pbr==5.11.1
     # via
     #   -r requirements/test.txt
     #   stevedore
-pip-tools==6.13.0
+pip-tools==6.14.0
     # via -r requirements/pip-tools.txt
 platformdirs==3.8.0
     # via
@@ -261,6 +261,7 @@ tomli==2.0.1
     #   -r requirements/test.txt
     #   build
     #   coverage
+    #   pip-tools
     #   pylint
     #   pyproject-hooks
     #   pytest
@@ -281,7 +282,7 @@ traceback2==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-typing-extensions==4.7.0
+typing-extensions==4.7.1
     # via
     #   -r requirements/test.txt
     #   asgiref
