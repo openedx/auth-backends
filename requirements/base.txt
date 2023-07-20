@@ -33,7 +33,7 @@ oauthlib==3.2.2
     #   social-auth-core
 pycparser==2.21
     # via cffi
-pyjwt[crypto]==2.7.0
+pyjwt[crypto]==2.8.0
     # via
     #   -r requirements/base.in
     #   social-auth-core
@@ -59,5 +59,5 @@ sqlparse==0.4.4
     # via django
 typing-extensions==4.7.1
     # via asgiref
-urllib3==2.0.3
+urllib3==2.0.4
     # via requests
