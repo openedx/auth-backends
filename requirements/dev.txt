@@ -53,7 +53,7 @@ coverage[toml]==7.2.7
     # via
     #   -r requirements/test.txt
     #   pytest-cov
-cryptography==41.0.2
+cryptography==41.0.3
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -140,9 +140,9 @@ pbr==5.11.1
     # via
     #   -r requirements/test.txt
     #   stevedore
-pip-tools==7.1.0
+pip-tools==7.3.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.9.1
+platformdirs==3.10.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -159,7 +159,7 @@ py==1.11.0
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   tox
-pycodestyle==2.10.0
+pycodestyle==2.11.0
     # via -r requirements/test.txt
 pycparser==2.21
     # via
@@ -266,7 +266,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.11.8
+tomlkit==0.12.1
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -299,7 +299,7 @@ virtualenv==20.24.2
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   tox
-wheel==0.41.0
+wheel==0.41.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
