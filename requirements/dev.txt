@@ -25,11 +25,11 @@ certifi==2023.7.22
     # via
     #   -r requirements/test.txt
     #   requests
-cffi==1.15.1
+cffi==1.16.0
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via
     #   -r requirements/test.txt
     #   requests
@@ -49,7 +49,7 @@ code-annotations==1.5.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.3.1
+coverage[toml]==7.3.2
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -58,7 +58,7 @@ cryptography==41.0.4
     #   -r requirements/test.txt
     #   pyjwt
     #   social-auth-core
-defusedxml==0.7.1
+defusedxml==0.8.0rc2
     # via
     #   -r requirements/test.txt
     #   python3-openid
@@ -72,7 +72,7 @@ distlib==0.3.7
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==3.2.21
+django==3.2.22
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -132,7 +132,7 @@ oauthlib==3.2.2
     #   -r requirements/test.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==23.1
+packaging==23.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
@@ -146,7 +146,7 @@ pbr==5.11.1
     #   stevedore
 pip-tools==7.3.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.10.0
+platformdirs==3.11.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -175,7 +175,7 @@ pyjwt[crypto]==2.8.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==2.17.6
+pylint==2.17.7
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -294,7 +294,7 @@ typing-extensions==4.8.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==2.0.5
+urllib3==2.0.6
     # via
     #   -r requirements/test.txt
     #   requests
