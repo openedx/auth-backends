@@ -8,19 +8,19 @@ asgiref==3.7.2
     # via django
 certifi==2023.7.22
     # via requests
-cffi==1.15.1
+cffi==1.16.0
     # via cryptography
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via requests
 cryptography==41.0.4
     # via
     #   pyjwt
     #   social-auth-core
-defusedxml==0.7.1
+defusedxml==0.8.0rc2
     # via
     #   python3-openid
     #   social-auth-core
-django==3.2.21
+django==3.2.22
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
@@ -59,5 +59,5 @@ sqlparse==0.4.4
     # via django
 typing-extensions==4.8.0
     # via asgiref
-urllib3==2.0.5
+urllib3==2.0.6
     # via requests
