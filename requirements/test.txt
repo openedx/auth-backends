@@ -22,7 +22,7 @@ cffi==1.16.0
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via
     #   -r requirements/base.txt
     #   requests
@@ -39,7 +39,7 @@ coverage[toml]==7.3.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==41.0.4
+cryptography==41.0.5
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -61,7 +61,7 @@ edx-lint==5.3.6
     # via -r requirements/test.in
 exceptiongroup==1.1.3
     # via pytest
-filelock==3.12.4
+filelock==3.13.1
     # via
     #   tox
     #   virtualenv
@@ -131,13 +131,13 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==7.4.2
+pytest==7.4.3
     # via
     #   pytest-cov
     #   pytest-django
 pytest-cov==4.1.0
     # via -r requirements/test.in
-pytest-django==4.5.2
+pytest-django==4.6.0
     # via -r requirements/test.in
 python-slugify==8.0.1
     # via code-annotations
@@ -168,7 +168,7 @@ six==1.16.0
     #   unittest2
 social-auth-app-django==5.4.0
     # via -r requirements/base.txt
-social-auth-core==4.4.2
+social-auth-core==4.5.0
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
