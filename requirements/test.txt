@@ -39,7 +39,7 @@ coverage[toml]==7.3.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==41.0.5
+cryptography==41.0.7
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -67,7 +67,7 @@ filelock==3.13.1
     #   virtualenv
 httpretty==1.1.4
     # via -r requirements/test.in
-idna==3.4
+idna==3.6
     # via
     #   -r requirements/base.txt
     #   requests
@@ -94,9 +94,8 @@ packaging==23.2
     #   tox
 pbr==6.0.0
     # via stevedore
-platformdirs==3.11.0
+platformdirs==4.1.0
     # via
-    #   -c requirements/common_constraints.txt
     #   pylint
     #   virtualenv
 pluggy==1.3.0
@@ -169,7 +168,7 @@ six==1.16.0
     #   unittest2
 social-auth-app-django==5.4.0
     # via -r requirements/base.txt
-social-auth-core==4.5.0
+social-auth-core==4.5.1
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
@@ -207,5 +206,5 @@ urllib3==2.1.0
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.24.7
+virtualenv==20.25.0
     # via tox
