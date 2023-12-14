@@ -10,7 +10,7 @@ asgiref==3.7.2
     # via
     #   -r requirements/base.txt
     #   django
-astroid==3.0.1
+astroid==3.0.2
     # via
     #   pylint
     #   pylint-celery
@@ -51,7 +51,7 @@ defusedxml==0.8.0rc2
     #   social-auth-core
 dill==0.3.7
     # via pylint
-distlib==0.3.7
+distlib==0.3.8
     # via virtualenv
     # via
     #   -c requirements/common_constraints.txt
@@ -73,7 +73,7 @@ idna==3.6
     #   requests
 iniconfig==2.0.0
     # via pytest
-isort==5.12.0
+isort==5.13.2
     # via pylint
 jinja2==3.1.2
     # via code-annotations
@@ -117,7 +117,7 @@ pyjwt[crypto]==2.8.0
     #   -r requirements/base.txt
     #   pyjwt
     #   social-auth-core
-pylint==3.0.2
+pylint==3.0.3
     # via
     #   edx-lint
     #   pylint-celery
@@ -194,7 +194,7 @@ tox==3.28.0
     #   -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
-typing-extensions==4.8.0
+typing-extensions==4.9.0
     # via
     #   -r requirements/base.txt
     #   asgiref
