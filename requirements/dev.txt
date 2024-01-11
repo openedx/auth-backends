@@ -49,7 +49,7 @@ code-annotations==1.5.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.3.4
+coverage[toml]==7.4.0
     # via
     #   -r requirements/test.txt
     #   coverage
@@ -96,7 +96,7 @@ idna==3.6
     # via
     #   -r requirements/test.txt
     #   requests
-importlib-metadata==7.0.0
+importlib-metadata==7.0.1
     # via
     #   -r requirements/pip-tools.txt
     #   build
@@ -108,7 +108,7 @@ isort==5.13.2
     # via
     #   -r requirements/test.txt
     #   pylint
-jinja2==3.1.2
+jinja2==3.1.3
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -166,7 +166,7 @@ pycparser==2.21
     # via
     #   -r requirements/test.txt
     #   cffi
-pycryptodomex==3.19.0
+pycryptodomex==3.20.0
     # via -r requirements/test.txt
 pyjwt[crypto]==2.8.0
     # via
@@ -197,7 +197,7 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
-pytest==7.4.3
+pytest==7.4.4
     # via
     #   -r requirements/test.txt
     #   pytest-cov
