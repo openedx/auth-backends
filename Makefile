@@ -18,7 +18,7 @@ test:
 	tox
 
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
-PIP_COMPILE = pip-compile $(PIP_COMPILE_OPTS)
+PIP_COMPILE = pip-compile --upgrade $(PIP_COMPILE_OPTS)
 
 
 COMMON_CONSTRAINTS_TXT=requirements/common_constraints.txt
