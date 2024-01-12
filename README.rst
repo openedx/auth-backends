@@ -1,7 +1,7 @@
 auth-backends  |CI|_ |Codecov|_
 ===================================
-.. |CI| image:: https://github.com/edx/auth-backends/workflows/Python%20CI/badge.svg?branch=master
-.. _CI: https://github.com/edx/auth-backends/actions?query=workflow%3A%22Python+CI%22
+.. |CI| image:: https://github.com/openedx/auth-backends/workflows/Python%20CI/badge.svg?branch=master
+.. _CI: https://github.com/openedx/auth-backends/actions?query=workflow%3A%22Python+CI%22
 
 .. |Codecov| image:: http://codecov.io/github/edx/auth-backends/coverage.svg?branch=master
 .. _Codecov: http://codecov.io/github/edx/auth-backends?branch=master
@@ -118,7 +118,7 @@ Publishing a Release
 --------------------
 
 After a PR merges, create a new tag from ``master`` branch with a new version of the package and create a
-`Github release <https://github.com/edx/auth-backends/releases>`_
+`Github release <https://github.com/openedx/auth-backends/releases>`_
 using the new tag that will automatically publish the package to PyPi when a release is created.
 
 
@@ -134,15 +134,12 @@ How To Contribute
 
 Contributions are very welcome!
 
-Please read `How To Contribute <https://github.com/edx/edx-platform/blob/master/CONTRIBUTING.rst>`_ for details.
-
-Even though it was written with `edx-platform <https://github.com/edx/edx-platform>`_ in mind,
-the guidelines should be followed for Open edX code in general.
+Please read `How To Contribute <https://github.com/openedx/.github/blob/master/CONTRIBUTING.md>`_ for details.
 
 Reporting Security Issues
 -------------------------
 
-Please do not report security issues in public. Please email security@edx.org.
+Please do not report security issues in public. Please email security@openedx.org.
 
 Mailing List and IRC Channel
 ----------------------------

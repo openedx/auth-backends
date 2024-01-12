@@ -15,4 +15,4 @@ Decision
 
 For more background or details of this decision, see duplicate `0001-use-changelog.rst decision in edx-drf-extensions`_.
 
-.. _0001-use-changelog.rst decision in edx-drf-extensions: https://github.com/edx/edx-drf-extensions/blob/master/docs/decisions/0001-use-changelog.rst
+.. _0001-use-changelog.rst decision in edx-drf-extensions: https://github.com/openedx/edx-drf-extensions/blob/master/docs/decisions/0001-use-changelog.rst

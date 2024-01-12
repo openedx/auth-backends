@@ -97,7 +97,7 @@ Updated LoginRedirectBaseView to include querystring
 
 Intervening releases not documented here; see Releases:
 
-https://github.com/edx/auth-backends/releases?after=1.1.2
+https://github.com/openedx/auth-backends/releases?after=1.1.2
 
 
 0.1.3 (2015-03-31)
