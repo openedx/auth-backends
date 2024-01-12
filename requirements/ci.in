@@ -2,3 +2,4 @@
 -c constraints.txt
 
 tox                       # Virtualenv management for tests
+edx-django-release-util   # Contains the reserved keyword check
