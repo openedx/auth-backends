@@ -35,11 +35,11 @@ click-log==0.4.0
     # via edx-lint
 code-annotations==1.5.0
     # via edx-lint
-coverage[toml]==7.3.4
+coverage[toml]==7.4.0
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==41.0.7
+cryptography==42.0.0
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -78,11 +78,11 @@ iniconfig==2.0.0
     # via pytest
 isort==5.13.2
     # via pylint
-jinja2==3.1.2
+jinja2==3.1.3
     # via code-annotations
 linecache2==1.0.0
     # via traceback2
-markupsafe==2.1.3
+markupsafe==2.1.4
     # via jinja2
 mccabe==0.7.0
     # via pylint
@@ -101,7 +101,7 @@ platformdirs==4.1.0
     # via
     #   pylint
     #   virtualenv
-pluggy==1.3.0
+pluggy==1.4.0
     # via
     #   pytest
     #   tox
@@ -113,7 +113,7 @@ pycparser==2.21
     # via
     #   -r requirements/base.txt
     #   cffi
-pycryptodomex==3.19.0
+pycryptodomex==3.20.0
     # via -r requirements/test.in
 pyjwt[crypto]==2.8.0
     # via
@@ -134,7 +134,7 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==7.4.3
+pytest==7.4.4
     # via
     #   pytest-cov
     #   pytest-django
