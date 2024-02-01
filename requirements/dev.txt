@@ -45,16 +45,16 @@ click-log==0.4.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-code-annotations==1.5.0
+code-annotations==1.6.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.4.0
+coverage[toml]==7.4.1
     # via
     #   -r requirements/test.txt
     #   coverage
     #   pytest-cov
-cryptography==42.0.0
+cryptography==42.0.2
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -64,7 +64,7 @@ defusedxml==0.8.0rc2
     #   -r requirements/test.txt
     #   python3-openid
     #   social-auth-core
-dill==0.3.7
+dill==0.3.8
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -146,7 +146,7 @@ pbr==6.0.0
     #   stevedore
 pip-tools==7.3.0
     # via -r requirements/pip-tools.txt
-platformdirs==4.1.0
+platformdirs==4.2.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -200,16 +200,16 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
-pytest==7.4.4
+pytest==8.0.0
     # via
     #   -r requirements/test.txt
     #   pytest-cov
     #   pytest-django
 pytest-cov==4.1.0
     # via -r requirements/test.txt
-pytest-django==4.7.0
+pytest-django==4.8.0
     # via -r requirements/test.txt
-python-slugify==8.0.1
+python-slugify==8.0.3
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -217,7 +217,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pytz==2023.3.post1
+pytz==2023.4
     # via
     #   -r requirements/test.txt
     #   django
@@ -245,7 +245,7 @@ six==1.16.0
     #   unittest2
 social-auth-app-django==5.4.0
     # via -r requirements/test.txt
-social-auth-core==4.5.1
+social-auth-core==4.5.2
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
@@ -294,7 +294,7 @@ typing-extensions==4.9.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==2.1.0
+urllib3==2.2.0
     # via
     #   -r requirements/test.txt
     #   requests
