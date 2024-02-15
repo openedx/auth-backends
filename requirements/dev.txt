@@ -209,7 +209,7 @@ pytest-cov==4.1.0
     # via -r requirements/test.txt
 pytest-django==4.8.0
     # via -r requirements/test.txt
-python-slugify==8.0.3
+python-slugify==8.0.4
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -245,7 +245,7 @@ six==1.16.0
     #   unittest2
 social-auth-app-django==5.4.0
     # via -r requirements/test.txt
-social-auth-core==4.5.2
+social-auth-core==4.5.3
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
