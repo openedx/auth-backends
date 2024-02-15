@@ -12,7 +12,7 @@ Change Log
 Unreleased
 ----------
 
-*
+* Added support for python3.11 and 3.12.
 
 [4.2.0] - 2023-08-03
 --------------------
