@@ -35,11 +35,11 @@ click-log==0.4.0
     # via edx-lint
 code-annotations==1.6.0
     # via edx-lint
-coverage[toml]==7.4.1
+coverage[toml]==7.4.2
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==42.0.2
+cryptography==42.0.4
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -118,7 +118,6 @@ pycryptodomex==3.20.0
 pyjwt[crypto]==2.8.0
     # via
     #   -r requirements/base.txt
-    #   pyjwt
     #   social-auth-core
 pylint==3.0.3
     # via
@@ -134,7 +133,7 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==8.0.0
+pytest==8.0.1
     # via
     #   pytest-cov
     #   pytest-django
@@ -208,9 +207,9 @@ typing-extensions==4.9.0
     #   pylint
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.25.0
+virtualenv==20.25.1
     # via tox

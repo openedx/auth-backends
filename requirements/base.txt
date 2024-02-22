@@ -12,7 +12,7 @@ cffi==1.16.0
     # via cryptography
 charset-normalizer==3.3.2
     # via requests
-cryptography==42.0.2
+cryptography==42.0.4
     # via
     #   pyjwt
     #   social-auth-core
@@ -36,7 +36,6 @@ pycparser==2.21
 pyjwt[crypto]==2.8.0
     # via
     #   -r requirements/base.in
-    #   pyjwt
     #   social-auth-core
 python3-openid==3.2.0
     # via social-auth-core
@@ -60,5 +59,5 @@ sqlparse==0.4.4
     # via django
 typing-extensions==4.9.0
     # via asgiref
-urllib3==2.2.0
+urllib3==2.2.1
     # via requests
