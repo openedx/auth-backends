@@ -17,7 +17,11 @@ astroid==3.1.0
     #   -r requirements/test.txt
     #   pylint
     #   pylint-celery
-build==1.0.3
+backports-zoneinfo==0.2.1
+    # via
+    #   -r requirements/test.txt
+    #   django
+build==1.1.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
@@ -72,7 +76,7 @@ distlib==0.3.8
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==3.2.24
+django==4.2.11
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -143,7 +147,7 @@ pbr==6.0.0
     # via
     #   -r requirements/test.txt
     #   stevedore
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements/pip-tools.txt
 platformdirs==4.2.0
     # via
@@ -216,10 +220,6 @@ python3-openid==3.2.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pytz==2024.1
-    # via
-    #   -r requirements/test.txt
-    #   django
 pyyaml==6.0.1
     # via
     #   -r requirements/test.txt

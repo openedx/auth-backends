@@ -14,6 +14,10 @@ astroid==3.1.0
     # via
     #   pylint
     #   pylint-celery
+backports-zoneinfo==0.2.1
+    # via
+    #   -r requirements/base.txt
+    #   django
 certifi==2024.2.2
     # via
     #   -r requirements/base.txt
@@ -147,10 +151,6 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pytz==2024.1
-    # via
-    #   -r requirements/base.txt
-    #   django
 pyyaml==6.0.1
     # via
     #   code-annotations
