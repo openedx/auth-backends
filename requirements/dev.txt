@@ -21,7 +21,7 @@ backports-zoneinfo==0.2.1
     # via
     #   -r requirements/test.txt
     #   django
-build==1.1.1
+build==1.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
