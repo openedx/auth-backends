@@ -14,6 +14,17 @@ Unreleased
 
 *
 
+[4.3.0] - 2024-03-29
+--------------------
+
+Added
+~~~~~~~
+* Added support for Python 3.11
+
+Removed
+~~~~~~~
+* Removed support for Django 3.2
+
 [4.2.0] - 2023-08-03
 --------------------
 
