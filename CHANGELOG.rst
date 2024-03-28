@@ -20,7 +20,7 @@ Added
 [4.3.0] - 2024-02-13
 --------------------
 
-* Added support for python3.11 and 3.12.
+* Added support for python3.11. Dropped django3.2 support.
 
 [4.2.0] - 2023-08-03
 --------------------
