@@ -6,14 +6,21 @@
 #
 argparse==1.4.0
     # via unittest2
-asgiref==3.7.2
+asgiref==3.8.1
     # via
     #   -r requirements/base.txt
     #   django
 astroid==3.1.0
+astroid==3.1.0
     # via
     #   pylint
     #   pylint-celery
+backports-zoneinfo==0.2.1
+    # via
+    #   -r requirements/base.txt
+    #   django
+cachetools==5.3.3
+    # via tox
 certifi==2024.2.2
     # via
     #   -r requirements/base.txt
@@ -22,6 +29,8 @@ cffi==1.16.0
     # via
     #   -r requirements/base.txt
     #   cryptography
+chardet==5.2.0
+    # via tox
 charset-normalizer==3.3.2
     # via
     #   -r requirements/base.txt
@@ -33,12 +42,15 @@ click==8.1.7
     #   edx-lint
 click-log==0.4.0
     # via edx-lint
-code-annotations==1.6.0
+code-annotations==1.7.0
     # via edx-lint
-coverage[toml]==7.4.3
+colorama==0.4.6
+    # via tox
+coverage[toml]==7.4.4
     # via
     #   -r requirements/test.in
     #   pytest-cov
+cryptography==42.0.5
 cryptography==42.0.5
     # via
     #   -r requirements/base.txt
@@ -64,7 +76,7 @@ edx-lint==5.3.6
     # via -r requirements/test.in
 exceptiongroup==1.2.0
     # via pytest
-filelock==3.13.1
+filelock==3.13.3
     # via
     #   tox
     #   virtualenv
@@ -91,8 +103,9 @@ oauthlib==3.2.2
     #   -r requirements/base.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==23.2
+packaging==24.0
     # via
+    #   pyproject-api
     #   pytest
     #   tox
 pbr==6.0.0
@@ -100,13 +113,12 @@ pbr==6.0.0
 platformdirs==4.2.0
     # via
     #   pylint
+    #   tox
     #   virtualenv
 pluggy==1.4.0
     # via
     #   pytest
     #   tox
-py==1.11.0
-    # via tox
 pycodestyle==2.11.1
     # via -r requirements/test.in
 pycparser==2.21
@@ -119,6 +131,7 @@ pyjwt[crypto]==2.8.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
+pylint==3.1.0
 pylint==3.1.0
     # via
     #   edx-lint
@@ -133,11 +146,13 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==8.0.2
+pyproject-api==1.6.1
+    # via tox
+pytest==8.1.1
     # via
     #   pytest-cov
     #   pytest-django
-pytest-cov==4.1.0
+pytest-cov==5.0.0
     # via -r requirements/test.in
 pytest-django==4.8.0
     # via -r requirements/test.in
@@ -147,10 +162,6 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pytz==2024.1
-    # via
-    #   -r requirements/base.txt
-    #   django
 pyyaml==6.0.1
     # via
     #   code-annotations
@@ -160,7 +171,7 @@ requests==2.31.0
     #   -r requirements/base.txt
     #   requests-oauthlib
     #   social-auth-core
-requests-oauthlib==1.3.1
+requests-oauthlib==2.0.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
@@ -169,7 +180,6 @@ six==1.16.0
     #   -r requirements/base.txt
     #   edx-django-release-util
     #   edx-lint
-    #   tox
     #   unittest2
 social-auth-app-django==5.4.0
     # via -r requirements/base.txt
@@ -182,6 +192,7 @@ sqlparse==0.4.4
     #   -r requirements/base.txt
     #   django
 stevedore==5.2.0
+stevedore==5.2.0
     # via code-annotations
 text-unidecode==1.3
     # via python-slugify
@@ -189,16 +200,17 @@ tomli==2.0.1
     # via
     #   coverage
     #   pylint
+    #   pyproject-api
     #   pytest
     #   tox
 tomlkit==0.12.4
+tomlkit==0.12.4
     # via pylint
-tox==3.28.0
-    # via
-    #   -c requirements/constraints.txt
-    #   -r requirements/test.in
+tox==4.14.2
+    # via -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
+typing-extensions==4.10.0
 typing-extensions==4.10.0
     # via
     #   -r requirements/base.txt
