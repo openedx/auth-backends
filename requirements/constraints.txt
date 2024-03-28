@@ -9,3 +9,6 @@
 # linking to it here is good.
 
 -c common_constraints.txt
+
+# For python greater than or equal to 3.9 backports.zoneinfo causing failures
+backports.zoneinfo; python_version<'3.9'
