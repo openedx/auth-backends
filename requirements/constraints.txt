@@ -13,3 +13,7 @@
 # tox>4.0.0 isn't yet compatible with many tox plugins, causing CI failures in almost all repos.
 # Details can be found in this discussion: https://github.com/tox-dev/tox/discussions/1810
 tox<4.0.0
+
+
+# Temporary to Support the python 3.11 Upgrade
+backports.zoneinfo;python_version<"3.9"  # Newer versions have zoneinfo available in the standard library
