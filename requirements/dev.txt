@@ -50,7 +50,7 @@ click-log==0.4.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-code-annotations==1.7.0
+code-annotations==1.8.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -91,7 +91,7 @@ exceptiongroup==1.2.0
     # via
     #   -r requirements/test.txt
     #   pytest
-filelock==3.13.3
+filelock==3.13.4
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -287,7 +287,7 @@ traceback2==1.4.0
     # via
     #   -r requirements/test.txt
     #   unittest2
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   -r requirements/test.txt
     #   asgiref
