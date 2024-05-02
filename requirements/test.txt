@@ -38,9 +38,9 @@ click==8.1.7
     #   edx-lint
 click-log==0.4.0
     # via edx-lint
-code-annotations==1.7.0
+code-annotations==1.8.0
     # via edx-lint
-coverage[toml]==7.4.4
+coverage[toml]==7.5.0
     # via
     #   -r requirements/test.in
     #   pytest-cov
@@ -67,15 +67,15 @@ edx-django-release-util==1.4.0
     # via -r requirements/test.in
 edx-lint==5.3.6
     # via -r requirements/test.in
-exceptiongroup==1.2.0
+exceptiongroup==1.2.1
     # via pytest
-filelock==3.13.3
+filelock==3.14.0
     # via
     #   tox
     #   virtualenv
 httpretty==1.1.4
     # via -r requirements/test.in
-idna==3.6
+idna==3.7
     # via
     #   -r requirements/base.txt
     #   requests
@@ -102,11 +102,11 @@ packaging==24.0
     #   tox
 pbr==6.0.0
     # via stevedore
-platformdirs==4.2.0
+platformdirs==4.2.1
     # via
     #   pylint
     #   virtualenv
-pluggy==1.4.0
+pluggy==1.5.0
     # via
     #   pytest
     #   tox
@@ -138,7 +138,7 @@ pylint-plugin-utils==0.8.2
     # via
     #   pylint-celery
     #   pylint-django
-pytest==8.1.1
+pytest==8.2.0
     # via
     #   pytest-cov
     #   pytest-django
@@ -172,13 +172,13 @@ six==1.16.0
     #   edx-lint
     #   tox
     #   unittest2
-social-auth-app-django==5.4.0
+social-auth-app-django==5.4.1
     # via -r requirements/base.txt
-social-auth-core==4.5.3
+social-auth-core==4.5.4
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via
     #   -r requirements/base.txt
     #   django
@@ -200,7 +200,7 @@ tox==3.28.0
     #   -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
-typing-extensions==4.10.0
+typing-extensions==4.11.0
     # via
     #   -r requirements/base.txt
     #   asgiref
@@ -212,5 +212,5 @@ urllib3==2.2.1
     # via
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.25.1
+virtualenv==20.26.1
     # via tox
