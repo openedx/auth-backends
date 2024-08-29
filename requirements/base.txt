@@ -25,7 +25,7 @@ django==4.2.15
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
     #   social-auth-app-django
-idna==3.7
+idna==3.8
     # via requests
 oauthlib==3.2.2
     # via

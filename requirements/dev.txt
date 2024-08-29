@@ -80,7 +80,7 @@ django==4.2.15
     #   social-auth-app-django
 edx-django-release-util==1.4.0
     # via -r requirements/test.txt
-edx-lint==5.3.7
+edx-lint==5.4.0
     # via -r requirements/test.txt
 filelock==3.15.4
     # via
@@ -90,7 +90,7 @@ filelock==3.15.4
     #   virtualenv
 httpretty==1.1.4
     # via -r requirements/test.txt
-idna==3.7
+idna==3.8
     # via
     #   -r requirements/test.txt
     #   requests
@@ -131,7 +131,7 @@ packaging==24.1
     #   build
     #   pytest
     #   tox
-pbr==6.0.0
+pbr==6.1.0
     # via
     #   -r requirements/test.txt
     #   stevedore
@@ -240,7 +240,7 @@ sqlparse==0.5.1
     # via
     #   -r requirements/test.txt
     #   django
-stevedore==5.2.0
+stevedore==5.3.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
