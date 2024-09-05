@@ -21,11 +21,11 @@ build==1.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-certifi==2024.7.4
+certifi==2024.8.30
     # via
     #   -r requirements/test.txt
     #   requests
-cffi==1.17.0
+cffi==1.17.1
     # via
     #   -r requirements/test.txt
     #   cryptography
@@ -53,7 +53,7 @@ coverage[toml]==7.6.1
     # via
     #   -r requirements/test.txt
     #   pytest-cov
-cryptography==43.0.0
+cryptography==43.0.1
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -72,7 +72,7 @@ distlib==0.3.8
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==4.2.15
+django==4.2.16
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -80,7 +80,7 @@ django==4.2.15
     #   social-auth-app-django
 edx-django-release-util==1.4.0
     # via -r requirements/test.txt
-edx-lint==5.3.7
+edx-lint==5.4.0
     # via -r requirements/test.txt
 filelock==3.15.4
     # via
@@ -90,7 +90,7 @@ filelock==3.15.4
     #   virtualenv
 httpretty==1.1.4
     # via -r requirements/test.txt
-idna==3.7
+idna==3.8
     # via
     #   -r requirements/test.txt
     #   requests
@@ -131,7 +131,7 @@ packaging==24.1
     #   build
     #   pytest
     #   tox
-pbr==6.0.0
+pbr==6.1.0
     # via
     #   -r requirements/test.txt
     #   stevedore
@@ -166,7 +166,7 @@ pyjwt[crypto]==2.9.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==3.2.6
+pylint==3.2.7
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -198,7 +198,7 @@ pytest==8.3.2
     #   pytest-django
 pytest-cov==5.0.0
     # via -r requirements/test.txt
-pytest-django==4.8.0
+pytest-django==4.9.0
     # via -r requirements/test.txt
 python-slugify==8.0.4
     # via
@@ -240,7 +240,7 @@ sqlparse==0.5.1
     # via
     #   -r requirements/test.txt
     #   django
-stevedore==5.2.0
+stevedore==5.3.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
