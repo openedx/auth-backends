@@ -12,24 +12,24 @@ asgiref==3.8.1
     # via
     #   -r requirements/test.txt
     #   django
-astroid==3.2.4
+astroid==3.3.5
     # via
     #   -r requirements/test.txt
     #   pylint
     #   pylint-celery
-build==1.2.1
+build==1.2.2.post1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-certifi==2024.7.4
+certifi==2024.8.30
     # via
     #   -r requirements/test.txt
     #   requests
-cffi==1.17.0
+cffi==1.17.1
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via
     #   -r requirements/test.txt
     #   requests
@@ -49,11 +49,11 @@ code-annotations==1.8.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.6.1
+coverage[toml]==7.6.4
     # via
     #   -r requirements/test.txt
     #   pytest-cov
-cryptography==43.0.0
+cryptography==43.0.3
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -63,16 +63,16 @@ defusedxml==0.8.0rc2
     #   -r requirements/test.txt
     #   python3-openid
     #   social-auth-core
-dill==0.3.8
+dill==0.3.9
     # via
     #   -r requirements/test.txt
     #   pylint
-distlib==0.3.8
+distlib==0.3.9
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==4.2.15
+django==4.2.16
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -80,9 +80,9 @@ django==4.2.15
     #   social-auth-app-django
 edx-django-release-util==1.4.0
     # via -r requirements/test.txt
-edx-lint==5.3.7
+edx-lint==5.4.1
     # via -r requirements/test.txt
-filelock==3.15.4
+filelock==3.16.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -90,7 +90,7 @@ filelock==3.15.4
     #   virtualenv
 httpretty==1.1.4
     # via -r requirements/test.txt
-idna==3.7
+idna==3.10
     # via
     #   -r requirements/test.txt
     #   requests
@@ -110,7 +110,7 @@ linecache2==1.0.0
     # via
     #   -r requirements/test.txt
     #   traceback2
-markupsafe==2.1.5
+markupsafe==3.0.2
     # via
     #   -r requirements/test.txt
     #   jinja2
@@ -131,13 +131,13 @@ packaging==24.1
     #   build
     #   pytest
     #   tox
-pbr==6.0.0
+pbr==6.1.0
     # via
     #   -r requirements/test.txt
     #   stevedore
 pip-tools==7.4.1
     # via -r requirements/pip-tools.txt
-platformdirs==4.2.2
+platformdirs==4.3.6
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -160,13 +160,13 @@ pycparser==2.22
     # via
     #   -r requirements/test.txt
     #   cffi
-pycryptodomex==3.20.0
+pycryptodomex==3.21.0
     # via -r requirements/test.txt
 pyjwt[crypto]==2.9.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==3.2.6
+pylint==3.3.1
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -177,7 +177,7 @@ pylint-celery==0.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
-pylint-django==2.5.5
+pylint-django==2.6.1
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -186,19 +186,19 @@ pylint-plugin-utils==0.8.2
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pyproject-hooks==1.1.0
+pyproject-hooks==1.2.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
     #   pip-tools
-pytest==8.3.2
+pytest==8.3.3
     # via
     #   -r requirements/test.txt
     #   pytest-cov
     #   pytest-django
-pytest-cov==5.0.0
+pytest-cov==6.0.0
     # via -r requirements/test.txt
-pytest-django==4.8.0
+pytest-django==4.9.0
     # via -r requirements/test.txt
 python-slugify==8.0.4
     # via
@@ -263,11 +263,11 @@ traceback2==1.4.0
     #   unittest2
 unittest2==1.1.0
     # via -r requirements/test.txt
-urllib3==2.2.2
+urllib3==2.2.3
     # via
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.26.3
+virtualenv==20.27.1
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
