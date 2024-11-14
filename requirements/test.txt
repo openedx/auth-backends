@@ -89,7 +89,7 @@ oauthlib==3.2.2
     #   -r requirements/base.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==24.1
+packaging==24.2
     # via
     #   pytest
     #   tox
