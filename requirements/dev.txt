@@ -45,11 +45,11 @@ click-log==0.4.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-code-annotations==1.8.0
+code-annotations==1.8.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.6.4
+coverage[toml]==7.6.7
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -123,7 +123,7 @@ oauthlib==3.2.2
     #   -r requirements/test.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==24.1
+packaging==24.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
@@ -162,7 +162,7 @@ pycparser==2.22
     #   cffi
 pycryptodomex==3.21.0
     # via -r requirements/test.txt
-pyjwt[crypto]==2.9.0
+pyjwt[crypto]==2.10.0
     # via
     #   -r requirements/test.txt
     #   social-auth-core
@@ -236,11 +236,11 @@ social-auth-core==4.5.4
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
-sqlparse==0.5.1
+sqlparse==0.5.2
     # via
     #   -r requirements/test.txt
     #   django
-stevedore==5.3.0
+stevedore==5.4.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -272,7 +272,7 @@ virtualenv==20.27.1
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   tox
-wheel==0.44.0
+wheel==0.45.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
