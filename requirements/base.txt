@@ -12,7 +12,7 @@ cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.0
     # via requests
-cryptography==43.0.3
+cryptography==44.0.0
     # via
     #   pyjwt
     #   social-auth-core
@@ -20,7 +20,7 @@ defusedxml==0.8.0rc2
     # via
     #   python3-openid
     #   social-auth-core
-django==4.2.16
+django==4.2.17
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
@@ -33,7 +33,7 @@ oauthlib==3.2.2
     #   social-auth-core
 pycparser==2.22
     # via cffi
-pyjwt[crypto]==2.9.0
+pyjwt[crypto]==2.10.1
     # via
     #   -r requirements/base.in
     #   social-auth-core
@@ -45,7 +45,7 @@ requests==2.32.3
     #   social-auth-core
 requests-oauthlib==2.0.0
     # via social-auth-core
-six==1.16.0
+six==1.17.0
     # via -r requirements/base.in
 social-auth-app-django==5.4.2
     # via -r requirements/base.in
@@ -53,7 +53,7 @@ social-auth-core==4.5.4
     # via
     #   -r requirements/base.in
     #   social-auth-app-django
-sqlparse==0.5.1
+sqlparse==0.5.2
     # via django
 urllib3==2.2.3
     # via requests
