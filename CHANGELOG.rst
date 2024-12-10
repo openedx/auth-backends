@@ -14,11 +14,23 @@ Unreleased
 
 *
 
+Added
+~~~~~~~
+
+[4.4.0] - 2024-09-10
+--------------------
+
+* Dropped support for python3.8
+
+[4.3.0] - 2024-04-01
+--------------------
+
+* Added support for python3.11 and 3.12
+* Dropped django 3.2 support.
+
 [4.2.0] - 2023-08-03
 --------------------
 
-Added
-~~~~~~~
 * Added support for Django 4.2
 
 [4.1.0] - 2022-01-28

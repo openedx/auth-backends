@@ -12,3 +12,4 @@ pytest-cov
 pytest-django
 tox
 unittest2
+edx-django-release-util   # Contains the reserved keyword check

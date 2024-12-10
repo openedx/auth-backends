@@ -13,6 +13,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'social_django',
     'auth_backends',
+    'release_util',
 )
 
 DATABASES = {
