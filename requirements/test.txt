@@ -10,7 +10,7 @@ asgiref==3.8.1
     # via
     #   -r requirements/base.txt
     #   django
-astroid==3.3.5
+astroid==3.3.6
     # via
     #   pylint
     #   pylint-celery
@@ -35,7 +35,7 @@ click-log==0.4.0
     # via edx-lint
 code-annotations==2.0.0
     # via edx-lint
-coverage[toml]==7.6.8
+coverage[toml]==7.6.9
     # via
     #   -r requirements/test.in
     #   pytest-cov
@@ -171,7 +171,7 @@ social-auth-core==4.5.4
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
-sqlparse==0.5.2
+sqlparse==0.5.3
     # via
     #   -r requirements/base.txt
     #   django
