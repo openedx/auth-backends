@@ -10,11 +10,11 @@ asgiref==3.8.1
     # via
     #   -r requirements/base.txt
     #   django
-astroid==3.3.5
+astroid==3.3.8
     # via
     #   pylint
     #   pylint-celery
-certifi==2024.8.30
+certifi==2024.12.14
     # via
     #   -r requirements/base.txt
     #   requests
@@ -22,20 +22,20 @@ cffi==1.17.1
     # via
     #   -r requirements/base.txt
     #   cryptography
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.1.7
+click==8.1.8
     # via
     #   click-log
     #   code-annotations
     #   edx-lint
 click-log==0.4.0
     # via edx-lint
-code-annotations==2.0.0
+code-annotations==2.1.0
     # via edx-lint
-coverage[toml]==7.6.8
+coverage[toml]==7.6.9
     # via
     #   -r requirements/test.in
     #   pytest-cov
@@ -76,7 +76,7 @@ iniconfig==2.0.0
     # via pytest
 isort==5.13.2
     # via pylint
-jinja2==3.1.4
+jinja2==3.1.5
     # via code-annotations
 linecache2==1.0.0
     # via traceback2
@@ -117,7 +117,7 @@ pyjwt[crypto]==2.10.1
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==3.3.2
+pylint==3.3.3
     # via
     #   edx-lint
     #   pylint-celery
@@ -171,7 +171,7 @@ social-auth-core==4.5.4
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
-sqlparse==0.5.2
+sqlparse==0.5.3
     # via
     #   -r requirements/base.txt
     #   django
@@ -189,7 +189,7 @@ traceback2==1.4.0
     # via unittest2
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==2.2.3
+urllib3==2.3.0
     # via
     #   -r requirements/base.txt
     #   requests
