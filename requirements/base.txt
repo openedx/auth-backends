@@ -55,5 +55,7 @@ social-auth-core==4.5.4
     #   social-auth-app-django
 sqlparse==0.5.3
     # via django
-urllib3==2.3.0
-    # via requests
+urllib3==2.2.3
+    # via
+    #   -c requirements/common_constraints.txt
+    #   requests
