@@ -189,9 +189,10 @@ traceback2==1.4.0
     # via unittest2
 unittest2==1.1.0
     # via -r requirements/test.in
-urllib3==2.3.0
+urllib3==2.2.3
     # via
+    #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.28.0
+virtualenv==20.28.1
     # via tox
