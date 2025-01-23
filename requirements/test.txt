@@ -33,7 +33,7 @@ click==8.1.8
     #   edx-lint
 click-log==0.4.0
     # via edx-lint
-code-annotations==2.1.0
+code-annotations==2.2.0
     # via edx-lint
 coverage[toml]==7.6.10
     # via
@@ -60,9 +60,9 @@ distlib==0.3.9
     #   social-auth-app-django
 edx-django-release-util==1.4.0
     # via -r requirements/test.in
-edx-lint==5.4.1
+edx-lint==5.5.0
     # via -r requirements/test.in
-filelock==3.16.1
+filelock==3.17.0
     # via
     #   tox
     #   virtualenv
@@ -194,5 +194,5 @@ urllib3==2.2.3
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.txt
     #   requests
-virtualenv==20.28.1
+virtualenv==20.29.1
     # via tox
