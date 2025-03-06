@@ -6,21 +6,21 @@
 #
 asgiref==3.8.1
     # via django
-certifi==2024.12.14
+certifi==2025.1.31
     # via requests
 cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.1
     # via requests
-cryptography==44.0.0
+cryptography==44.0.2
     # via
     #   pyjwt
     #   social-auth-core
-defusedxml==0.8.0rc2
+defusedxml==0.7.1
     # via
     #   python3-openid
     #   social-auth-core
-django==4.2.17
+django==4.2.19
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/base.in
@@ -47,9 +47,9 @@ requests-oauthlib==2.0.0
     # via social-auth-core
 six==1.17.0
     # via -r requirements/base.in
-social-auth-app-django==5.4.2
+social-auth-app-django==5.4.3
     # via -r requirements/base.in
-social-auth-core==4.5.4
+social-auth-core==4.5.6
     # via
     #   -r requirements/base.in
     #   social-auth-app-django
