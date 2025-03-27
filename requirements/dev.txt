@@ -49,7 +49,7 @@ code-annotations==2.2.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.7.0
+coverage[toml]==7.7.1
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -166,7 +166,7 @@ pyjwt[crypto]==2.10.1
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==3.3.5
+pylint==3.3.6
     # via
     #   -r requirements/test.txt
     #   edx-lint
