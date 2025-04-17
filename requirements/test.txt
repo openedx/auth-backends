@@ -33,7 +33,7 @@ click==8.1.8
     #   edx-lint
 click-log==0.4.0
     # via edx-lint
-code-annotations==2.2.0
+code-annotations==2.3.0
     # via edx-lint
 coverage[toml]==7.8.0
     # via
@@ -49,7 +49,7 @@ defusedxml==0.7.1
     #   -r requirements/base.txt
     #   python3-openid
     #   social-auth-core
-dill==0.3.9
+dill==0.4.0
     # via pylint
 distlib==0.3.9
     # via virtualenv
@@ -135,9 +135,9 @@ pytest==8.3.5
     # via
     #   pytest-cov
     #   pytest-django
-pytest-cov==6.1.0
+pytest-cov==6.1.1
     # via -r requirements/test.in
-pytest-django==4.11.0
+pytest-django==4.11.1
     # via -r requirements/test.in
 python-slugify==8.0.4
     # via code-annotations
