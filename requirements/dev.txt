@@ -45,7 +45,7 @@ click-log==0.4.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-code-annotations==2.2.0
+code-annotations==2.3.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -63,7 +63,7 @@ defusedxml==0.7.1
     #   -r requirements/test.txt
     #   python3-openid
     #   social-auth-core
-dill==0.3.9
+dill==0.4.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -78,7 +78,7 @@ django==4.2.20
     #   -r requirements/test.txt
     #   edx-django-release-util
     #   social-auth-app-django
-edx-django-release-util==1.4.0
+edx-django-release-util==1.5.0
     # via -r requirements/test.txt
 edx-lint==5.6.0
     # via -r requirements/test.txt
@@ -123,7 +123,7 @@ oauthlib==3.2.2
     #   -r requirements/test.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==24.2
+packaging==25.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
@@ -196,9 +196,9 @@ pytest==8.3.5
     #   -r requirements/test.txt
     #   pytest-cov
     #   pytest-django
-pytest-cov==6.1.0
+pytest-cov==6.1.1
     # via -r requirements/test.txt
-pytest-django==4.11.0
+pytest-django==4.11.1
     # via -r requirements/test.txt
 python-slugify==8.0.4
     # via
