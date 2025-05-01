@@ -14,7 +14,7 @@ astroid==3.3.9
     # via
     #   pylint
     #   pylint-celery
-certifi==2025.1.31
+certifi==2025.4.26
     # via
     #   -r requirements/base.txt
     #   requests
@@ -167,7 +167,7 @@ six==1.17.0
     #   unittest2
 social-auth-app-django==5.4.3
     # via -r requirements/base.txt
-social-auth-core==4.5.6
+social-auth-core==4.6.1
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
