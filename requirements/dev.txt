@@ -12,7 +12,7 @@ asgiref==3.8.1
     # via
     #   -r requirements/test.txt
     #   django
-astroid==3.3.9
+astroid==3.3.10
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -21,7 +21,7 @@ build==1.2.2.post1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-certifi==2025.1.31
+certifi==2025.4.26
     # via
     #   -r requirements/test.txt
     #   requests
@@ -29,11 +29,11 @@ cffi==1.17.1
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
     # via
     #   -r requirements/test.txt
     #   requests
-click==8.1.8
+click==8.2.1
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/test.txt
@@ -49,11 +49,11 @@ code-annotations==2.3.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-coverage[toml]==7.8.0
+coverage[toml]==7.8.2
     # via
     #   -r requirements/test.txt
     #   pytest-cov
-cryptography==44.0.2
+cryptography==45.0.3
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -72,7 +72,7 @@ distlib==0.3.9
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   virtualenv
-django==4.2.20
+django==4.2.22
     # via
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
@@ -137,13 +137,13 @@ pbr==6.1.1
     #   stevedore
 pip-tools==7.4.1
     # via -r requirements/pip-tools.txt
-platformdirs==4.3.7
+platformdirs==4.3.8
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pylint
     #   virtualenv
-pluggy==1.5.0
+pluggy==1.6.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -160,13 +160,17 @@ pycparser==2.22
     # via
     #   -r requirements/test.txt
     #   cffi
-pycryptodomex==3.22.0
+pycryptodomex==3.23.0
     # via -r requirements/test.txt
+pygments==2.19.1
+    # via
+    #   -r requirements/test.txt
+    #   pytest
 pyjwt[crypto]==2.10.1
     # via
     #   -r requirements/test.txt
     #   social-auth-core
-pylint==3.3.6
+pylint==3.3.7
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -191,7 +195,7 @@ pyproject-hooks==1.2.0
     #   -r requirements/pip-tools.txt
     #   build
     #   pip-tools
-pytest==8.3.5
+pytest==8.4.0
     # via
     #   -r requirements/test.txt
     #   pytest-cov
@@ -232,7 +236,7 @@ six==1.17.0
     #   unittest2
 social-auth-app-django==5.4.3
     # via -r requirements/test.txt
-social-auth-core==4.5.6
+social-auth-core==4.6.1
     # via
     #   -r requirements/test.txt
     #   social-auth-app-django
@@ -268,7 +272,7 @@ urllib3==2.2.3
     #   -c requirements/common_constraints.txt
     #   -r requirements/test.txt
     #   requests
-virtualenv==20.30.0
+virtualenv==20.31.2
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
