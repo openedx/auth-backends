@@ -101,8 +101,17 @@ class UpdateEmailPipelineTests(TestCase):
         self.assertEqual(self.user.email, old_email)
         self.strategy.storage.user.changed.assert_not_called()
 
-        # Verify logger was called with warning
-        mock_logger.warning.assert_called_once()
+        # Verify logger was called with both warnings
+        self.assertEqual(mock_logger.warning.call_count, 2)
+        mock_logger.warning.assert_any_call(
+            "Username mismatch during email update. User username: %s, Details username: %s",
+            'test_user', 'different_user'
+        )
+        mock_logger.warning.assert_any_call(
+            "Skipping email update for user %s due to username mismatch and "
+            "SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH toggle enabled",
+            'test_user'
+        )
 
         # Verify all custom attributes were set correctly
         mock_set_attribute.assert_any_call('update_email.username_mismatch', True)
