@@ -2,8 +2,8 @@
 -c constraints.txt
 
 Django
+edx-django-utils
 pyjwt[crypto]>=2.1.0       # depends on newer jwt.decode and jwt.encode functionality
 six
 social-auth-app-django
 social-auth-core           # Common auth interfaces
-edx-django-utils
