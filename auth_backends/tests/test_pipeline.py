@@ -89,7 +89,7 @@ class UpdateEmailPipelineTests(TestCase):
         """ Verify that email is not updated when usernames don't match and toggle is enabled. """
         # Configure toggle to be enabled
         mock_toggle.return_value = True
-        
+
         old_email = self.user.email
         updated_email = 'updated@example.com'
 
@@ -117,7 +117,7 @@ class UpdateEmailPipelineTests(TestCase):
         """ Verify that email is updated when usernames don't match but toggle is disabled. """
         # Configure toggle to be disabled
         mock_toggle.return_value = False
-        
+
         updated_email = 'updated@example.com'
 
         # Provide mismatched username in details

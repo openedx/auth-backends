@@ -87,7 +87,8 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
             # Only exit if the toggle is enabled
             if SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled():
                 logger.warning(
-                    "Skipping email update for user %s due to username mismatch and SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH toggle enabled",
+                    "Skipping email update for user %s due to username mismatch and "
+                    "SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH toggle enabled",
                     user_username
                 )
                 return  # Exit without updating email
