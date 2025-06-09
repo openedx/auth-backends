@@ -78,12 +78,12 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
             # .. custom_attribute_description: Records the actual username of the user
             #    when a mismatch occurs with the social details username.
             set_custom_attribute('update_email.user_username', str(user_username))
-            
+
             # .. custom_attribute_name: update_email.details_has_email
             # .. custom_attribute_description: Records whether the details contain an email
             #    when a username mismatch occurs, to identify potential edge cases.
             set_custom_attribute('update_email.details_has_email', details.get('email') is not None)
-            
+
             # Only exit if the toggle is enabled
             if SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled():
                 logger.warning(
