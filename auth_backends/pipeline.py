@@ -19,6 +19,7 @@ User = get_user_model()
 #    of username mismatches.
 # .. toggle_use_cases: temporary
 # .. toggle_creation_date: 2025-06-05
+# .. toggle_target_removal_date: 2026-06-05
 # .. toggle_warnings: This is a temporary toggle for a security enhancement rollout.
 # .. toggle_tickets: ARCHBOM-2181
 SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH = SettingToggle("SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH", default=False)
