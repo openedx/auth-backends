@@ -16,12 +16,10 @@ User = get_user_model()
 # .. toggle_description: Determines whether to block email updates when usernames don't match.
 #    When enabled (True), email updates will be blocked when the username in social auth details
 #    doesn't match the user's username. When disabled (False), email updates will proceed regardless
-#    of username mismatches.
+#    of username mismatches.This will be used for a temporary rollout.
 # .. toggle_use_cases: temporary
 # .. toggle_creation_date: 2025-06-05
 # .. toggle_target_removal_date: 2026-06-05
-# .. toggle_warnings: This is a temporary toggle for a security enhancement rollout.
-# .. toggle_tickets: ARCHBOM-2181
 SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH = SettingToggle("SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH", default=False)
 
 
@@ -73,12 +71,12 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
             # .. custom_attribute_name: update_email.details_username
             # .. custom_attribute_description: Records the username provided in the
             #    social details when a mismatch occurs with the user's username.
-            set_custom_attribute('update_email.details_username', str(details_username))
+            set_custom_attribute('update_email.details_username', details_username)
 
             # .. custom_attribute_name: update_email.user_username
             # .. custom_attribute_description: Records the actual username of the user
             #    when a mismatch occurs with the social details username.
-            set_custom_attribute('update_email.user_username', str(user_username))
+            set_custom_attribute('update_email.user_username', user_username)
 
             # .. custom_attribute_name: update_email.details_has_email
             # .. custom_attribute_description: Records whether the details contain an email

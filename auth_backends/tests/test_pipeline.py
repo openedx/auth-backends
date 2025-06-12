@@ -1,8 +1,9 @@
 """ Tests for pipelines. """
 
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from social_django.utils import load_strategy
 
 from auth_backends.pipeline import get_user_if_exists, update_email
 
@@ -41,13 +42,7 @@ class UpdateEmailPipelineTests(TestCase):
     def setUp(self):
         super().setUp()
         self.user = User.objects.create(username='test_user')
-        self.strategy = MagicMock()
-
-        # Make strategy.storage.user.changed actually save the user
-        def save_user(user):
-            user.save()
-
-        self.strategy.storage.user.changed.side_effect = save_user
+        self.strategy = load_strategy()
 
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_update_email(self, mock_set_attribute):
@@ -55,15 +50,14 @@ class UpdateEmailPipelineTests(TestCase):
         updated_email = 'updated@example.com'
         self.assertNotEqual(self.user.email, updated_email)
 
-        # Provide matching username in details
+        initial_email = self.user.email
+        
         update_email(self.strategy, {'email': updated_email, 'username': 'test_user'}, user=self.user)
 
-        # Verify email was updated
-        self.user = User.objects.get(username=self.user.username)
-        self.assertEqual(self.user.email, updated_email)
-        self.strategy.storage.user.changed.assert_called_once_with(self.user)
+        updated_user = User.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.email, updated_email)
+        self.assertNotEqual(updated_user.email, initial_email)
 
-        # Verify custom attribute was set correctly
         mock_set_attribute.assert_called_with('update_email.username_mismatch', False)
 
     @patch('auth_backends.pipeline.set_custom_attribute')
@@ -71,15 +65,11 @@ class UpdateEmailPipelineTests(TestCase):
         """ Verify that user email is not updated if email value is None. """
         old_email = self.user.email
 
-        # Provide matching username in details
         update_email(self.strategy, {'email': None, 'username': 'test_user'}, user=self.user)
 
-        # Verify email was not updated
-        self.user = User.objects.get(username=self.user.username)
-        self.assertEqual(self.user.email, old_email)
-        self.strategy.storage.user.changed.assert_not_called()
+        updated_user = User.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.email, old_email)
 
-        # Verify custom attribute was still set
         mock_set_attribute.assert_called_with('update_email.username_mismatch', False)
 
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
@@ -87,21 +77,16 @@ class UpdateEmailPipelineTests(TestCase):
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_username_mismatch_no_update_toggle_enabled(self, mock_set_attribute, mock_logger, mock_toggle):
         """ Verify that email is not updated when usernames don't match and toggle is enabled. """
-        # Configure toggle to be enabled
         mock_toggle.return_value = True
 
         old_email = self.user.email
         updated_email = 'updated@example.com'
 
-        # Provide mismatched username in details
         update_email(self.strategy, {'email': updated_email, 'username': 'different_user'}, user=self.user)
 
-        # Verify email was not updated
-        self.user = User.objects.get(username=self.user.username)
-        self.assertEqual(self.user.email, old_email)
-        self.strategy.storage.user.changed.assert_not_called()
+        updated_user = User.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.email, old_email)
 
-        # Verify logger was called with both warnings
         self.assertEqual(mock_logger.warning.call_count, 2)
         mock_logger.warning.assert_any_call(
             "Username mismatch during email update. User username: %s, Details username: %s",
@@ -113,7 +98,6 @@ class UpdateEmailPipelineTests(TestCase):
             'test_user'
         )
 
-        # Verify all custom attributes were set correctly
         mock_set_attribute.assert_any_call('update_email.username_mismatch', True)
         mock_set_attribute.assert_any_call('update_email.details_username', 'different_user')
         mock_set_attribute.assert_any_call('update_email.user_username', 'test_user')
@@ -124,23 +108,19 @@ class UpdateEmailPipelineTests(TestCase):
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_username_mismatch_with_update_toggle_disabled(self, mock_set_attribute, mock_logger, mock_toggle):
         """ Verify that email is updated when usernames don't match but toggle is disabled. """
-        # Configure toggle to be disabled
         mock_toggle.return_value = False
 
+        old_email = self.user.email
         updated_email = 'updated@example.com'
 
-        # Provide mismatched username in details
         update_email(self.strategy, {'email': updated_email, 'username': 'different_user'}, user=self.user)
 
-        # Verify email was updated despite username mismatch
-        self.user = User.objects.get(username=self.user.username)
-        self.assertEqual(self.user.email, updated_email)
-        self.strategy.storage.user.changed.assert_called_once_with(self.user)
+        updated_user = User.objects.get(pk=self.user.pk)
+        self.assertEqual(updated_user.email, updated_email)
+        self.assertNotEqual(updated_user.email, old_email)
 
-        # Verify logger was still called with warning
         mock_logger.warning.assert_called_once()
 
-        # Verify all custom attributes were set correctly
         mock_set_attribute.assert_any_call('update_email.username_mismatch', True)
         mock_set_attribute.assert_any_call('update_email.details_username', 'different_user')
         mock_set_attribute.assert_any_call('update_email.user_username', 'test_user')
