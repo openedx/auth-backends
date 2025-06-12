@@ -51,7 +51,7 @@ class UpdateEmailPipelineTests(TestCase):
         self.assertNotEqual(self.user.email, updated_email)
 
         initial_email = self.user.email
-        
+
         update_email(self.strategy, {'email': updated_email, 'username': 'test_user'}, user=self.user)
 
         updated_user = User.objects.get(pk=self.user.pk)
