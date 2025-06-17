@@ -44,9 +44,11 @@ class UpdateEmailPipelineTests(TestCase):
         self.user = User.objects.create(username='test_user')
         self.strategy = load_strategy()
 
+    @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.set_custom_attribute')
-    def test_update_email(self, mock_set_attribute):
+    def test_update_email(self, mock_set_attribute, mock_toggle):
         """ Verify that user email is updated upon changing email when usernames match. """
+        mock_toggle.return_value = False
         updated_email = 'updated@example.com'
         self.assertNotEqual(self.user.email, updated_email)
 
@@ -58,11 +60,15 @@ class UpdateEmailPipelineTests(TestCase):
         self.assertEqual(updated_user.email, updated_email)
         self.assertNotEqual(updated_user.email, initial_email)
 
-        mock_set_attribute.assert_called_with('update_email.username_mismatch', False)
+        mock_set_attribute.assert_any_call('update_email.username_mismatch', False)
+        mock_set_attribute.assert_any_call('update_email.rollout_toggle_enabled', False)
+        mock_set_attribute.assert_any_call('update_email.email_updated', True)
 
+    @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.set_custom_attribute')
-    def test_update_email_with_none(self, mock_set_attribute):
+    def test_update_email_with_none(self, mock_set_attribute, mock_toggle):
         """ Verify that user email is not updated if email value is None. """
+        mock_toggle.return_value = False
         old_email = self.user.email
 
         update_email(self.strategy, {'email': None, 'username': 'test_user'}, user=self.user)
@@ -70,7 +76,9 @@ class UpdateEmailPipelineTests(TestCase):
         updated_user = User.objects.get(pk=self.user.pk)
         self.assertEqual(updated_user.email, old_email)
 
-        mock_set_attribute.assert_called_with('update_email.username_mismatch', False)
+        mock_set_attribute.assert_any_call('update_email.username_mismatch', False)
+        mock_set_attribute.assert_any_call('update_email.rollout_toggle_enabled', False)
+        # email_updated should not be called since email wasn't updated
 
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.logger')
@@ -99,9 +107,11 @@ class UpdateEmailPipelineTests(TestCase):
         )
 
         mock_set_attribute.assert_any_call('update_email.username_mismatch', True)
+        mock_set_attribute.assert_any_call('update_email.rollout_toggle_enabled', True)
         mock_set_attribute.assert_any_call('update_email.details_username', 'different_user')
         mock_set_attribute.assert_any_call('update_email.user_username', 'test_user')
         mock_set_attribute.assert_any_call('update_email.details_has_email', True)
+        # email_updated should not be called since email wasn't updated
 
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.logger')
@@ -122,6 +132,8 @@ class UpdateEmailPipelineTests(TestCase):
         mock_logger.warning.assert_called_once()
 
         mock_set_attribute.assert_any_call('update_email.username_mismatch', True)
+        mock_set_attribute.assert_any_call('update_email.rollout_toggle_enabled', False)
         mock_set_attribute.assert_any_call('update_email.details_username', 'different_user')
         mock_set_attribute.assert_any_call('update_email.user_username', 'test_user')
         mock_set_attribute.assert_any_call('update_email.details_has_email', True)
+        mock_set_attribute.assert_any_call('update_email.email_updated', True)

@@ -16,10 +16,10 @@ User = get_user_model()
 # .. toggle_description: Determines whether to block email updates when usernames don't match.
 #    When enabled (True), email updates will be blocked when the username in social auth details
 #    doesn't match the user's username. When disabled (False), email updates will proceed regardless
-#    of username mismatches.This will be used for a temporary rollout.
+#    of username mismatches. This will be used for a temporary rollout.
 # .. toggle_use_cases: temporary
-# .. toggle_creation_date: 2025-06-05
-# .. toggle_target_removal_date: 2026-06-05
+# .. toggle_creation_date: 2025-06-18
+# .. toggle_target_removal_date: 2025-08-18
 SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH = SettingToggle("SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH", default=False)
 
 
@@ -48,20 +48,26 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint
 
 def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disable=keyword-arg-before-vararg
     """Update the user's email address using data from provider."""
+
     if user:
         # Get usernames for comparison, using defensive coding
         details_username = details.get('username')
         user_username = getattr(user, 'username', None)
-        # Check if usernames match
-        username_match = details_username == user_username
+        # Check if usernames don't match
+        username_mismatch = details_username != user_username
 
         # .. custom_attribute_name: update_email.username_mismatch
         # .. custom_attribute_description: Tracks whether there's a mismatch between
         #    the username in the social details and the user's actual username.
         #    True if usernames don't match, False if they match.
-        set_custom_attribute('update_email.username_mismatch', not username_match)
+        set_custom_attribute('update_email.username_mismatch', username_mismatch)
 
-        if not username_match:
+        # .. custom_attribute_name: update_email.rollout_toggle_enabled
+        # .. custom_attribute_description: Tracks whether the SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH
+        #    toggle is enabled during this pipeline execution.
+        set_custom_attribute('update_email.rollout_toggle_enabled', SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled())
+
+        if username_mismatch:
             # Log warning and set additional custom attributes for mismatches
             logger.warning(
                 "Username mismatch during email update. User username: %s, Details username: %s",
@@ -81,7 +87,7 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
             # .. custom_attribute_name: update_email.details_has_email
             # .. custom_attribute_description: Records whether the details contain an email
             #    when a username mismatch occurs, to identify potential edge cases.
-            set_custom_attribute('update_email.details_has_email', details.get('email') is not None)
+            set_custom_attribute('update_email.details_has_email', bool(details.get('email')))
 
             # Only exit if the toggle is enabled
             if SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled():
@@ -97,3 +103,8 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
         if email and user.email != email:
             user.email = email
             strategy.storage.user.changed(user)
+
+            # .. custom_attribute_name: update_email.email_updated
+            # .. custom_attribute_description: Indicates that the user's email was
+            #    actually updated during this pipeline execution.
+            set_custom_attribute('update_email.email_updated', True)
