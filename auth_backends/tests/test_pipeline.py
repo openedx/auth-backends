@@ -62,7 +62,7 @@ class UpdateEmailPipelineTests(TestCase):
 
         mock_set_attribute.assert_any_call('update_email.username_mismatch', False)
         mock_set_attribute.assert_any_call('update_email.rollout_toggle_enabled', False)
-        mock_set_attribute.assert_any_call('update_email.email_updated', True)
+        self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=True)
 
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.set_custom_attribute')
@@ -78,9 +78,7 @@ class UpdateEmailPipelineTests(TestCase):
 
         mock_set_attribute.assert_any_call('update_email.username_mismatch', False)
         mock_set_attribute.assert_any_call('update_email.rollout_toggle_enabled', False)
-        # Verify email_updated was not set
-        for call_args in mock_set_attribute.call_args_list:
-            self.assertNotEqual(call_args[0][0], 'update_email.email_updated')
+        self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=False)
 
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.logger')
@@ -113,9 +111,7 @@ class UpdateEmailPipelineTests(TestCase):
         mock_set_attribute.assert_any_call('update_email.details_username', 'different_user')
         mock_set_attribute.assert_any_call('update_email.user_username', 'test_user')
         mock_set_attribute.assert_any_call('update_email.details_has_email', True)
-        # Verify email_updated was not set
-        for call_args in mock_set_attribute.call_args_list:
-            self.assertNotEqual(call_args[0][0], 'update_email.email_updated')
+        self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=False)
 
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.logger')
@@ -140,4 +136,29 @@ class UpdateEmailPipelineTests(TestCase):
         mock_set_attribute.assert_any_call('update_email.details_username', 'different_user')
         mock_set_attribute.assert_any_call('update_email.user_username', 'test_user')
         mock_set_attribute.assert_any_call('update_email.details_has_email', True)
-        mock_set_attribute.assert_any_call('update_email.email_updated', True)
+        self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=True)
+
+    def assert_attribute_was_set(self, mock_set_attribute, attribute_name, should_exist=True):
+        """
+        Assert that a specific attribute was or was not set via set_custom_attribute.
+
+        Args:
+            mock_set_attribute: The mocked set_custom_attribute function
+            attribute_name: The name of the attribute to check
+            should_exist: If True, assert the attribute was set; if False, assert it wasn't
+        """
+        matching_calls = [
+            call for call in mock_set_attribute.call_args_list
+            if call[0][0] == attribute_name
+        ]
+
+        if should_exist:
+            self.assertGreater(
+                len(matching_calls), 0,
+                f"Expected '{attribute_name}' to be set, but it wasn't"
+            )
+        else:
+            self.assertEqual(
+                len(matching_calls), 0,
+                f"Expected '{attribute_name}' not to be set, but it was: {matching_calls}"
+            )
