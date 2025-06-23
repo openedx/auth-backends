@@ -12,7 +12,16 @@ Change Log
 Unreleased
 ----------
 
-*
+
+[4.6.0] - 2025-06-18
+--------------------
+
+Changed
+~~~~~~~
+
+* Improved test coverage by replacing MagicMock with real load_strategy() implementation.
+* Fixed email update handling in authentication pipeline.
+* Added logging for email updates.
 
 Added
 ~~~~~~~
