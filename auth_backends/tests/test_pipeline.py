@@ -94,7 +94,6 @@ class GetUserIfExistsPipelineTests(TestCase):
         )
 
     @patch('auth_backends.pipeline.logger')
-    @patch('auth_backends.pipeline.set_custom_attribute')
     @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
     def test_debug_enabled_with_existing_user(self, mock_debug_toggle, mock_logger):
         """ Verify debug logging when DEBUG_GET_USER_IF_EXISTS toggle is enabled. """
@@ -112,7 +111,6 @@ class GetUserIfExistsPipelineTests(TestCase):
         )
 
     @patch('auth_backends.pipeline.logger')
-    @patch('auth_backends.pipeline.set_custom_attribute')
     @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
     def test_debug_enabled_no_user_found(self, mock_debug_toggle, mock_logger):
         """ Verify debug logging when no user is found and debug is enabled. """
@@ -169,7 +167,6 @@ class GetUserIfExistsPipelineTests(TestCase):
         )
 
     @patch('auth_backends.pipeline.logger')
-    @patch('auth_backends.pipeline.set_custom_attribute')
     @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
     def test_debug_enabled_with_username_mismatch(self, mock_debug_toggle, mock_logger):
         """ Verify debug and warning logging when username mismatch occurs with debug enabled. """
