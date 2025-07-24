@@ -18,22 +18,183 @@ class GetUserIfExistsPipelineTests(TestCase):
         self.username = 'edx'
         self.details = {'username': self.username}
 
-    def test_no_user_exists(self):
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_no_user_exists(self, mock_debug_toggle, mock_set_attribute):
         """ Verify an empty dict is returned if no user exists. """
+        mock_debug_toggle.return_value = False
+
         actual = get_user_if_exists(None, self.details)
         self.assertDictEqual(actual, {})
 
-    def test_existing_user(self):
+        # Verify custom attributes were set
+        mock_set_attribute.assert_any_call('get_user_if_exists.details_username', self.username)
+        mock_set_attribute.assert_any_call('get_user_if_exists.user_provided', False)
+        mock_set_attribute.assert_any_call('get_user_if_exists.debug_enabled', False)
+        mock_set_attribute.assert_any_call('get_user_if_exists.user_found', False)
+
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_existing_user(self, mock_debug_toggle, mock_set_attribute):
         """ Verify a dict with the user and extra details is returned if the user exists. """
+        mock_debug_toggle.return_value = False
         user = User.objects.create(username=self.username)
+
         actual = get_user_if_exists(None, self.details)
         self.assertDictEqual(actual, {'is_new': False, 'user': user})
 
-    def test_get_user_if_exists(self):
+        # Verify custom attributes were set
+        mock_set_attribute.assert_any_call('get_user_if_exists.details_username', self.username)
+        mock_set_attribute.assert_any_call('get_user_if_exists.user_provided', False)
+        mock_set_attribute.assert_any_call('get_user_if_exists.debug_enabled', False)
+        mock_set_attribute.assert_any_call('get_user_if_exists.user_found', True)
+        mock_set_attribute.assert_any_call('get_user_if_exists.found_user_id', user.id)
+
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_get_user_if_exists_with_user_provided(self, mock_debug_toggle, mock_set_attribute):
         """ Verify only the details are returned if a user is passed to the function. """
+        mock_debug_toggle.return_value = False
         user = User.objects.create(username=self.username)
+
         actual = get_user_if_exists(None, self.details, user=user)
         self.assertDictEqual(actual, {'is_new': False})
+
+        # Verify custom attributes were set
+        mock_set_attribute.assert_any_call('get_user_if_exists.details_username', self.username)
+        mock_set_attribute.assert_any_call('get_user_if_exists.user_provided', True)
+        mock_set_attribute.assert_any_call('get_user_if_exists.debug_enabled', False)
+        mock_set_attribute.assert_any_call('get_user_if_exists.existing_user_username', self.username)
+        mock_set_attribute.assert_any_call('get_user_if_exists.username_mismatch', False)
+
+    @patch('auth_backends.pipeline.logger')
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_username_mismatch_with_provided_user(self, mock_debug_toggle, mock_set_attribute, mock_logger):
+        """ Verify proper handling when there's a username mismatch with provided user. """
+        mock_debug_toggle.return_value = False
+        user = User.objects.create(username='existing_user')
+        details = {'username': 'different_user'}
+
+        actual = get_user_if_exists(None, details, user=user)
+        self.assertDictEqual(actual, {'is_new': False})
+
+        # Verify custom attributes were set
+        mock_set_attribute.assert_any_call('get_user_if_exists.details_username', 'different_user')
+        mock_set_attribute.assert_any_call('get_user_if_exists.user_provided', True)
+        mock_set_attribute.assert_any_call('get_user_if_exists.existing_user_username', 'existing_user')
+        mock_set_attribute.assert_any_call('get_user_if_exists.username_mismatch', True)
+
+        # Verify warning was logged
+        mock_logger.warning.assert_called_once_with(
+            "Username mismatch in get_user_if_exists. Details username: %s, "
+            "Existing user username: %s. This may indicate an authentication issue.",
+            'different_user',
+            'existing_user'
+        )
+
+    @patch('auth_backends.pipeline.logger')
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_debug_enabled_with_existing_user(self, mock_debug_toggle, mock_logger):
+        """ Verify debug logging when DEBUG_GET_USER_IF_EXISTS toggle is enabled. """
+        mock_debug_toggle.return_value = True
+        user = User.objects.create(username=self.username)
+
+        actual = get_user_if_exists(None, self.details)
+        self.assertDictEqual(actual, {'is_new': False, 'user': user})
+
+        # Verify debug logging
+        mock_logger.info.assert_called_with(
+            "get_user_if_exists: Found existing user with username '%s' (ID: %s)",
+            self.username,
+            user.id
+        )
+
+    @patch('auth_backends.pipeline.logger')
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_debug_enabled_no_user_found(self, mock_debug_toggle, mock_logger):
+        """ Verify debug logging when no user is found and debug is enabled. """
+        mock_debug_toggle.return_value = True
+
+        actual = get_user_if_exists(None, self.details)
+        self.assertDictEqual(actual, {})
+
+        # Verify debug logging
+        mock_logger.info.assert_called_with(
+            "get_user_if_exists: No user found with username '%s'",
+            self.username
+        )
+
+    @patch('auth_backends.pipeline.logger')
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_no_username_in_details(self, mock_debug_toggle, mock_set_attribute, mock_logger):
+        """ Verify proper handling when no username is provided in details. """
+        mock_debug_toggle.return_value = False
+        details = {}  # No username
+
+        actual = get_user_if_exists(None, details)
+        self.assertDictEqual(actual, {})
+
+        # Verify custom attributes were set
+        mock_set_attribute.assert_any_call('get_user_if_exists.details_username', None)
+        mock_set_attribute.assert_any_call('get_user_if_exists.no_username_in_details', True)
+
+        # Verify warning was logged
+        mock_logger.warning.assert_called_with("get_user_if_exists: No username provided in details")
+
+    @patch('auth_backends.pipeline.User.objects.get')
+    @patch('auth_backends.pipeline.logger')
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_database_error_handling(self, mock_debug_toggle, mock_set_attribute, mock_logger, mock_user_get):
+        """ Verify proper handling of unexpected database errors. """
+        mock_debug_toggle.return_value = False
+        mock_user_get.side_effect = Exception("Database connection error")
+
+        actual = get_user_if_exists(None, self.details)
+        self.assertDictEqual(actual, {})
+
+        # Verify custom attributes were set
+        mock_set_attribute.assert_any_call('get_user_if_exists.lookup_error', True)
+        mock_set_attribute.assert_any_call('get_user_if_exists.error_message', "Database connection error")
+
+        # Verify error was logged
+        mock_logger.error.assert_called_with(
+            "get_user_if_exists: Unexpected error during user lookup for username '%s': %s",
+            self.username,
+            "Database connection error"
+        )
+
+    @patch('auth_backends.pipeline.logger')
+    @patch('auth_backends.pipeline.set_custom_attribute')
+    @patch('auth_backends.pipeline.DEBUG_GET_USER_IF_EXISTS.is_enabled')
+    def test_debug_enabled_with_username_mismatch(self, mock_debug_toggle, mock_logger):
+        """ Verify debug and warning logging when username mismatch occurs with debug enabled. """
+        mock_debug_toggle.return_value = True
+        user = User.objects.create(username='existing_user')
+        details = {'username': 'different_user'}
+
+        actual = get_user_if_exists(None, details, user=user)
+        self.assertDictEqual(actual, {'is_new': False})
+
+        # Verify both info and warning logs were called
+        mock_logger.info.assert_called_with(
+            "get_user_if_exists: User already provided. Username mismatch: %s. "
+            "Details username: %s, Existing user username: %s",
+            True,
+            'different_user',
+            'existing_user'
+        )
+
+        mock_logger.warning.assert_called_with(
+            "Username mismatch in get_user_if_exists. Details username: %s, "
+            "Existing user username: %s. This may indicate an authentication issue.",
+            'different_user',
+            'existing_user'
+        )
 
 
 class UpdateEmailPipelineTests(TestCase):
@@ -139,14 +300,7 @@ class UpdateEmailPipelineTests(TestCase):
         self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=True)
 
     def assert_attribute_was_set(self, mock_set_attribute, attribute_name, should_exist=True):
-        """
-        Assert that a specific attribute was or was not set via set_custom_attribute.
-
-        Args:
-            mock_set_attribute: The mocked set_custom_attribute function
-            attribute_name: The name of the attribute to check
-            should_exist: If True, assert the attribute was set; if False, assert it wasn't
-        """
+        """ Assert that a specific attribute was or was not set via set_custom_attribute. """
         matching_calls = [
             call for call in mock_set_attribute.call_args_list
             if call[0][0] == attribute_name
