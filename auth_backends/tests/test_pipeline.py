@@ -81,7 +81,7 @@ class GetUserIfExistsPipelineTests(TestCase):
         mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', True)
 
         mock_logger.info.assert_called_once_with(
-            "Username mismatch detected. Details: %s, User: %s. Ignoring logged-in user.",
+            "Username mismatch detected. Username from Details: %s, Username from User: %s.",
             'different_user',
             'existing_user'
         )
@@ -123,7 +123,7 @@ class GetUserIfExistsPipelineTests(TestCase):
         mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', True)
 
         mock_logger.info.assert_called_once_with(
-            "Username mismatch detected. Details: %s, User: %s. Ignoring logged-in user.",
+            "Username mismatch detected. Username from Details: %s, Username from User: %s.",
             'nonexistent_user',
             'existing_user'
         )
