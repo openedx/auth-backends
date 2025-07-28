@@ -61,7 +61,7 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint
 
         if username_mismatch and IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled():
             logger.info(
-                "Username mismatch detected. Details: %s, User: %s. Ignoring logged-in user.",
+                "Username mismatch detected. Username from Details: %s, Username from User: %s.",
                 details_username, user_username
             )
         else:

@@ -23,7 +23,9 @@ class GetUserIfExistsPipelineTests(TestCase):
     @patch('auth_backends.pipeline.set_custom_attribute')
     @patch('auth_backends.pipeline.IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled')
     def test_no_user_exists(self, mock_toggle, mock_set_attribute):
-        """ Verify an empty dict is returned if no user exists. """
+        """
+        Verify an empty dict is returned if no user exists.
+        """
         mock_toggle.return_value = True
 
         actual = get_user_if_exists(None, self.details)
