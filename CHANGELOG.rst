@@ -13,6 +13,21 @@ Unreleased
 ----------
 
 
+[4.6.1] - 2025-07-25
+--------------------
+
+Added
+~~~~~
+
+* Added IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle to handle username mismatches in authentication pipeline.
+* Enhanced get_user_if_exists function with monitoring capabilities for debugging authentication conflicts.
+
+Fixed
+~~~~~
+
+* Fixed authentication issues where username mismatches between logged-in users and social auth details caused "user already exists" errors.
+* Improved user account conflict resolution in devstack and stage environments.
+
 [4.6.0] - 2025-06-18
 --------------------
 
