@@ -244,6 +244,8 @@ tox==3.28.0
     #   -r requirements/test.in
 traceback2==1.4.0
     # via unittest2
+typing-extensions==4.14.1
+    # via -r requirements/test.in
 unittest2==1.1.0
     # via -r requirements/test.in
 urllib3==2.5.0

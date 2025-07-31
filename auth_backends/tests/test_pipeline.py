@@ -34,19 +34,19 @@ class GetUserIfExistsPipelineTests(TestCase):
     @ddt.data(
         # (test_config, expected_result)
         ({'setting': True, 'user_provided': False, 'username_match': True, 'target_exists': True},
-         {'is_new': False, 'user': 'found_user'}),
+         {'is_new': False, 'user': 'found_user'}),  # setting=True, no current user
         ({'setting': False, 'user_provided': False, 'username_match': True, 'target_exists': True},
-         {'is_new': False, 'user': 'found_user'}),
+         {'is_new': False, 'user': 'found_user'}),  # setting=False, no current user
         ({'setting': True, 'user_provided': True, 'username_match': True, 'target_exists': True},
-         {'is_new': False}),
+         {'is_new': False}),  # setting=True, usernames match
         ({'setting': False, 'user_provided': True, 'username_match': True, 'target_exists': True},
-         {'is_new': False}),
+         {'is_new': False}),  # setting=False, usernames match
         ({'setting': True, 'user_provided': True, 'username_match': False, 'target_exists': True},
-         {'is_new': False, 'user': 'target_user'}),
+         {'is_new': False, 'user': 'target_user'}),  # setting=True, mismatch with target
         ({'setting': False, 'user_provided': True, 'username_match': False, 'target_exists': True},
-         {'is_new': False}),
+         {'is_new': False}),  # setting=False, mismatch with target
         ({'setting': True, 'user_provided': True, 'username_match': False, 'target_exists': False},
-         {}),
+         {}),  # setting=True, mismatch no target
     )
     @ddt.unpack
     @patch('auth_backends.pipeline.logger')
