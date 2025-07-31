@@ -42,6 +42,11 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint
     """
     Return a User with the given username iff the User exists.
     """
+    # .. custom_attribute_name: get_user_if_exists.ignore_toggle_enabled
+    # .. custom_attribute_description: Tracks whether the IGNORE_LOGGED_IN_USER_ON_MISMATCH
+    #    toggle is enabled during this pipeline execution.
+    set_custom_attribute('get_user_if_exists.ignore_toggle_enabled', IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled())
+
     if user:
         # Check for username mismatch and toggle behavior
         details_username = details.get('username')
@@ -53,11 +58,6 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint
         #    the username in the social details and the user's actual username.
         #    True if usernames don't match, False if they match.
         set_custom_attribute('get_user_if_exists.username_mismatch', username_mismatch)
-
-        # .. custom_attribute_name: get_user_if_exists.ignore_toggle_enabled
-        # .. custom_attribute_description: Tracks whether the IGNORE_LOGGED_IN_USER_ON_MISMATCH
-        #    toggle is enabled during this pipeline execution.
-        set_custom_attribute('get_user_if_exists.ignore_toggle_enabled', IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled())
 
         if username_mismatch and IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled():
             logger.info(
