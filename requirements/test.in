@@ -4,6 +4,7 @@
 -r base.txt                # Core dependencies
 
 coverage
+ddt                         # for running multiple test cases with multiple input
 edx-lint
 httpretty
 pycodestyle
