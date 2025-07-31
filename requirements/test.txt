@@ -197,15 +197,19 @@ pyyaml==6.0.2
     #   -r requirements/base.txt
     #   code-annotations
     #   edx-django-release-util
+    #   responses
 requests==2.32.4
     # via
     #   -r requirements/base.txt
     #   requests-oauthlib
+    #   responses
     #   social-auth-core
 requests-oauthlib==2.0.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
+responses==0.25.7
+    # via -r requirements/test.in
 six==1.17.0
     # via
     #   -r requirements/base.txt
@@ -246,6 +250,7 @@ urllib3==2.5.0
     # via
     #   -r requirements/base.txt
     #   requests
+    #   responses
 virtualenv==20.32.0
     # via tox
 

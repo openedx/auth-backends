@@ -11,6 +11,7 @@ pycodestyle
 pycryptodomex                   # used for crypto tests
 pytest-cov
 pytest-django
+responses
 tox
 unittest2
 edx-django-release-util   # Contains the reserved keyword check
