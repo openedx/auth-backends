@@ -31,7 +31,6 @@ def _to_language(locale):
     return locale.replace('_', '-').lower()
 
 
-# pylint: disable=abstract-method
 class EdXOAuth2(BaseOAuth2):
     """
     IMPORTANT: The oauth2 application must have access to the ``user_id`` scope in order

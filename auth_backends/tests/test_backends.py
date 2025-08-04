@@ -4,6 +4,7 @@ import json
 from calendar import timegm
 
 import jwt
+import responses
 import six
 from Cryptodome.PublicKey import RSA
 from django.core.cache import cache
@@ -37,10 +38,13 @@ class EdXOAuth2Tests(OAuth2Test):
         # does not rely on Django settings.
         self.strategy.set_settings({f'SOCIAL_AUTH_{backend_name}_{setting_name}': value})
 
-    def access_token_body(self, request, _url, headers):
+    def access_token_body(self, request):
         """ Generates a response from the provider's access token endpoint. """
         # The backend should always request JWT access tokens, not Bearer.
-        body = six.moves.urllib.parse.parse_qs(request.body.decode('utf8'))
+        body_content = request.body
+        if isinstance(body_content, bytes):
+            body_content = body_content.decode('utf8')
+        body = six.moves.urllib.parse.parse_qs(body_content)
         self.assertEqual(body['token_type'], ['jwt'])
 
         expires_in = 3600
@@ -51,7 +55,16 @@ class EdXOAuth2Tests(OAuth2Test):
             'expires_in': expires_in,
             'access_token': access_token
         })
-        return 200, headers, body
+        return (200, {}, body)
+
+    def pre_complete_callback(self, start_url):
+        """ Override to properly set up the access token response with callback. """
+        responses.add_callback(
+            responses.POST,
+            url=self.backend.access_token_url(),
+            callback=self.access_token_body,
+            content_type="application/json",
+        )
 
     def create_jwt_access_token(self, expires_in=3600, issuer=None, key=None, alg='RS512'):
         """
