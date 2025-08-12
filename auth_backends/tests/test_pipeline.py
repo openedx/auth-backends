@@ -1,6 +1,6 @@
 """ Tests for pipelines. """
 
-from unittest.mock import patch
+from unittest.mock import patch, call
 import ddt
 from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
@@ -56,8 +56,10 @@ class GetUserIfExistsPipelineTests(TestCase):
             actual = get_user_if_exists(None, details, user=user)
 
             self.assertDictEqual(actual, {'is_new': False})
-            mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled)
-            mock_set_attribute.assert_any_call('get_user_if_exists.username_mismatch', False)
+            mock_set_attribute.assert_has_calls([
+                call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled),
+                call('get_user_if_exists.username_mismatch', False)
+            ], any_order=True)
             mock_logger.info.assert_not_called()
 
     @ddt.data(True, False)
@@ -84,8 +86,10 @@ class GetUserIfExistsPipelineTests(TestCase):
                 mock_logger.info.assert_not_called()
 
             self.assertDictEqual(actual, expected)
-            mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled)
-            mock_set_attribute.assert_any_call('get_user_if_exists.username_mismatch', True)
+            mock_set_attribute.assert_has_calls([
+                call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled),
+                call('get_user_if_exists.username_mismatch', True)
+            ], any_order=True)
 
     @ddt.data(True, False)
     @patch('auth_backends.pipeline.logger')
@@ -110,14 +114,14 @@ class GetUserIfExistsPipelineTests(TestCase):
                 mock_logger.info.assert_not_called()
 
             self.assertDictEqual(actual, expected)
-            mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled)
-            mock_set_attribute.assert_any_call('get_user_if_exists.username_mismatch', True)
+            mock_set_attribute.assert_has_calls([
+                call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled),
+                call('get_user_if_exists.username_mismatch', True)
+            ], any_order=True)
 
 
 class UpdateEmailPipelineTests(TestCase):
-    """
-    Tests for the update_email pipeline function.
-    """
+    """ Tests for the update_email pipeline function. """
 
     def setUp(self):
         super().setUp()
@@ -127,7 +131,7 @@ class UpdateEmailPipelineTests(TestCase):
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_update_email(self, mock_set_attribute, mock_toggle):
-        """Updates user email when usernames match."""
+        """ Verify that user email is updated upon changing email when usernames match. """
         mock_toggle.return_value = False
         updated_email = 'updated@example.com'
         self.assertNotEqual(self.user.email, updated_email)
@@ -147,7 +151,7 @@ class UpdateEmailPipelineTests(TestCase):
     @patch('auth_backends.pipeline.SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_update_email_with_none(self, mock_set_attribute, mock_toggle):
-        """Skips email update when email value is None."""
+        """ Verify that user email is not updated if email value is None. """
         mock_toggle.return_value = False
         old_email = self.user.email
 
@@ -164,7 +168,7 @@ class UpdateEmailPipelineTests(TestCase):
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_username_mismatch_no_update_toggle_enabled(self, mock_set_attribute, mock_logger, mock_toggle):
-        """Skips email update when usernames don't match and toggle is enabled."""
+        """ Verify that email is not updated when usernames don't match and toggle is enabled. """
         mock_toggle.return_value = True
 
         old_email = self.user.email
@@ -197,7 +201,7 @@ class UpdateEmailPipelineTests(TestCase):
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_username_mismatch_with_update_toggle_disabled(self, mock_set_attribute, mock_logger, mock_toggle):
-        """Updates email when usernames don't match but toggle is disabled."""
+        """ Verify that email is updated when usernames don't match but toggle is disabled. """
         mock_toggle.return_value = False
 
         old_email = self.user.email
@@ -219,7 +223,14 @@ class UpdateEmailPipelineTests(TestCase):
         self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=True)
 
     def assert_attribute_was_set(self, mock_set_attribute, attribute_name, should_exist=True):
-        """Asserts that a specific attribute was or was not set via set_custom_attribute."""
+        """
+        Assert that a specific attribute was or was not set via set_custom_attribute.
+
+        Args:
+            mock_set_attribute: The mocked set_custom_attribute function
+            attribute_name: The name of the attribute to check
+            should_exist: If True, assert the attribute was set; if False, assert it wasn't
+        """
         matching_calls = [
             call for call in mock_set_attribute.call_args_list
             if call[0][0] == attribute_name
