@@ -64,54 +64,49 @@ class GetUserIfExistsPipelineTests(TestCase):
             ], any_order=True)
             mock_logger.info.assert_not_called()
 
-    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
+    @ddt.data(
+        (True, True),   # toggle enabled, target exists
+        (True, False),  # toggle enabled, target missing
+        (False, True),  # toggle disabled, target exists
+        (False, False)  # toggle disabled, target missing
+    )
+    @ddt.unpack
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
-    def test_get_user_if_exists_username_mismatch_with_target(self, toggle_enabled, mock_set_attribute, mock_logger):
-        """Toggle enabled: return target user. Toggle disabled: return empty dict."""
+    def test_get_user_if_exists_username_mismatch(self, toggle_enabled, target_exists, mock_set_attribute, mock_logger):
+        """Test username mismatch scenarios with different toggle states and target user presence."""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
             user = User.objects.create(username='existing_user')
-            target_user = User.objects.create(username='different_user')
-            details = {'username': 'different_user'}
+            target_user = None
+
+            if target_exists:
+                target_user = User.objects.create(username='different_user')
+                details = {'username': 'different_user'}
+                details_username = 'different_user'
+            else:
+                details = {'username': 'nonexistent_user'}
+                details_username = 'nonexistent_user'
 
             actual = get_user_if_exists(None, details, user=user)
 
-            if toggle_enabled:
+            if toggle_enabled and target_exists:
+                # Toggle enabled and target exists: return target user
                 expected = {'is_new': False, 'user': target_user}
                 mock_logger.info.assert_called_with(
                     "Username mismatch detected. Username from Details: %s, Username from User: %s.",
-                    'different_user',
+                    details_username,
                     'existing_user'
                 )
-            else:
-                expected = {'is_new': False}
-                mock_logger.info.assert_not_called()
-
-            self.assertDictEqual(actual, expected)
-            mock_set_attribute.assert_has_calls([
-                call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled),
-                call('get_user_if_exists.username_mismatch', True)
-            ], any_order=True)
-
-    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
-    @patch('auth_backends.pipeline.logger')
-    @patch('auth_backends.pipeline.set_custom_attribute')
-    def test_get_user_if_exists_username_mismatch_no_target(self, toggle_enabled, mock_set_attribute, mock_logger):
-        """Toggle enabled: log warning and return empty dict. Toggle disabled: return empty dict without logging."""
-        with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
-            user = User.objects.create(username='existing_user')
-            details = {'username': 'nonexistent_user'}
-
-            actual = get_user_if_exists(None, details, user=user)
-
-            if toggle_enabled:
+            elif toggle_enabled and not target_exists:
+                # Toggle enabled and no target: return empty dict with logging
                 expected = {}
                 mock_logger.info.assert_called_with(
                     "Username mismatch detected. Username from Details: %s, Username from User: %s.",
-                    'nonexistent_user',
+                    details_username,
                     'existing_user'
                 )
             else:
+                # Toggle disabled: return empty dict without logging
                 expected = {'is_new': False}
                 mock_logger.info.assert_not_called()
 

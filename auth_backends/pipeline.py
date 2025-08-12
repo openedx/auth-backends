@@ -81,9 +81,7 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint
 
 
 def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disable=keyword-arg-before-vararg
-    """
-    Update the user's email address using data from provider.
-    """
+    """Update the user's email address using data from provider."""
 
     if user:
         # Get usernames for comparison, using defensive coding
