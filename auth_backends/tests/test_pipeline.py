@@ -22,14 +22,15 @@ class GetUserIfExistsPipelineTests(TestCase):
         self.username = 'edx'
         self.details = {'username': self.username}
 
-    @ddt.data(True, False)
+    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
     def test_no_user_exists(self, setting_value):
         """Returns empty dict if no user exists regardless of setting."""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=setting_value):
             actual = get_user_if_exists(None, self.details)
-            self.assertDictEqual(actual, {})
+            expected = {}
+            self.assertDictEqual(actual, expected)
 
-    @ddt.data(True, False)
+    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_get_user_if_exists_no_current_user(self, toggle_enabled, mock_set_attribute, mock_logger):
@@ -44,7 +45,7 @@ class GetUserIfExistsPipelineTests(TestCase):
             mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled)
             mock_logger.info.assert_not_called()
 
-    @ddt.data(True, False)
+    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_get_user_if_exists_username_match(self, toggle_enabled, mock_set_attribute, mock_logger):
@@ -54,15 +55,16 @@ class GetUserIfExistsPipelineTests(TestCase):
             details = {'username': 'existing_user'}
 
             actual = get_user_if_exists(None, details, user=user)
+            expected = {'is_new': False}
 
-            self.assertDictEqual(actual, {'is_new': False})
+            self.assertDictEqual(actual, expected)
             mock_set_attribute.assert_has_calls([
                 call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled),
                 call('get_user_if_exists.username_mismatch', False)
             ], any_order=True)
             mock_logger.info.assert_not_called()
 
-    @ddt.data(True, False)
+    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_get_user_if_exists_username_mismatch_with_target(self, toggle_enabled, mock_set_attribute, mock_logger):
@@ -91,7 +93,7 @@ class GetUserIfExistsPipelineTests(TestCase):
                 call('get_user_if_exists.username_mismatch', True)
             ], any_order=True)
 
-    @ddt.data(True, False)
+    @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
     def test_get_user_if_exists_username_mismatch_no_target(self, toggle_enabled, mock_set_attribute, mock_logger):
