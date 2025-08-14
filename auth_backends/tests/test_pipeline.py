@@ -22,7 +22,7 @@ class GetUserIfExistsPipelineTests(TestCase):
         self.username = 'edx'
         self.details = {'username': self.username}
 
-    # Test behavior when no user exists in database with and without toggle
+    # Test no user exists in database with and without toggle
     @ddt.data(True, False)
     def test_no_user_exists(self, setting_value):
         """Returns empty dict if no user exists regardless of setting."""
@@ -31,7 +31,7 @@ class GetUserIfExistsPipelineTests(TestCase):
             expected = {}
             self.assertDictEqual(actual, expected)
 
-    # Test behavior when user exists but no current user with and without toggle
+    # Test user exists but no current user with and without toggle
     @ddt.data(True, False)
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
@@ -47,7 +47,7 @@ class GetUserIfExistsPipelineTests(TestCase):
             mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled)
             mock_logger.info.assert_not_called()
 
-    # Test behavior when usernames match with and without toggle
+    # Test usernames match with and without toggle
     @ddt.data(True, False)
     @patch('auth_backends.pipeline.logger')
     @patch('auth_backends.pipeline.set_custom_attribute')
