@@ -4,15 +4,15 @@
 -r base.txt                # Core dependencies
 
 coverage
-ddt                         # for running multiple test cases with multiple input
+ddt                        # for running multiple test cases with multiple input
 edx-lint
 httpretty
 pycodestyle
-pycryptodomex                   # used for crypto tests
+pycryptodomex              # used for crypto tests
 pytest-cov
 pytest-django
-responses                    # required by ddt
+responses                  # required by ddt
 tox
-typing_extensions
+typing_extensions          # required by ddt
 unittest2
-edx-django-release-util   # Contains the reserved keyword check
+edx-django-release-util    # Contains the reserved keyword check
