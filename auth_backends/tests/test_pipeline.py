@@ -19,14 +19,16 @@ class GetUserIfExistsPipelineTests(TestCase):
 
     def setUp(self):
         super().setUp()
-        self.username = 'edx'
-        self.details = {'username': self.username}
+        self.details_for_existing_user = {'username': 'existing_user'}
+        self.details_for_non_existing_user = {'username': 'non_existing_user'}
+        self.details_for_different_user = {'username': 'different_user'}
+        self.user = User.objects.create(**self.details_for_existing_user)
 
     @ddt.data(True, False)  # test IGNORE_LOGGED_IN_USER_ON_MISMATCH toggle enabled/disabled
     def test_no_user_exists(self, toggle_enabled):
         """Returns empty dict if no user exists regardless of setting."""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
-            actual = get_user_if_exists(None, self.details)
+            actual = get_user_if_exists(None, self.details_for_non_existing_user)
             expected = {}
             self.assertDictEqual(actual, expected)
 
@@ -36,11 +38,11 @@ class GetUserIfExistsPipelineTests(TestCase):
     def test_get_user_if_exists_no_current_user(self, toggle_enabled, mock_set_attribute, mock_logger):
         """Returns details user when it can be found and there is no current user, regardless of toggle setting"""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
-            found_user = User.objects.create(username=self.details['username'])
+            existing_user = self.user
 
-            actual = get_user_if_exists(None, self.details, user=None)
+            actual = get_user_if_exists(None, self.details_for_existing_user, user=None)
 
-            expected = {'is_new': False, 'user': found_user}
+            expected = {'is_new': False, 'user': existing_user}
             self.assertDictEqual(actual, expected)
             mock_set_attribute.assert_any_call('get_user_if_exists.ignore_toggle_enabled', toggle_enabled)
             mock_logger.info.assert_not_called()
@@ -51,10 +53,9 @@ class GetUserIfExistsPipelineTests(TestCase):
     def test_get_user_if_exists_username_match(self, toggle_enabled, mock_set_attribute, mock_logger):
         """Returns dict without user element when current user matches details username, regardless of toggle."""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
-            user = User.objects.create(username='existing_user')
-            details = {'username': 'existing_user'}
+            existing_user = self.user
 
-            actual = get_user_if_exists(None, details, user=user)
+            actual = get_user_if_exists(None, self.details_for_existing_user, user=existing_user)
             expected = {'is_new': False}
 
             self.assertDictEqual(actual, expected)
@@ -72,14 +73,13 @@ class GetUserIfExistsPipelineTests(TestCase):
     ):
         """Toggle enabled: return found details user. Toggle disabled: return dict without user element."""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
-            user = User.objects.create(username='existing_user')
-            details = {'username': 'different_user'}
-            found_user = User.objects.create(username=details['username'])
+            existing_user = self.user
+            different_user = User.objects.create(**self.details_for_different_user)
 
-            actual = get_user_if_exists(None, details, user=user)
+            actual = get_user_if_exists(None, self.details_for_different_user, user=existing_user)
 
             if toggle_enabled:
-                expected = {'is_new': False, 'user': found_user}
+                expected = {'is_new': False, 'user': different_user}
                 mock_logger.info.assert_called_with(
                     "Username mismatch detected. Username from Details: %s, Username from User: %s.",
                     'different_user',
@@ -103,16 +103,15 @@ class GetUserIfExistsPipelineTests(TestCase):
     ):
         """Toggle enabled: return empty dict. Toggle disabled: return dict without user element."""
         with override_settings(IGNORE_LOGGED_IN_USER_ON_MISMATCH=toggle_enabled):
-            user = User.objects.create(username='existing_user')
-            details = {'username': 'nonexistent_user'}
+            existing_user = self.user
 
-            actual = get_user_if_exists(None, details, user=user)
+            actual = get_user_if_exists(None, self.details_for_non_existing_user, user=existing_user)
 
             if toggle_enabled:
                 expected = {}
                 mock_logger.info.assert_called_with(
                     "Username mismatch detected. Username from Details: %s, Username from User: %s.",
-                    'nonexistent_user',
+                    'non_existing_user',
                     'existing_user'
                 )
             else:
