@@ -11,29 +11,58 @@ User = get_user_model()
 
 
 class GetUserIfExistsPipelineTests(TestCase):
-    """ Tests for the get_user_if_exists pipeline function. """
+    """
+    Tests for the get_user_if_exists pipeline function.
+    """
 
     def setUp(self):
         super().setUp()
-        self.username = 'edx'
-        self.details = {'username': self.username}
+        self.details_for_existing_user = {'username': 'existing_user'}
+        self.details_for_non_existing_user = {'username': 'non_existing_user'}
+        self.details_for_different_user = {'username': 'different_user'}
+        self.existing_user = User.objects.create(**self.details_for_existing_user)
 
     def test_no_user_exists(self):
-        """ Verify an empty dict is returned if no user exists. """
-        actual = get_user_if_exists(None, self.details)
-        self.assertDictEqual(actual, {})
+        """Returns empty dict if no user exists."""
+        actual = get_user_if_exists(None, self.details_for_non_existing_user)
+        expected = {}
+        self.assertDictEqual(actual, expected)
 
-    def test_existing_user(self):
-        """ Verify a dict with the user and extra details is returned if the user exists. """
-        user = User.objects.create(username=self.username)
-        actual = get_user_if_exists(None, self.details)
-        self.assertDictEqual(actual, {'is_new': False, 'user': user})
+    def test_get_user_if_exists_no_current_user(self):
+        """Returns details user when it can be found and there is no current user."""
+        existing_user = self.existing_user
 
-    def test_get_user_if_exists(self):
-        """ Verify only the details are returned if a user is passed to the function. """
-        user = User.objects.create(username=self.username)
-        actual = get_user_if_exists(None, self.details, user=user)
-        self.assertDictEqual(actual, {'is_new': False})
+        actual = get_user_if_exists(None, self.details_for_existing_user, user=None)
+
+        expected = {'is_new': False, 'user': existing_user}
+        self.assertDictEqual(actual, expected)
+
+    def test_get_user_if_exists_username_match(self):
+        """Returns dict without user element when current user is provided."""
+        existing_user = self.existing_user
+
+        actual = get_user_if_exists(None, self.details_for_existing_user, user=existing_user)
+        expected = {'is_new': False}
+
+        self.assertDictEqual(actual, expected)
+
+    def test_get_user_if_exists_username_mismatch_and_details_user_found(self):
+        """Returns dict without user element when current user is provided, regardless of username mismatch."""
+        existing_user = self.existing_user
+
+        actual = get_user_if_exists(None, self.details_for_different_user, user=existing_user)
+
+        expected = {'is_new': False}
+        self.assertDictEqual(actual, expected)
+
+    def test_get_user_if_exists_username_mismatch_details_user_not_found(self):
+        """Returns dict without user element when current user is provided, regardless of details username."""
+        existing_user = self.existing_user
+
+        actual = get_user_if_exists(None, self.details_for_non_existing_user, user=existing_user)
+
+        expected = {'is_new': False}
+        self.assertDictEqual(actual, expected)
 
 
 class UpdateEmailPipelineTests(TestCase):
