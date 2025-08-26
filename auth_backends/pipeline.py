@@ -51,6 +51,12 @@ def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint
         # Check for username mismatch and toggle behavior
         details_username = details.get('username')
         user_username = getattr(user, 'username', None)
+
+        # .. custom_attribute_name: get_user_if_exists.has_details_username
+        # .. custom_attribute_description: Tracks whether the details contain a username field.
+        #    True if username is present and not None, False if username is missing or None.
+        set_custom_attribute('get_user_if_exists.has_details_username', bool(details_username))
+
         username_mismatch = details_username != user_username
 
         # .. custom_attribute_name: get_user_if_exists.username_mismatch

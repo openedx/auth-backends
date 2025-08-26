@@ -13,15 +13,16 @@ Unreleased
 ----------
 
 
-[4.6.1] - 2025-07-25
+[4.6.1] - 2025-08-26
 --------------------
 
 Fixed
 ~~~~~
 
-* Fixed authentication issues where username mismatches between logged-in users and social auth details caused "user already exists" errors.
+* Fixed authentication issues where the social auth details username is not being respected as the user to be logged in in certain cases.
+  When the already logged-in user does not match the social auth details user, the pipeline should log in the new user, rather than leaving some other user logged in.
 
-  * Added temporary rollout toggle IGNORE_LOGGED_IN_USER_ON_MISMATCH to ensure the bug fix doesn't introduce any issues..
+  * Added temporary rollout toggle IGNORE_LOGGED_IN_USER_ON_MISMATCH to ensure the bug fix doesn't introduce any issues.
   * Enhanced get_user_if_exists function with monitoring capabilities for debugging authentication conflicts.
 
 [4.6.0] - 2025-06-18
