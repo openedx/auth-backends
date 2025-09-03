@@ -22,27 +22,67 @@ User = get_user_model()
 # .. toggle_target_removal_date: 2025-08-18
 SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH = SettingToggle("SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH", default=False)
 
+# .. toggle_name: IGNORE_LOGGED_IN_USER_ON_MISMATCH
+# .. toggle_implementation: SettingToggle
+# .. toggle_default: True
+# .. toggle_description: Controls behavior when there's a username mismatch between the logged-in user
+#    and social auth details. When enabled (True), ignores the logged-in user and proceeds with
+#    user lookup from social auth details. When disabled (False), proceeds with the logged-in user
+#    despite the mismatch. This toggle is for temporary rollout only to ensure we don't create bugs.
+# .. toggle_use_cases: temporary
+# .. toggle_creation_date: 2025-07-25
+# .. toggle_target_removal_date: 2025-09-25
+IGNORE_LOGGED_IN_USER_ON_MISMATCH = SettingToggle("IGNORE_LOGGED_IN_USER_ON_MISMATCH", default=True)
+
 
 # pylint: disable=unused-argument
 # The function parameters must be named exactly as they are below.
 # Do not change them to appease Pylint.
 def get_user_if_exists(strategy, details, user=None, *args, **kwargs):  # pylint: disable=keyword-arg-before-vararg
-    """Return a User with the given username iff the User exists."""
+    """
+    Return a User with the given username iff the User exists.
+    """
+    # .. custom_attribute_name: get_user_if_exists.ignore_toggle_enabled
+    # .. custom_attribute_description: Tracks whether the IGNORE_LOGGED_IN_USER_ON_MISMATCH
+    #    toggle is enabled during this pipeline execution.
+    set_custom_attribute('get_user_if_exists.ignore_toggle_enabled', IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled())
+
     if user:
-        return {'is_new': False}
+        # Check for username mismatch and toggle behavior
+        details_username = details.get('username')
+        user_username = getattr(user, 'username', None)
+
+        # .. custom_attribute_name: get_user_if_exists.has_details_username
+        # .. custom_attribute_description: Tracks whether the details contain a username field.
+        #    True if username is present, False if missing.
+        set_custom_attribute('get_user_if_exists.has_details_username', bool(details_username))
+
+        username_mismatch = details_username != user_username
+
+        # .. custom_attribute_name: get_user_if_exists.username_mismatch
+        # .. custom_attribute_description: Tracks whether there's a mismatch between
+        #    the username in the social details and the user's actual username.
+        #    True if usernames don't match, False if they match.
+        set_custom_attribute('get_user_if_exists.username_mismatch', username_mismatch)
+
+        if username_mismatch and IGNORE_LOGGED_IN_USER_ON_MISMATCH.is_enabled():
+            logger.info(
+                "Username mismatch detected. Username from Details: %s, Username from User: %s.",
+                details_username, user_username
+            )
+        else:
+            return {'is_new': False}
+
     try:
         username = details.get('username')
 
-        # Return the user if it exists
         return {
             'is_new': False,
             'user': User.objects.get(username=username)
         }
     except User.DoesNotExist:
-        # Fall to the default return value
         pass
 
-    # Nothing to return since we don't have a user
     return {}
 
 
