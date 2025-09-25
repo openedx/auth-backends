@@ -13,6 +13,16 @@ Unreleased
 ----------
 
 
+[4.6.1] - 2025-09-23
+--------------------
+
+Added
+~~~~~
+
+* Enhanced OAuth2 authentication backend to logout any old session before initiating a new OAuth2 flow. This prevents user association conflicts with the previously logged-in user.
+
+  * Added temporary rollout toggle ENABLE_OAUTH_SESSION_CLEANUP to control session cleanup during OAuth start process.
+
 [4.6.0] - 2025-06-18
 --------------------
 
