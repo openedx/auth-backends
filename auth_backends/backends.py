@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 # .. toggle_use_cases: temporary
 # .. toggle_creation_date: 2025-09-25
 # .. toggle_target_removal_date: 2025-11-25
-ENABLE_OAUTH_SESSION_CLEANUP = SettingToggle("ENABLE_OAUTH_SESSION_CLEANUP", default=True)
+ENABLE_OAUTH_SESSION_CLEANUP = SettingToggle("ENABLE_OAUTH_SESSION_CLEANUP", default=False)
 
 PROFILE_CLAIMS_TO_DETAILS_KEY_MAP = {
     'preferred_username': 'username',
