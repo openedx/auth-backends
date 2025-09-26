@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 # .. toggle_name: ENABLE_OAUTH_SESSION_CLEANUP
 # .. toggle_implementation: SettingToggle
-# .. toggle_default: True
+# .. toggle_default: False
 # .. toggle_description: Controls whether to perform session cleanup during OAuth start.
 #    When enabled (True), existing user sessions are cleared before OAuth authentication
 #    to prevent user association conflicts. When disabled (False), session cleanup is skipped.
