@@ -45,7 +45,7 @@ coverage[toml]==7.10.7
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==46.0.1
+cryptography==46.0.2
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -82,7 +82,7 @@ django-waffle==5.0.0
     #   edx-toggles
 edx-django-release-util==1.5.0
     # via -r requirements/test.in
-edx-django-utils==8.0.0
+edx-django-utils==8.0.1
     # via
     #   -r requirements/base.txt
     #   edx-toggles
@@ -102,7 +102,7 @@ idna==3.10
     #   requests
 iniconfig==2.1.0
     # via pytest
-isort==6.0.1
+isort==6.1.0
     # via pylint
 jinja2==3.1.6
     # via
@@ -110,7 +110,7 @@ jinja2==3.1.6
     #   code-annotations
 linecache2==1.0.0
     # via traceback2
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   -r requirements/base.txt
     #   jinja2
@@ -188,7 +188,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pyyaml==6.0.2
+pyyaml==6.0.3
     # via
     #   -r requirements/base.txt
     #   code-annotations
