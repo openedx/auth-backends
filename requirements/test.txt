@@ -6,7 +6,7 @@
 #
 argparse==1.4.0
     # via unittest2
-asgiref==3.9.2
+asgiref==3.10.0
     # via
     #   -r requirements/base.txt
     #   django
@@ -14,7 +14,7 @@ astroid==3.3.11
     # via
     #   pylint
     #   pylint-celery
-certifi==2025.8.3
+certifi==2025.10.5
     # via
     #   -r requirements/base.txt
     #   requests
@@ -45,11 +45,10 @@ coverage[toml]==7.10.7
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==46.0.1
+cryptography==46.0.2
     # via
     #   -r requirements/base.txt
     #   pyjwt
-    #   social-auth-core
 ddt==1.7.2
     # via -r requirements/test.in
 defusedxml==0.7.1
@@ -82,7 +81,7 @@ django-waffle==5.0.0
     #   edx-toggles
 edx-django-release-util==1.5.0
     # via -r requirements/test.in
-edx-django-utils==8.0.0
+edx-django-utils==8.0.1
     # via
     #   -r requirements/base.txt
     #   edx-toggles
@@ -90,7 +89,7 @@ edx-lint==5.6.0
     # via -r requirements/test.in
 edx-toggles==5.4.1
     # via -r requirements/base.txt
-filelock==3.19.1
+filelock==3.20.0
     # via
     #   tox
     #   virtualenv
@@ -102,7 +101,7 @@ idna==3.10
     #   requests
 iniconfig==2.1.0
     # via pytest
-isort==6.0.1
+isort==6.1.0
     # via pylint
 jinja2==3.1.6
     # via
@@ -110,7 +109,7 @@ jinja2==3.1.6
     #   code-annotations
 linecache2==1.0.0
     # via traceback2
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   -r requirements/base.txt
     #   jinja2
@@ -125,7 +124,7 @@ packaging==25.0
     # via
     #   pytest
     #   tox
-platformdirs==4.4.0
+platformdirs==4.5.0
     # via
     #   pylint
     #   virtualenv
@@ -154,7 +153,7 @@ pyjwt[crypto]==2.10.1
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pylint==3.3.8
+pylint==3.3.9
     # via
     #   edx-lint
     #   pylint-celery
@@ -188,7 +187,7 @@ python3-openid==3.2.0
     # via
     #   -r requirements/base.txt
     #   social-auth-core
-pyyaml==6.0.2
+pyyaml==6.0.3
     # via
     #   -r requirements/base.txt
     #   code-annotations
@@ -215,7 +214,7 @@ six==1.17.0
     #   unittest2
 social-auth-app-django==5.4.3
     # via -r requirements/base.txt
-social-auth-core==4.7.0
+social-auth-core==4.8.0
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
