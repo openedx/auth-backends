@@ -14,7 +14,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.cache import cache
 from django.test import RequestFactory
-from django.test.utils import override_settings
 from social_core.tests.backends.oauth import OAuth2Test
 
 User = get_user_model()
@@ -127,54 +126,47 @@ class EdXOAuth2Tests(OAuth2Test):
         self.do_login()
 
     @pytest.mark.django_db
-    @ddt.data(True, False)  # Test session cleanup with both toggle enabled and disabled
+    @ddt.data(True, False)  # Test with and without authenticated user
     @patch('auth_backends.backends.set_custom_attribute')
     @patch('auth_backends.backends.logger')
-    def test_start_with_session_cleanup(self, toggle_enabled, mock_logger, mock_set_attr):
-        """Test start method for session cleanup of existing user with toggle variation."""
-        with override_settings(ENABLE_OAUTH_SESSION_CLEANUP=toggle_enabled):
-            existing_user = User.objects.create_user(username='existing_user', email='existing@example.com')
+    def test_start_with_session_cleanup(self, user_authenticated, mock_logger, mock_set_attr):
+        """Test start method for session cleanup with and without authenticated user."""
+        request = RequestFactory().get('/auth/login/edx-oauth2/')
 
-            request = RequestFactory().get('/auth/login/edx-oauth2/')
+        if user_authenticated:
+            existing_user = User.objects.create_user(username='existing_user', email='existing@example.com')
             request.user = existing_user
 
-            middleware = SessionMiddleware(lambda req: None)
-            middleware.process_request(request)
-            request.session.save()
+        middleware = SessionMiddleware(lambda req: None)
+        middleware.process_request(request)
+        request.session.save()
 
-            initial_session_key = request.session.session_key
+        initial_session_key = request.session.session_key
 
-            self.backend.strategy.request = request
+        self.backend.strategy.request = request
 
-            self.do_start()
+        self.do_start()
 
-            if toggle_enabled:
-                self.assertNotEqual(request.session.session_key, initial_session_key)
+        if user_authenticated:
+            self.assertNotEqual(request.session.session_key, initial_session_key)
+            self.assertTrue(request.user.is_anonymous)
 
-                self.assertTrue(request.user.is_anonymous)
+            mock_set_attr.assert_has_calls([
+                call('session_cleanup.logout_required', True),
+                call('session_cleanup.logout_performed', True)
+            ], any_order=True)
 
-                mock_set_attr.assert_has_calls([
-                    call('session_cleanup.toggle_enabled', True),
-                    call('session_cleanup.logout_performed', True),
-                    call('session_cleanup.logged_out_username', 'existing_user')
-                ], any_order=True)
+            mock_logger.info.assert_called_with(
+                "OAuth start: Performing session cleanup for user '%s'",
+                'existing_user'
+            )
+        else:
+            mock_set_attr.assert_has_calls([
+                call('session_cleanup.logout_required', False),
+                call('session_cleanup.logout_performed', False)
+            ], any_order=True)
 
-                mock_logger.info.assert_called_with(
-                    "OAuth start: Performing session cleanup for user '%s'",
-                    'existing_user'
-                )
-            else:
-                self.assertEqual(request.session.session_key, initial_session_key)
-
-                self.assertEqual(request.user, existing_user)
-                self.assertFalse(request.user.is_anonymous)
-
-                mock_set_attr.assert_has_calls([
-                    call('session_cleanup.toggle_enabled', False),
-                    call('session_cleanup.logout_performed', False)
-                ], any_order=True)
-
-                mock_logger.info.assert_not_called()
+            mock_logger.info.assert_not_called()
 
     def test_partial_pipeline(self):
         self.do_partial_pipeline()

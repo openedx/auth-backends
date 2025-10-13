@@ -4,23 +4,10 @@ For more info visit https://python-social-auth.readthedocs.io/en/latest/pipeline
 """
 import logging
 from django.contrib.auth import get_user_model
-from edx_toggles.toggles import SettingToggle
 from edx_django_utils.monitoring import set_custom_attribute
 
 logger = logging.getLogger(__name__)
 User = get_user_model()
-
-# .. toggle_name: SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH
-# .. toggle_implementation: SettingToggle
-# .. toggle_default: False
-# .. toggle_description: Determines whether to block email updates when usernames don't match.
-#    When enabled (True), email updates will be blocked when the username in social auth details
-#    doesn't match the user's username. When disabled (False), email updates will proceed regardless
-#    of username mismatches. This will be used for a temporary rollout.
-# .. toggle_use_cases: temporary
-# .. toggle_creation_date: 2025-06-18
-# .. toggle_target_removal_date: 2025-08-18
-SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH = SettingToggle("SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH", default=False)
 
 
 # pylint: disable=unused-argument
@@ -62,43 +49,22 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
         #    True if usernames don't match, False if they match.
         set_custom_attribute('update_email.username_mismatch', username_mismatch)
 
-        # .. custom_attribute_name: update_email.rollout_toggle_enabled
-        # .. custom_attribute_description: Tracks whether the SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH
-        #    toggle is enabled during this pipeline execution.
-        set_custom_attribute('update_email.rollout_toggle_enabled', SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled())
-
         if username_mismatch:
-            # Log warning and set additional custom attributes for mismatches
+            # Log warning about the mismatch
             logger.warning(
                 "Username mismatch during email update. User username: %s, Details username: %s",
                 user_username,
                 details_username
             )
-            # .. custom_attribute_name: update_email.details_username
-            # .. custom_attribute_description: Records the username provided in the
-            #    social details when a mismatch occurs with the user's username.
-            set_custom_attribute('update_email.details_username', details_username)
 
-            # .. custom_attribute_name: update_email.user_username
-            # .. custom_attribute_description: Records the actual username of the user
-            #    when a mismatch occurs with the social details username.
-            set_custom_attribute('update_email.user_username', user_username)
+            # Skip email update due to username mismatch
+            logger.warning(
+                "Skipping email update for user %s due to username mismatch",
+                user_username
+            )
+            return  # Exit without updating email
 
-            # .. custom_attribute_name: update_email.details_has_email
-            # .. custom_attribute_description: Records whether the details contain an email
-            #    when a username mismatch occurs, to identify potential edge cases.
-            set_custom_attribute('update_email.details_has_email', bool(details.get('email')))
-
-            # Only exit if the toggle is enabled
-            if SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH.is_enabled():
-                logger.warning(
-                    "Skipping email update for user %s due to username mismatch and "
-                    "SKIP_UPDATE_EMAIL_ON_USERNAME_MISMATCH toggle enabled",
-                    user_username
-                )
-                return  # Exit without updating email
-
-        # Proceed with email update only if usernames match or toggle is disabled
+        # Proceed with email update only if usernames match
         email = details.get('email')
         if email and user.email != email:
             user.email = email
