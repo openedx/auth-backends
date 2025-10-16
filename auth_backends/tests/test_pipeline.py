@@ -85,7 +85,8 @@ class UpdateEmailPipelineTests(TestCase):
         self.assertEqual(updated_user.email, old_email)
 
         mock_logger.warning.assert_called_once_with(
-            "Unexpected username mismatch during email update. Skipping email update for user %s. User username: %s, Details username: %s",
+            "Unexpected username mismatch during email update. Skipping email update for user %s. "
+            "User username: %s, Details username: %s",
             'test_user',
             'test_user',
             'different_user'

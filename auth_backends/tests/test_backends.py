@@ -2,7 +2,7 @@
 import datetime
 import json
 from calendar import timegm
-from unittest.mock import patch, call
+from unittest.mock import patch
 
 import ddt
 import jwt

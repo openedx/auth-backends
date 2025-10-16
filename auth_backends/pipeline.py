@@ -46,7 +46,8 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
         if username_mismatch:
             # Log warning about the mismatch
             logger.warning(
-                "Unexpected username mismatch during email update. Skipping email update for user %s. User username: %s, Details username: %s",
+                "Unexpected username mismatch during email update. Skipping email update for user %s. "
+                "User username: %s, Details username: %s",
                 user_username,
                 user_username,
                 details_username
