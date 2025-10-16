@@ -100,13 +100,6 @@ class EdXOAuth2(BaseOAuth2):
 
             logout(request)
 
-            # .. custom_attribute_name: session_cleanup.logout_performed
-            # .. custom_attribute_description: Indicates that session cleanup was
-            #    actually performed during OAuth start.
-            set_custom_attribute('session_cleanup.logout_performed', True)
-        else:
-            set_custom_attribute('session_cleanup.logout_performed', False)
-
         return super().start()
 
     def authorization_url(self):

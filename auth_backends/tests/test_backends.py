@@ -151,20 +151,14 @@ class EdXOAuth2Tests(OAuth2Test):
             self.assertNotEqual(request.session.session_key, initial_session_key)
             self.assertTrue(request.user.is_anonymous)
 
-            mock_set_attr.assert_has_calls([
-                call('session_cleanup.logout_required', True),
-                call('session_cleanup.logout_performed', True)
-            ], any_order=True)
+            mock_set_attr.assert_called_once_with('session_cleanup.logout_required', True)
 
             mock_logger.info.assert_called_with(
                 "OAuth start: Performing session cleanup for user '%s'",
                 'existing_user'
             )
         else:
-            mock_set_attr.assert_has_calls([
-                call('session_cleanup.logout_required', False),
-                call('session_cleanup.logout_performed', False)
-            ], any_order=True)
+            mock_set_attr.assert_called_once_with('session_cleanup.logout_required', False)
 
             mock_logger.info.assert_not_called()
 

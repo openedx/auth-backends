@@ -58,7 +58,6 @@ class UpdateEmailPipelineTests(TestCase):
         self.assertEqual(updated_user.email, updated_email)
         self.assertNotEqual(updated_user.email, initial_email)
 
-        mock_set_attribute.assert_any_call('update_email.username_mismatch', False)
         self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=True)
 
     @patch('auth_backends.pipeline.set_custom_attribute')
@@ -71,7 +70,6 @@ class UpdateEmailPipelineTests(TestCase):
         updated_user = User.objects.get(pk=self.user.pk)
         self.assertEqual(updated_user.email, old_email)
 
-        mock_set_attribute.assert_any_call('update_email.username_mismatch', False)
         self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=False)
 
     @patch('auth_backends.pipeline.logger')
@@ -86,17 +84,13 @@ class UpdateEmailPipelineTests(TestCase):
         updated_user = User.objects.get(pk=self.user.pk)
         self.assertEqual(updated_user.email, old_email)
 
-        self.assertEqual(mock_logger.warning.call_count, 2)
-        mock_logger.warning.assert_any_call(
-            "Username mismatch during email update. User username: %s, Details username: %s",
-            'test_user', 'different_user'
-        )
-        mock_logger.warning.assert_any_call(
-            "Skipping email update for user %s due to username mismatch",
-            'test_user'
+        mock_logger.warning.assert_called_once_with(
+            "Unexpected username mismatch during email update. Skipping email update for user %s. User username: %s, Details username: %s",
+            'test_user',
+            'test_user',
+            'different_user'
         )
 
-        mock_set_attribute.assert_any_call('update_email.username_mismatch', True)
         self.assert_attribute_was_set(mock_set_attribute, 'update_email.email_updated', should_exist=False)
 
     def assert_attribute_was_set(self, mock_set_attribute, attribute_name, should_exist=True):

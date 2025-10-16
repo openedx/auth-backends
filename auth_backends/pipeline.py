@@ -43,24 +43,13 @@ def update_email(strategy, details, user=None, *args, **kwargs):  # pylint: disa
         # Check if usernames don't match
         username_mismatch = details_username != user_username
 
-        # .. custom_attribute_name: update_email.username_mismatch
-        # .. custom_attribute_description: Tracks whether there's a mismatch between
-        #    the username in the social details and the user's actual username.
-        #    True if usernames don't match, False if they match.
-        set_custom_attribute('update_email.username_mismatch', username_mismatch)
-
         if username_mismatch:
             # Log warning about the mismatch
             logger.warning(
-                "Username mismatch during email update. User username: %s, Details username: %s",
+                "Unexpected username mismatch during email update. Skipping email update for user %s. User username: %s, Details username: %s",
+                user_username,
                 user_username,
                 details_username
-            )
-
-            # Skip email update due to username mismatch
-            logger.warning(
-                "Skipping email update for user %s due to username mismatch",
-                user_username
             )
             return  # Exit without updating email
 
