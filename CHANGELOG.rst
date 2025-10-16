@@ -13,6 +13,14 @@ Unreleased
 ----------
 
 
+[4.6.2] - 2025-10-16
+--------------------
+
+Changed
+~~~~~~~
+
+* Removed temporary rollout toggles and simplified custom attribute tracking after successful OAuth session cleanup rollout.
+
 [4.6.1] - 2025-09-23
 --------------------
 
