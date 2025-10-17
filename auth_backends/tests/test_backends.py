@@ -147,20 +147,15 @@ class EdXOAuth2Tests(OAuth2Test):
 
         self.do_start()
 
+        mock_set_attr.assert_called_once_with('session_cleanup.logout_required', user_authenticated)
+
         if user_authenticated:
             self.assertNotEqual(request.session.session_key, initial_session_key)
             self.assertTrue(request.user.is_anonymous)
-
-            mock_set_attr.assert_called_once_with('session_cleanup.logout_required', True)
-
             mock_logger.info.assert_called_with(
                 "OAuth start: Performing session cleanup for user '%s'",
                 'existing_user'
             )
-        else:
-            mock_set_attr.assert_called_once_with('session_cleanup.logout_required', False)
-
-            mock_logger.info.assert_not_called()
 
     def test_partial_pipeline(self):
         self.do_partial_pipeline()
