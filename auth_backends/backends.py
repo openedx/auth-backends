@@ -7,22 +7,9 @@ import jwt
 from django.contrib.auth import logout
 from django.dispatch import Signal
 from social_core.backends.oauth import BaseOAuth2
-from edx_toggles.toggles import SettingToggle
 from edx_django_utils.monitoring import set_custom_attribute
 
 logger = logging.getLogger(__name__)
-
-# .. toggle_name: ENABLE_OAUTH_SESSION_CLEANUP
-# .. toggle_implementation: SettingToggle
-# .. toggle_default: False
-# .. toggle_description: Controls whether to perform session cleanup during OAuth start.
-#    When enabled (True), existing user sessions are cleared before OAuth authentication
-#    to prevent user association conflicts. When disabled (False), session cleanup is skipped.
-#    This toggle allows for gradual rollout and quick rollback if issues arise.
-# .. toggle_use_cases: temporary
-# .. toggle_creation_date: 2025-09-25
-# .. toggle_target_removal_date: 2025-11-25
-ENABLE_OAUTH_SESSION_CLEANUP = SettingToggle("ENABLE_OAUTH_SESSION_CLEANUP", default=False)
 
 PROFILE_CLAIMS_TO_DETAILS_KEY_MAP = {
     'preferred_username': 'username',
@@ -88,19 +75,9 @@ class EdXOAuth2(BaseOAuth2):
             return self.end_session_url()
 
     def start(self):
-        """Initialize OAuth authentication with optional session cleanup."""
-
-        # .. custom_attribute_name: session_cleanup.toggle_enabled
-        # .. custom_attribute_description: Tracks whether the ENABLE_OAUTH_SESSION_CLEANUP
-        #    toggle is enabled during OAuth start.
-        set_custom_attribute('session_cleanup.toggle_enabled', ENABLE_OAUTH_SESSION_CLEANUP.is_enabled())
+        """Initialize OAuth authentication with session cleanup."""
 
         request = self.strategy.request if hasattr(self.strategy, 'request') else None
-
-        # .. custom_attribute_name: session_cleanup.has_request
-        # .. custom_attribute_description: Tracks whether a request object is available
-        #    during OAuth start. True if request exists, False if missing.
-        set_custom_attribute('session_cleanup.has_request', request is not None)
 
         user_authenticated = (
             request is not None and
@@ -113,13 +90,8 @@ class EdXOAuth2(BaseOAuth2):
         #    before session cleanup. True if user was logged in, False otherwise.
         set_custom_attribute('session_cleanup.logout_required', user_authenticated)
 
-        if user_authenticated and ENABLE_OAUTH_SESSION_CLEANUP.is_enabled():
+        if user_authenticated:
             existing_username = getattr(request.user, 'username', 'unknown')
-
-            # .. custom_attribute_name: session_cleanup.logged_out_username
-            # .. custom_attribute_description: Records the username that was logged out
-            #    during session cleanup for tracking and debugging purposes.
-            set_custom_attribute('session_cleanup.logged_out_username', existing_username)
 
             logger.info(
                 "OAuth start: Performing session cleanup for user '%s'",
@@ -127,13 +99,6 @@ class EdXOAuth2(BaseOAuth2):
             )
 
             logout(request)
-
-            # .. custom_attribute_name: session_cleanup.logout_performed
-            # .. custom_attribute_description: Indicates that session cleanup was
-            #    actually performed during OAuth start.
-            set_custom_attribute('session_cleanup.logout_performed', True)
-        else:
-            set_custom_attribute('session_cleanup.logout_performed', False)
 
         return super().start()
 
