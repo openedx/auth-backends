@@ -156,6 +156,8 @@ class EdXOAuth2Tests(OAuth2Test):
                 "OAuth start: Performing session cleanup for user '%s'",
                 'existing_user'
             )
+        else:
+            mock_logger.info.assert_not_called()
 
     def test_partial_pipeline(self):
         self.do_partial_pipeline()
