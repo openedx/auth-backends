@@ -8,7 +8,7 @@ asgiref==3.8.1
     # via django
 certifi==2025.4.26
     # via requests
-cffi==1.17.1
+cffi==2.0.0
     # via
     #   cryptography
     #   pynacl
@@ -30,8 +30,8 @@ defusedxml==0.7.1
     #   social-auth-core
 django==4.2.22
     # via
-    #   -c requirements/common_constraints.txt
-    #   -r requirements/base.in
+    #   -c common_constraints.txt
+    #   -r base.in
     #   django-crum
     #   django-waffle
     #   edx-django-utils
@@ -47,10 +47,10 @@ django-waffle==4.2.0
     #   edx-toggles
 edx-django-utils==8.0.0
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   edx-toggles
 edx-toggles==5.3.0
-    # via -r requirements/base.in
+    # via -r base.in
 idna==3.10
     # via requests
 jinja2==3.1.6
@@ -69,9 +69,9 @@ pycparser==2.22
     # via cffi
 pyjwt[crypto]==2.10.1
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   social-auth-core
-pynacl==1.5.0
+pynacl==1.6.2
     # via edx-django-utils
 python-slugify==8.0.4
     # via code-annotations
@@ -86,12 +86,12 @@ requests==2.32.3
 requests-oauthlib==2.0.0
     # via social-auth-core
 six==1.17.0
-    # via -r requirements/base.in
+    # via -r base.in
 social-auth-app-django==5.4.3
-    # via -r requirements/base.in
+    # via -r base.in
 social-auth-core==4.6.1
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   social-auth-app-django
 sqlparse==0.5.3
     # via django
@@ -103,7 +103,7 @@ text-unidecode==1.3
     # via python-slugify
 urllib3==2.2.3
     # via
-    #   -c requirements/common_constraints.txt
+    #   -c common_constraints.txt
     #   requests
 
 # The following packages are considered to be unsafe in a requirements file:
