@@ -8,7 +8,7 @@ auth-backends  |CI|_ |Codecov|_
 
 This package contains custom authentication backends, views, and pipeline steps used by edX services for single sign-on.
 
-This package is compatible with Python 3.12, Django 4.2 and Django 5.2
+This package is compatible with Python 3.12 and Django 5.2
 
 We currently support OAuth 2.0 authentication. Support for OpenID Connect (OIDC) was removed as of version 3.0. Use version 2.x if you require OIDC and are not able to migrate to OAuth2.
 
