@@ -12,6 +12,7 @@ Change Log
 Unreleased
 ----------
 
+* Dropped Django 4.2 support; upgraded pyjwt 2.11→2.12.1, code-annotations to 3.0.0, edx-lint to 6.0.0
 
 [4.6.2] - 2025-10-16
 --------------------

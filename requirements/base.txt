@@ -12,13 +12,13 @@ cffi==2.0.0
     # via
     #   cryptography
     #   pynacl
-charset-normalizer==3.4.5
+charset-normalizer==3.4.6
     # via requests
 click==8.3.1
     # via
     #   code-annotations
     #   edx-django-utils
-code-annotations==2.3.2
+code-annotations==3.0.0
     # via edx-toggles
 cryptography==46.0.5
     # via pyjwt
@@ -63,7 +63,7 @@ psutil==7.2.2
     # via edx-django-utils
 pycparser==3.0
     # via cffi
-pyjwt[crypto]==2.11.0
+pyjwt[crypto]==2.12.1
     # via
     #   -r requirements/base.in
     #   social-auth-core
