@@ -14,7 +14,7 @@ astroid==4.0.4
     # via
     #   pylint
     #   pylint-celery
-certifi==2026.2.25
+certifi==2026.4.22
     # via
     #   -r requirements/base.txt
     #   requests
@@ -23,11 +23,11 @@ cffi==2.0.0
     #   -r requirements/base.txt
     #   cryptography
     #   pynacl
-charset-normalizer==3.4.5
+charset-normalizer==3.4.7
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.3.1
+click==8.3.3
     # via
     #   -r requirements/base.txt
     #   click-log
@@ -36,16 +36,16 @@ click==8.3.1
     #   edx-lint
 click-log==0.4.0
     # via edx-lint
-code-annotations==2.3.2
+code-annotations==3.0.0
     # via
     #   -r requirements/base.txt
     #   edx-lint
     #   edx-toggles
-coverage[toml]==7.13.4
+coverage[toml]==7.13.5
     # via
     #   -r requirements/test.in
     #   pytest-cov
-cryptography==46.0.5
+cryptography==46.0.7
     # via
     #   -r requirements/base.txt
     #   pyjwt
@@ -85,18 +85,18 @@ edx-django-utils==8.0.1
     # via
     #   -r requirements/base.txt
     #   edx-toggles
-edx-lint==5.6.0
+edx-lint==6.0.0
     # via -r requirements/test.in
-edx-toggles==5.4.1
+edx-toggles==6.0.0
     # via -r requirements/base.txt
-filelock==3.25.0
+filelock==3.29.0
     # via
     #   python-discovery
     #   tox
     #   virtualenv
 httpretty==1.1.4
     # via -r requirements/test.in
-idna==3.11
+idna==3.13
     # via
     #   -r requirements/base.txt
     #   requests
@@ -121,11 +121,11 @@ oauthlib==3.3.1
     #   -r requirements/base.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==26.0
+packaging==26.1
     # via
     #   pytest
     #   tox
-platformdirs==4.9.4
+platformdirs==4.9.6
     # via
     #   pylint
     #   python-discovery
@@ -149,9 +149,9 @@ pycparser==3.0
     #   cffi
 pycryptodomex==3.23.0
     # via -r requirements/test.in
-pygments==2.19.2
+pygments==2.20.0
     # via pytest
-pyjwt[crypto]==2.11.0
+pyjwt[crypto]==2.12.1
     # via
     #   -r requirements/base.txt
     #   social-auth-core
@@ -173,15 +173,15 @@ pynacl==1.6.2
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-pytest==9.0.2
+pytest==9.0.3
     # via
     #   pytest-cov
     #   pytest-django
-pytest-cov==7.0.0
+pytest-cov==7.1.0
     # via -r requirements/test.in
 pytest-django==4.12.0
     # via -r requirements/test.in
-python-discovery==1.1.0
+python-discovery==1.2.2
     # via virtualenv
 python-slugify==8.0.4
     # via
@@ -197,7 +197,7 @@ pyyaml==6.0.3
     #   code-annotations
     #   edx-django-release-util
     #   responses
-requests==2.32.5
+requests==2.33.1
     # via
     #   -r requirements/base.txt
     #   requests-oauthlib
@@ -216,9 +216,9 @@ six==1.17.0
     #   edx-lint
     #   tox
     #   unittest2
-social-auth-app-django==5.7.0
+social-auth-app-django==5.8.0
     # via -r requirements/base.txt
-social-auth-core==4.8.5
+social-auth-core==4.8.6
     # via
     #   -r requirements/base.txt
     #   social-auth-app-django
@@ -252,5 +252,5 @@ urllib3==2.6.3
     #   -r requirements/base.txt
     #   requests
     #   responses
-virtualenv==21.1.0
+virtualenv==21.2.4
     # via tox
