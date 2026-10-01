@@ -1,3 +1,2 @@
 include *.rst LICENSE.txt AUTHORS
-include requirements/base.in
-include requirements/constraints.txt
+recursive-include src/auth_backends *.html *.png *.gif *js *.css *jpg *jpeg *svg *py

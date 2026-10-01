@@ -1,0 +1,129 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "edx-auth-backends"
+description = "Custom edX authentication backends and pipeline steps"
+readme = "README.rst"
+license = "AGPL-3.0-only"
+license-files = ["LICENSE.txt"]
+requires-python = ">=3.12"
+authors = [
+    {name = "Open edX Project", email = "oscm@openedx.org"},
+]
+keywords = ["authentication", "edx"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Topic :: Internet",
+]
+dynamic = ["version"]
+dependencies = [
+    "django>=5.2",
+    "edx-django-utils",
+    "edx-toggles",
+    "pyjwt[crypto]>=2.1.0",
+    "six",
+    "social-auth-app-django",
+    "social-auth-core",
+]
+
+[project.urls]
+Homepage = "https://github.com/openedx/auth-backends"
+
+[dependency-groups]
+# Base test packages, no version pins - let uv.lock handle it
+test-base = [
+    "coverage",
+    "ddt",
+    "edx-django-release-util",
+    "httpretty",
+    "pycryptodomex",
+    "pytest-cov",
+    "pytest-django",
+    "responses",
+    "typing_extensions",
+    "unittest2",
+]
+test = [
+    {include-group = "test-base"},
+    "django>=5.2,<5.3",
+]
+quality = [
+    {include-group = "test"},
+    "edx-lint",
+    "pycodestyle",
+    "pylint",
+]
+# Minimal CI group: just what's needed to invoke tox
+ci = [
+    "tox",
+    "tox-uv",
+]
+dev = [
+    {include-group = "quality"},
+    {include-group = "ci"},
+]
+
+[tool.setuptools_scm]
+version_scheme = "only-version"
+local_scheme = "no-local-version"
+fallback_version = "0.0.0"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["auth_backends"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["tests*", "*.tests*", "spec*", "*.spec*"]
+
+[tool.uv]
+package = true
+
+#  DO NOT EDIT constraint-dependencies DIRECTLY.
+#  This list is managed by `edx_lint write_uv_constraints`
+#  and will be overwritten the next time `make upgrade` is run.
+#  - GLOBAL constraints: edit edx_lint/files/common_constraints.txt
+#  - REPO-SPECIFIC constraints: edit [tool.edx_lint].uv_constraints in this file
+constraint-dependencies = [
+    "Django<6.0",
+    "elasticsearch<7.14.0",
+]
+
+[tool.edx_lint]
+uv_constraints = []
+
+[tool.semantic_release]
+build_command = "python -m pip install --upgrade build && SETUPTOOLS_SCM_PRETEND_VERSION=$NEW_VERSION python -m build"
+major_on_zero = false
+allow_zero_version = true
+tag_format = "v{version}"
+
+[tool.coverage.run]
+branch = true
+source = ["src/auth_backends"]
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/__pycache__/*",
+    "*/settings.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"

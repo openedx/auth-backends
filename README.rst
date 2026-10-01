@@ -117,9 +117,14 @@ Call ``make test``.
 Publishing a Release
 --------------------
 
-After a PR merges, create a new tag from ``master`` branch with a new version of the package and create a
-`Github release <https://github.com/openedx/auth-backends/releases>`_
-using the new tag that will automatically publish the package to PyPi when a release is created.
+Releases are published automatically by `python-semantic-release
+<https://python-semantic-release.readthedocs.io/>`_ whenever a PR merges to ``master``. The new
+version number is derived from the conventional-commit subject lines (``feat:``, ``fix:``, etc.) of
+the commits being merged, and semantic-release tags the release and publishes it to PyPI accordingly.
+
+Do not manually create a tag or a `Github release <https://github.com/openedx/auth-backends/releases>`_
+for a new version. A hand-cut tag will cause python-semantic-release to lose track of what it has
+already released, breaking future automated releases.
 
 
 License
