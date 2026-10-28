@@ -159,6 +159,26 @@ class EdXOAuth2Tests(OAuth2Test):
         else:
             mock_logger.info.assert_not_called()
 
+    @pytest.mark.django_db
+    @patch('auth_backends.backends.set_custom_attribute')
+    @patch('auth_backends.backends.logger')
+    def test_start_with_session_cleanup_preserves_next(self, _mock_logger, _mock_set_attr):
+        """The post-login redirect stored by social-auth must survive the session cleanup."""
+        request = RequestFactory().get('/auth/login/edx-oauth2/?next=/credentials/abc/')
+        request.user = User.objects.create_user(username='existing_user', email='existing@example.com')
+        middleware = SessionMiddleware(lambda req: None)
+        middleware.process_request(request)
+        request.session.save()
+        self.backend.strategy.request = request
+        # In production the strategy's session IS request.session; the fake test strategy keeps its own dict.
+        self.backend.strategy._session = request.session  # pylint: disable=protected-access
+        self.backend.strategy.session_set('next', '/credentials/abc/')
+
+        self.do_start()
+
+        self.assertTrue(request.user.is_anonymous)
+        self.assertEqual(self.backend.strategy.session_get('next'), '/credentials/abc/')
+
     def test_partial_pipeline(self):
         self.do_partial_pipeline()
 
