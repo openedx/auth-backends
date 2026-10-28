@@ -98,7 +98,11 @@ class EdXOAuth2(BaseOAuth2):
                 existing_username
             )
 
+            # logout() flushes the session, which also holds the post-login redirect social-auth just stored.
+            next_url = self.strategy.session_get('next')
             logout(request)
+            if next_url:
+                self.strategy.session_set('next', next_url)
 
         return super().start()
 
