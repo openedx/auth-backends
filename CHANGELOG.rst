@@ -12,6 +12,12 @@ Change Log
 Unreleased
 ----------
 
+Fixed
+~~~~~
+
+* Session cleanup in ``EdXOAuth2.start()`` no longer discards the ``next`` redirect that social-auth stores before the OAuth flow begins. Users who were already logged in were sent to ``LOGIN_REDIRECT_URL`` instead of the page they asked for.
+* The same cleanup also keeps any fields listed in ``FIELDS_STORED_IN_SESSION``, which social-auth stores at the same point.
+
 
 [4.6.2] - 2025-10-16
 --------------------
