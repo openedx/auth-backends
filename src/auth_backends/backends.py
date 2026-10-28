@@ -98,11 +98,14 @@ class EdXOAuth2(BaseOAuth2):
                 existing_username
             )
 
-            # logout() flushes the session, which also holds the post-login redirect social-auth just stored.
-            next_url = self.strategy.session_get('next')
+            # logout() flushes the session, which also holds what social-auth just stored for this request:
+            # the sanitized redirect and any FIELDS_STORED_IN_SESSION. Carry only those across.
+            stored_names = ['next', *self.setting('FIELDS_STORED_IN_SESSION', [])]
+            stored_values = {name: self.strategy.session_get(name) for name in stored_names}
             logout(request)
-            if next_url:
-                self.strategy.session_set('next', next_url)
+            for name, value in stored_values.items():
+                if value is not None:
+                    self.strategy.session_set(name, value)
 
         return super().start()
 

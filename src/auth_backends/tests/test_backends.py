@@ -172,12 +172,15 @@ class EdXOAuth2Tests(OAuth2Test):
         self.backend.strategy.request = request
         # In production the strategy's session IS request.session; the fake test strategy keeps its own dict.
         self.backend.strategy._session = request.session  # pylint: disable=protected-access
+        self.set_social_auth_setting('FIELDS_STORED_IN_SESSION', ['auth_entry'])
         self.backend.strategy.session_set('next', '/credentials/abc/')
+        self.backend.strategy.session_set('auth_entry', 'login')
 
         self.do_start()
 
         self.assertTrue(request.user.is_anonymous)
         self.assertEqual(self.backend.strategy.session_get('next'), '/credentials/abc/')
+        self.assertEqual(self.backend.strategy.session_get('auth_entry'), 'login')
 
     def test_partial_pipeline(self):
         self.do_partial_pipeline()
