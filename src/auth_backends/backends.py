@@ -100,7 +100,11 @@ class EdXOAuth2(BaseOAuth2):
 
             # logout() flushes the session, which also holds what social-auth just stored for this request:
             # the sanitized redirect and any FIELDS_STORED_IN_SESSION. Carry only those across.
-            stored_names = ['next', *self.setting('FIELDS_STORED_IN_SESSION', [])]
+            stored_names = [*self.setting('FIELDS_STORED_IN_SESSION', [])]
+            # do_auth() only writes `next` when this request carries one, otherwise the value is left over
+            # from an earlier login and should not survive the logout.
+            if 'next' in self.strategy.request_data(merge=False):
+                stored_names.append('next')
             stored_values = {name: self.strategy.session_get(name) for name in stored_names}
             logout(request)
             for name, value in stored_values.items():
