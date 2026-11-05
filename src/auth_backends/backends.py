@@ -108,8 +108,7 @@ class EdXOAuth2(BaseOAuth2):
             stored_values = {name: self.strategy.session_get(name) for name in stored_names}
             logout(request)
             for name, value in stored_values.items():
-                if value is not None:
-                    self.strategy.session_set(name, value)
+                self.strategy.session_set(name, value)
 
         return super().start()
 
